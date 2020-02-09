@@ -9,6 +9,6 @@ class Page(Content):
         self.title = self.meta.get("title")
         self.content = ""
         if self.file_type == ".md":
-            self.content = markdown.markdown(self.raw_content, extensions=['extra'])
+            self.content = markdown.markdown(self.raw_content, extensions=['extra', 'markdown_del_ins'])
     def get_content(self):
         return self.content
