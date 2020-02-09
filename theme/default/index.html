@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% block site_content %}
-<ul>
-    {% for post in content.post %}
-    <li><a href="{{post.permalink}}">{{post.title}}</a></li>
-    {% endfor %}
-</ul>
-{% endblock %}
