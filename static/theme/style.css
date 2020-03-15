@@ -3,6 +3,7 @@ body {
     color: #444;
 }
 p {
+    text-indent: 2rem;
     color: #666;
 }
 a,a:visited {
@@ -13,7 +14,7 @@ p a, p a:visited {
     color: #2892d8
 }
 
-li>a, li>a:visited {
+.nav-links li>a, .nav-links li>a:visited {
     text-decoration: none;
     color: #444;
     background-color: #FFF;
@@ -22,13 +23,14 @@ li>a, li>a:visited {
     height: 100%;
     width: 100%;
 }
-li:hover>a {
+.nav-links li:hover>a {
     color: #FFF;
     background-color: #444;
     transition: 0.2s;
 }
 ul {
     list-style: none;
+    padding-left: 1rem;
 }
 code {
     font-size: 16px;
