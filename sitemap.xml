@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://127.0.0.1:8000/2020/03/14/linux-prefetch.html</loc>
+<loc>https://keyswing.com/2020/03/14/linux-prefetch.html</loc>
 <lastmod>2020-03-14</lastmod>
 </url>
 <url>
-<loc>http://127.0.0.1:8000/2020/02/09/ssg-in-200-lines.html</loc>
+<loc>https://keyswing.com/2020/02/09/ssg-in-200-lines.html</loc>
 <lastmod>2020-02-09</lastmod>
 </url>
 <url>
-<loc>http://127.0.0.1:8000/2020/02/09/hello.html</loc>
+<loc>https://keyswing.com/2020/02/09/hello.html</loc>
 <lastmod>2020-02-07</lastmod>
 </url>
 <url>
-<loc>http://127.0.0.1:8000/about.html</loc>
+<loc>https://keyswing.com/about.html</loc>
 <lastmod>2020-03-17</lastmod>
 </url>
 </urlset>
