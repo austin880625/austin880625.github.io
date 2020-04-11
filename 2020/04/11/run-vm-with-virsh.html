@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
+        <link rel="stylesheet" href="/static/theme/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> 
+        <title>
+文字介面的 VM 工具 virsh 使用筆記 - 
+KeySwing</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160715033-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-160715033-1');
+        </script>
+        
+<link rel="stylesheet" href="/static/theme/post.css">
+
+    </head>
+    <body>
+        <header>
+            <h1 class="header-title"><a href="/">KeySwing</a></h1>
+            <h2 class="header-subtitle">1048576 Hows, 2097152 Wheres, And 8388608 Whys</h2>
+            <nav>
+                <!--
+                <ul>
+                    
+                </ul>
+                -->
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="/">首頁</a></li>
+                        
+                        <li><a href="/about.html">關於</a></li>
+                        
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            
+<div class="post-heading">
+    <h1 class="post-title">文字介面的 VM 工具 virsh 使用筆記</h1>
+    <div class="post-date">2020-04-11</div>
+</div>
+<div class="post-content">
+    <p>對於個人使用的 VM 環境來說，除了圖形化介面的 VirtualBox 或 VMWare 之外，在 Linux 上可以使用的虛擬化技術還有 KVM, QEMU, Xen 等，他們各自可以擁有很多不同的操作介面，可能是文字、圖形或網頁。對這些虛擬化技術如果能有統一的 API ，不同類型的操作介面就可以只用這套 API 控制不同虛擬化技術的 VM ， libvirt 就是提供這種 API 的一套函式庫，而 virsh 則是使用這個函式庫的一種文字介面管理程式。</p>
+<h2>安裝套件</h2>
+<ul>
+<li><code>qemu-kvm</code>： QEMU 是一套包含各種架構模擬器的總稱， kvm 是 linux 操作不同處理器的虛擬化指令集的 kernel module ， qemu-kvm 則是利用 kvm module 建立虛擬機的模擬器。</li>
+<li><code>libvirt</code>： 一套以 C 語言撰寫的 library ，提供一套統一的界面來操作不同虛擬化技術的 VM。這裡用 libvirt 操作的虛擬化技術是 KVM。</li>
+<li><code>libvirt-client</code>： 操作 libvirt 的 client 端程式，包含文字介面工具 virsh。</li>
+<li><code>virt-install</code>：方便使用 libvirt 建立 VM 的文字介面工具。</li>
+</ul>
+<h2>權限設定</h2>
+<p>非 root 的使用者需要在 kvm 這個 group 中才能建立/控制 VM。</p>
+<h2>使用 virt-install 建立 VM</h2>
+<p>以安裝 Archlinux 為例，在 archlinux 的 iso 檔所在目錄中，底下的指令可以快速的建立一臺 VM 並開機</p>
+<pre><code>virt-install \
+    --name=&lt;vm_name&gt; \
+    --vcpus=1 --memory=1024 \
+    --cdrom=archlinux-2020.04.01-x86_64.iso \
+    --disk size=20,format=vmdk \
+    --os-variant=archlinux \
+    --graphics=vnc,port=5900,listen=0.0.0.0 \
+    --noautoconsole
+</code></pre>
+
+<p>在文字介面中使用 --graphics=vnc 參數可以將畫面輸出到 vnc 協定上，並且可以指定 port 及 bind address 。如此就可以從遠端連入該虛擬機器的畫面進行操作，由於可以指定 port ，使用前務必檢查防火牆有沒有擋下所使用的 port 。</p>
+<h2>virsh 常見指令</h2>
+<h3><code>virsh list [--all]</code></h3>
+<p>列出正在運行的（加上 --all 是全部） VM 。</p>
+<h3><code>virsh start &lt;vm_name&gt;</code></h3>
+<p>啟動指定的 VM 。</p>
+<h3><code>virsh destroy &lt;name&gt;</code></h3>
+<p>強制關閉指定的 VM 。</p>
+<h3><code>virsh shutdown &lt;name&gt;</code></h3>
+<p>對指定的 VM 送出關機指令。</p>
+<h3><code>virsh undefine &lt;name&gt; [--remove-all-storage] [--wipe-storage]</code></h3>
+<p>刪除指定的 VM ，並指定是否刪除相關磁碟映像檔。</p>
+</div>
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'https://keyswing.com/2020/04/11/run-vm-with-virsh.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2020/04/11/run-vm-with-virsh.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://austinchang-me.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+        </div>
+        <footer>
+            <p>Copyright © 2020 by Austin Chang</p>
+        </footer>
+    </body>
+</html>

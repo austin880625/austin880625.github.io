@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> 
         <title>
 用 Python 實作一個 200 行內的 Static Site Generator - 
-鍵人盪鞦韆</title>
+KeySwing</title>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160715033-1"></script>
         <script>
@@ -17,10 +17,13 @@
 
         gtag('config', 'UA-160715033-1');
         </script>
+        
+<link rel="stylesheet" href="/static/theme/post.css">
+
     </head>
     <body>
         <header>
-            <h1 class="header-title"><a href="/">鍵人盪鞦韆</a></h1>
+            <h1 class="header-title"><a href="/">KeySwing</a></h1>
             <h2 class="header-subtitle">1048576 Hows, 2097152 Wheres, And 8388608 Whys</h2>
             <nav>
                 <!--
@@ -40,7 +43,10 @@
         </header>
         <div class="container">
             
-<h1>用 Python 實作一個 200 行內的 Static Site Generator</h1>
+<div class="post-heading">
+    <h1 class="post-title">用 Python 實作一個 200 行內的 Static Site Generator</h1>
+    <div class="post-date">2020-02-09</div>
+</div>
 <div class="post-content">
     <p>Static Site Generator 在網路上有很多介紹，有幾個相當知名的工具如 Hexo, Hugo, Jekyll 等，其主要的運作流程是從網站內容的目錄讀出文章的 markdown 文件，再從使用者選取的佈景主題中讀出模板檔案，最後使用 template engine 將最終的網頁內容生成 HTML 檔案。完整的 SSG 會包含更模組化或更高自訂性的功能，例如 i18n 、 plugin 的 API 或是自訂 permalink 或 route 的規則等，但如果只是完成前面講到的基本功能，在已經有現成的 template engine 和 markdown parser 的情況下，似乎不會是很難的一件事。也因此我也想過自己實作一個 SSG 的想法，在思考程式的架構時因為 overdesign 的老毛病和喜歡亂試不同語言卡了一段時間，最後用 Python 搭配 python-markdown 和 jinja2 寫了一個最小可行版本，也不刻意遵守程式語言的 packaging convention 等規範（也就是只當成放在網站內容目錄下的一個自動化 script），不含佈景模板在兩百行內就能完成。</p>
 <h2>功能設計</h2>
