@@ -28,9 +28,12 @@ p a, p a:visited {
     background-color: #444;
     transition: 0.2s;
 }
-ul {
+.nav-links ul {
     list-style: none;
+}
+ul {
     padding-left: 1rem;
+    color: #666;
 }
 code {
     font-size: 16px;
