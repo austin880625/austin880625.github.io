@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://keyswing.com/2020/10/16/hw-cxx-tricks-1.html</loc>
+<lastmod>2020-10-16</lastmod>
+</url>
+<url>
 <loc>https://keyswing.com/2020/10/01/wol-os-and-power.html</loc>
 <lastmod>2020-10-01</lastmod>
 </url>
@@ -26,6 +30,6 @@
 </url>
 <url>
 <loc>https://keyswing.com/about.html</loc>
-<lastmod>2020-10-01</lastmod>
+<lastmod>2020-10-16</lastmod>
 </url>
 </urlset>
