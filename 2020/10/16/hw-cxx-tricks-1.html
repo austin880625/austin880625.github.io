@@ -67,9 +67,9 @@ KeySwing</title>
 <pre><code>// F, G 是 callable 的 type
 template&lt;typename F, typename G&gt;
 auto compose(F&amp;&amp; fn, G&amp;&amp; gn) {
-        return [=](auto&amp;&amp; x) {
-                return fn(gn(x));
-        };  
+    return [=](auto&amp;&amp; x) {
+        return fn(gn(x));
+    };  
 }
 
 int main() {
@@ -97,7 +97,7 @@ int main() {
 template&lt;typename T, int r, int... Args&gt;
 struct Tensor_ {
     // 拿出第一個參數，剩下用 Args... 展開往下傳
-    // 使用 typename 是因為 Tensor_&lt;T, Args...&gt; non-instantiated type ， compiler 還不知道成員 ::t 是什麼
+    // 使用 typename 是因為 Tensor_&lt;T, Args...&gt; 是 non-instantiated type ， compiler 還不知道成員 ::t 是什麼
     using t = std::array&lt;typename Tensor_&lt;T, Args...&gt;::t, r&gt;;
 };
 
