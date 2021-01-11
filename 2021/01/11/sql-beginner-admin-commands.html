@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
+        <link rel="stylesheet" href="/static/theme/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> 
+        <title>
+一些用一次忘一次的 SQL 管理指令 - 
+KeySwing</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160715033-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-160715033-1');
+        </script>
+        
+<link rel="stylesheet" href="/static/theme/post.css">
+
+    </head>
+    <body>
+        <header>
+            <h1 class="header-title"><a href="/">KeySwing</a></h1>
+            <h2 class="header-subtitle">1048576 Hows, 2097152 Wheres, And 8388608 Whys</h2>
+            <nav>
+                <!--
+                <ul>
+                    
+                </ul>
+                -->
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="/">首頁</a></li>
+                        
+                        <li><a href="/about.html">關於</a></li>
+                        
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            
+<div class="post-heading">
+    <h1 class="post-title">一些用一次忘一次的 SQL 管理指令</h1>
+    <div class="post-date">2021-01-11</div>
+</div>
+<div class="post-content">
+    <p>有些 SQL 伺服器的管理指令是在剛架起來的時候比較常用到，或是有時會在 MySQL/PostgreSQL 間切換，所以幾乎都查一次忘一次。</p>
+<h2>安裝及啟動</h2>
+<h3>MySQL</h3>
+<p>在 Fedora 上的指令似乎會自動變成 MariaDB, XD</p>
+<pre><code># On Fedora or RHEL variants
+sudo dnf install mysql-server
+# Or on Ubuntu, Debian variants
+sudo apt install mysql-server
+</code></pre>
+<p>安裝完成後設定 root 密碼以及確認刪除一些 MySQL 內建的測試內容</p>
+<pre><code>mysql_secure_installation
+</code></pre>
+<p>Client 的 root user 連線方式目前預設是只會檢查本地的 unix username ，因此不能直接用 3306 port 連線，要使用 sudo</p>
+<pre><code>sudo mysql
+</code></pre>
+<h3>PostgreSQL</h3>
+<pre><code># Fedora 上如果不是一定要最新版的話這個就可以
+sudo dnf install postgresql-server
+# On Ubuntu
+sudo apt install postgresql postgresql-contrib
+</code></pre>
+<p>安裝完成後預設的認證方式是 <code>ident</code> ，也是透過檢查 unix username 進行認證，因此一開始需要切換至 postgresql 建立的 <code>postgres</code> user</p>
+<pre><code>sudo su postgres
+psql
+</code></pre>
+<h2>允許連線</h2>
+<h3>MySQL</h3>
+<p>編輯 <code>/etc/mysql/my.cnf</code> 或 <code>/etc/mysql/mysql.conf.d/mysqld.conf</code> 下的 <code>bind-address</code></p>
+<h3>PostgreSQL</h3>
+<p><code>/var/lib/pgsql/data</code> (或 <code>/var/lib/pgsql/&lt;版本&gt;/data</code>) 下的 <code>postgresql.conf</code> 下的 <code>listen_addresses</code> 及 <code>port</code> 設定</p>
+<p>以及 <code>pg_hba.conf</code> ，以允許所有 user 透過 TCP socket 連上本地 IP 來說，可以使用如下的設定</p>
+<pre><code>host    replication     all             127.0.0.1/32            ident
+</code></pre>
+<h2>資料庫、資料表顯示、切換</h2>
+<h3>MySQL</h3>
+<p>列出所有資料庫</p>
+<pre><code>show databases;
+</code></pre>
+<p>切換資料庫</p>
+<pre><code>use dbname;
+</code></pre>
+<p>列出所有資料表</p>
+<pre><code>show tables;
+</code></pre>
+<p>查看資料表欄位</p>
+<pre><code>describe tablename;
+</code></pre>
+<h3>PostgreSQL</h3>
+<p>列出所有資料庫</p>
+<pre><code>\l
+# Or for more information
+\l+
+# Or using SELECT
+SELECT datname FROM pg_database;
+</code></pre>
+<p>切換資料庫</p>
+<pre><code>\c dbname
+</code></pre>
+<p>列出所有資料表</p>
+<pre><code>\dt
+</code></pre>
+<p>查看資料表欄位</p>
+<pre><code>SELECT table_name,column_name,data_type 
+FROM information_schema.columns 
+WHERE table_name='tablename';
+</code></pre>
+<h2>使用者及權限</h2>
+<h3>MySQL</h3>
+<p>對於認證方式，有些應用程式（例如文章寫成時的 PHP mysqli）需要使用舊版的認證方式，需要在 <code>/etc/mysql/my.cnf</code> 加入
+：</p>
+<pre><code>default-authentication-plugin=mysql_native_password
+</code></pre>
+<p>對於使用者則需要確認是使用對應的驗證方式：</p>
+<pre><code>ALTER USER 'user'@'localhost' IDENTIFIED BY 'mysql_native_password' WITH '密碼';
+</code></pre>
+<h3>PostgreSQL</h3>
+<p>新增使用者、更改使用者密碼：</p>
+<pre><code>CREATE USER 'user' WITH PASSWORD '密碼';
+ALTER USER 'user' WITH PASSWORD '密碼';
+</code></pre>
+<h3>差不多的部分</h3>
+<p>對於使用者寫表等等的權限，可以使用 <code>GRANT</code> 語句：</p>
+<pre><code>GRANT ALL ON db1.* TO 'jeffrey'@'localhost';
+GRANT SELECT, CREATE, REFERENCE, DELETE, RELOAD ON db1.* TO 'user'@'localhost';
+</code></pre>
+<h2>References</h2>
+<p><a href="https://www.postgresql.org/docs/13/auth-methods.html">PostgreSQL: Documentation: 13: Authentication Methods</a></p>
+<p><a href="https://www.postgresql.org/docs/13/auth-pg-hba-conf.html">PostgreSQL: Documentation: 13: The pg_hba.conf File</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/grant.html">MySQL :: MySQL 8.0 Reference Manual :: 13.7.1.6 GRANT Statement</a></p>
+<p><a href="https://www.postgresqltutorial.com/postgresql-show-tables/">PostgreSQL Show Tables</a></p>
+<p><a href="https://www.postgresqltutorial.com/postgresql-describe-table/">PostgreSQL DESCRIBE TABLE</a></p>
+</div>
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'https://keyswing.com/2021/01/11/sql-beginner-admin-commands.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2021/01/11/sql-beginner-admin-commands.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://austinchang-me.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+        </div>
+        <footer>
+            <p>Copyright © 2020 by Austin Chang</p>
+        </footer>
+    </body>
+</html>

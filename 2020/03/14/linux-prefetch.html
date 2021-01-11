@@ -57,11 +57,10 @@ KeySwing</title>
 <p>到這裡事情看起來很美好，但這件事顯然不是多多益善，找了一下發現了一個在作業系統這種對速度斤斤計較的情境中的使用案例。</p>
 <h2>Linux Kernel 曾經的 Prefetching</h2>
 <p>在 linux kernel 的 API 中提供了一個叫 <code>prefetch()</code> 的界面，可以用來產生不同處理器上專用的 prefetch 指令，在 kernel 中的資料會講求減少 cache miss ，又假如資料結構的性質會在記憶體上產生「跳來跳去」的存取對 cache 相當不友善，於是某個叫做 link list 的資料結構就被拿來開刀了。所以在 linux kernel 中（以及網路上衆多對 prefetch 的介紹文章）曾經有過下面這一段程式碼：</p>
-<pre><code class="C">#define list_for_each(pos, head) \
+<pre><code class="language-C">#define list_for_each(pos, head) \
 for (pos = (head)-&gt;next; prefetch(pos-&gt;next), pos != (head); \
         pos = pos-&gt;next)
 </code></pre>
-
 <p>這是遍歷一個 link list 的 for 迴圈， 在每次檢查 loop condition 時 prefetch 下一個節點，在 loop body 跑完之後，下一個節點的內容應該就會在 catch 中， 執行到 <code>pos = pos-&gt;next</code> 時便不會發生 cache miss 。</p>
 <p>這在當時被認為是個合理的最佳化手段，在一些過去的處理器（據 mailing list 來看是 AMD K7 系列的處理器）中確實也起到改善效能的作用，直到一位叫 Andi Kleen 的 kernel contributor 做了將大部分 prefetch 移除的 patch ，後續幾位 linux contributor 包含 Linus 本人也對這份 patch 進行一些測試，發現這樣的「最佳化」反而讓程式變慢了。</p>
 <p>在相關的討論中提到了速度變慢的幾個原因，包含 CPU 已經會使用自己的預測策略進行 prefetch 了，額外使用 prefetch 指令反而會增加 prefetch unit 的負擔、 kernel 運行時使用的 link list 太短以至於太常對 <code>NULL</code> 做 prefetch 、 prefetch 指令會消耗額外的 register 等。因此對 list 的 prefetch 從 kernel 版本 3.0 以後便被移除。</p>

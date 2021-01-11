@@ -53,7 +53,6 @@ KeySwing</title>
 <p>基本的 lambda function 會長這樣：</p>
 <pre><code>auto f = [](int x) { return x; };
 </code></pre>
-
 <p>前面方括號的意思是 capture ，可以用來「抓」在目前 scope 裡的 symbol 。預設的 capture 是by value ，也就是會 copy ，在 symbol 前面加 <code>&amp;</code> 就會是 capture by reference 。除了顯式的指定要 capture 的符號外，也可以使用 default capture ，會自動 capture 所有「沒有 capture 但有在 function body 中使用」的 symbol 。 default capture 的語法長這樣：</p>
 <pre><code>void f(int y) {
     int x = 10;
@@ -61,7 +60,6 @@ KeySwing</title>
     auto h = [&amp;]() { return x++; } // capture by reference
 }
 </code></pre>
-
 <h2>Lambda for Function Composition</h2>
 <p>在 template 中拿到 function 的參數 type 的方法沒有那麼好想，所以要寫一個函數的合成的 callable type 也不太容易，要偷懶就用 lambda 讓他全部自己推。</p>
 <pre><code>// F, G 是 callable 的 type
@@ -78,7 +76,6 @@ int main() {
     std::cout &lt;&lt; compose(f, g)(10) &lt;&lt; std::endl;
 }
 </code></pre>
-
 <h2><code>using</code> aliases</h2>
 <p>typedef 只能對 instantiated type 做定義，我們有時候希望這個定義能夠幫我們對 template 傳遞需要的 template 參數，這時候可以對 <code>using</code> 關鍵字使用 template 。</p>
 <pre><code>template&lt;class T&gt;
@@ -89,7 +86,6 @@ int main() {
     return 0;
 }
 </code></pre>
-
 <h2>Templates Parameter Pack</h2>
 <p>C++ template 的參數可以是不定長度的，在參數列表中會在最後一個參數以 <code>...</code> 表示，因為這些參數的使用都是在 compile time 就完成的，所以不會有像 va_list 那樣可以在執行時期使用的資料結構，也因此把參數 unpack 過後使用他的方法要不就是把它原封不動傳給其他人，要不就是用 template 寫遞迴把參數一個一個拿出來。底下是一個使用遞迴定義多維陣列 <code>Tensor</code> 的例子：</p>
 <pre><code>// using 本身不能遞迴，所以用 struct 遞迴定出每一層的 type
@@ -113,7 +109,6 @@ using Tensor = typename Tensor_&lt;T, r, Args...&gt;::t;
 // 使用
 Tensor&lt;3, 4, 5&gt; T;
 </code></pre>
-
 <h2>References</h2>
 <p><a href="https://stackoverflow.com/questions/6181464/do-c11-lambdas-capture-variables-they-dont-use">Do c++11 lambdas capture variables they don't use?</a></p>
 <p><a href="https://stackoverflow.com/questions/21105169/is-there-any-difference-betwen-and-in-lambda-functions">Is there any difference betwen [=] and [&amp;] in lambda functions?</a></p>
