@@ -71,8 +71,8 @@ header h2 {
 
 header nav {
     text-align: center;
-    margin-left: -5px;
-    margin-right: -5px;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
 }
 
 header ul {
@@ -82,8 +82,8 @@ header ul {
 header ul>li {
     flex: 1 1 auto;
     border: 1px solid #000;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 .container {
