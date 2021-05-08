@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://blog.austint.in/2021/05/08/nic-show-promisc-and-caveat.html</loc>
+<lastmod>2021-05-08</lastmod>
+</url>
+<url>
 <loc>https://blog.austint.in/2021/01/11/sql-beginner-admin-commands.html</loc>
 <lastmod>2021-01-11</lastmod>
 </url>
@@ -34,6 +38,6 @@
 </url>
 <url>
 <loc>https://blog.austint.in/about.html</loc>
-<lastmod>2021-02-04</lastmod>
+<lastmod>2021-05-08</lastmod>
 </url>
 </urlset>
