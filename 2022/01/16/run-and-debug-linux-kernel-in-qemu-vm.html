@@ -49,24 +49,21 @@ AusTinTin</title>
 </div>
 <div class="post-content">
     <h2>安裝環境</h2>
-<p>```shell=
-apt-get install qemu-system build-essential flex bison libelf-dev libssl-dev
+<pre><code>apt-get install qemu-system build-essential flex bison libelf-dev libssl-dev
 wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.12.tar.xz
 tar -xvf linux-5.15.12.tar.xz
-cd linux-5.15.12</p>
-<pre><code>
-## 編譯 kernel
-
-幾個比較常用到的 Linux kernel makefile target
-
-- `menuconfig`: 啟動 CLI 介面選擇和設定核心功能
-- `tinyconfig`: 編譯出可以在處理器中執行的最小核心(連輸出字元的 driver 都不會有)
-- `vmlinux`: 按照可執行檔案格式(如 ELF, COFF)包裝的 kernel，如果有選擇 debug 功能的話 symbol table 會在這個檔案裡
-- `zImage`: 包含 boot sector 可以直接載入記憶體中開機的 kernel 映象檔案以 gzip 壓縮，如果核心太大(超過 512KB)會編譯失敗
-- `bzImage`: 字面意思是比較大的 zImage ，和 bzip 壓縮沒有關係。較大的核心會使用的映像檔案格式，boot sector 會將 kernel 載入到處理器支援的較大的記憶體區段之後再跳轉執行。
-
-```shell=
-make menuconfig
+cd linux-5.15.12
+</code></pre>
+<h2>編譯 kernel</h2>
+<p>幾個比較常用到的 Linux kernel makefile target</p>
+<ul>
+<li><code>menuconfig</code>: 啟動 CLI 介面選擇和設定核心功能</li>
+<li><code>tinyconfig</code>: 編譯出可以在處理器中執行的最小核心(連輸出字元的 driver 都不會有)</li>
+<li><code>vmlinux</code>: 按照可執行檔案格式(如 ELF, COFF)包裝的 kernel，如果有選擇 debug 功能的話 symbol table 會在這個檔案裡</li>
+<li><code>zImage</code>: 包含 boot sector 可以直接載入記憶體中開機的 kernel 映象檔案以 gzip 壓縮，如果核心太大(超過 512KB)會編譯失敗</li>
+<li><code>bzImage</code>: 字面意思是比較大的 zImage ，和 bzip 壓縮沒有關係。較大的核心會使用的映像檔案格式，boot sector 會將 kernel 載入到處理器支援的較大的記憶體區段之後再跳轉執行。</li>
+</ul>
+<pre><code>make menuconfig
 # 確定 DEBUG_INFO 和 GDB_SCRIPTS 的選項為 y
 # 直接 make 會連 module 一起編很久，這邊就編 vmlinux 和給 VM 開機用的 bzImage
 make -j4 vmlinux
@@ -77,34 +74,24 @@ make -j4 bzImage
 <p>編輯 .config 把 <code>CONFIG_SYSTEM_TRUSTED_KEYS</code> 的值改成 <code>""</code>
 以及把 <code>CONFIG_SYSTEM_REVOCATION_KEYS</code> 的值也改成 <code>""</code></p>
 <h2>在 QEMU 中啟動 Linux kernel</h2>
-<p>執行以下指令
-```shell=
-qemu-system-x86_64 -kernel arch/x86/boot/bzImage -nographic -append "console=ttyS0"</p>
-<pre><code>基本的意思就是啟動一台 x86_64 架構處理器的 VM ，以 bzImage 映像檔作為 kernel ，關閉圖形並將文字輸出到 ttyS0 裝置上
-
-沒有特別的狀況的話， kernel 會開始啟動，直到處理器使用率被跑滿，畫面會停在這一句
+<p>執行以下指令</p>
+<pre><code>qemu-system-x86_64 -kernel arch/x86/boot/bzImage -nographic -append &quot;console=ttyS0&quot;
 </code></pre>
-<p>[    8.088348] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) ]---</p>
-<pre><code>
-表示 kernel 找不到可以掛載的 root fs ，沒辦法啟動應該在裡面的 init process
-
-這時可以按鍵盤的 Ctrl+a 接著按 x 中止 VM
-
-## 啟動 gdb
-
-linux kernel 有提供一些 linux debug 用的 gdb 指令，可以修改 gdb 的設定檔讓 gdb 啟動時自動載入加入這些指令的 script
-
-```shell
-echo &quot;add-auto-load-safe-path `pwd`/scripts/gdb/vmlinux-gdb.py&quot; &gt;&gt; ~/.gdbinit
+<p>基本的意思就是啟動一台 x86_64 架構處理器的 VM ，以 bzImage 映像檔作為 kernel ，關閉圖形並將文字輸出到 ttyS0 裝置上</p>
+<p>沒有特別的狀況的話， kernel 會開始啟動，直到處理器使用率被跑滿，畫面會停在這一句</p>
+<pre><code>[    8.088348] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) ]---
 </code></pre>
-<p>現在用以下指令啟動 QEMU
-```shell=
-qemu-system-x86_64 -kernel arch/x86/boot/bzImage -nographic -append "console=ttyS0 nokaslr" -S -s</p>
-<pre><code>
-`-S` 參數是讓 QEMU 將 VM 啟動時就將 VM 停住等待 gdb 的指令，`-s` 參數則是讓 QEMU 會監聽 port 1234 的連線。 `nokaslr` 的核心參數是停用隨機分配 kernel 運作位址的功能。接著在另一個 terminal 上啟動 gdb 連線
-
-```shell=
-user@user-VirtualBox:~/os/linux-5.15.12$ gdb vmlinux 
+<p>表示 kernel 找不到可以掛載的 root fs ，沒辦法啟動應該在裡面的 init process</p>
+<p>這時可以按鍵盤的 Ctrl+a 接著按 x 中止 VM</p>
+<h2>啟動 gdb</h2>
+<p>linux kernel 有提供一些 linux debug 用的 gdb 指令，可以修改 gdb 的設定檔讓 gdb 啟動時自動載入加入這些指令的 script</p>
+<pre><code class="language-shell">echo &quot;add-auto-load-safe-path `pwd`/scripts/gdb/vmlinux-gdb.py&quot; &gt;&gt; ~/.gdbinit
+</code></pre>
+<p>現在用以下指令啟動 QEMU</p>
+<pre><code>qemu-system-x86_64 -kernel arch/x86/boot/bzImage -nographic -append &quot;console=ttyS0 nokaslr&quot; -S -s
+</code></pre>
+<p><code>-S</code> 參數是讓 QEMU 將 VM 啟動時就將 VM 停住等待 gdb 的指令，<code>-s</code> 參數則是讓 QEMU 會監聽 port 1234 的連線。 <code>nokaslr</code> 的核心參數是停用隨機分配 kernel 運作位址的功能。接著在另一個 terminal 上啟動 gdb 連線</p>
+<pre><code>user@user-VirtualBox:~/os/linux-5.15.12$ gdb vmlinux 
 GNU gdb (Ubuntu 9.2-0ubuntu1~20.04) 9.2
 Copyright (C) 2020 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
