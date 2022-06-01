@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block site_content %}
+<div class="post-list">
+    {% for post in content.post %}
+    <div class="post-list-item">
+        <h3><a href="{{post.permalink}}">{{post.title}}</a></h3>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
