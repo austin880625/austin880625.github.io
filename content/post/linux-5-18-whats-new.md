@@ -25,12 +25,20 @@ path: 2022/05/28
 
 ## References
 
-https://lkml.org/lkml/2022/5/22/274
-https://www.zdnet.com/article/linux-kernel-5-18-arrives-heres-whats-new/
-https://kernelnewbies.org/Linux_5.18
-https://lwn.net/Articles/888736/
-https://lwn.net/Articles/889266/
-https://lwn.net/Articles/884876/
-https://segmentfault.com/a/1190000041470767/en
-https://lwn.net/ml/linux-kernel/20220217184829.1991035-1-jakobkoschel@gmail.com/
-https://lwn.net/ml/linux-kernel/86C4CE7D-6D93-456B-AA82-F8ADEACA40B7@gmail.com/
+[https://lkml.org/lkml/2022/5/22/274](https://lkml.org/lkml/2022/5/22/274)
+
+[https://www.zdnet.com/article/linux-kernel-5-18-arrives-heres-whats-new/](https://www.zdnet.com/article/linux-kernel-5-18-arrives-heres-whats-new/)
+
+[https://kernelnewbies.org/Linux_5.18](https://kernelnewbies.org/Linux_5.18)
+
+[https://lwn.net/Articles/888736/](https://lwn.net/Articles/888736/)
+
+[https://lwn.net/Articles/889266/](https://lwn.net/Articles/889266/)
+
+[https://lwn.net/Articles/884876/](https://lwn.net/Articles/884876/)
+
+[https://segmentfault.com/a/1190000041470767/en](https://segmentfault.com/a/1190000041470767/en)
+
+[https://lwn.net/ml/linux-kernel/20220217184829.1991035-1-jakobkoschel@gmail.com/](https://lwn.net/ml/linux-kernel/20220217184829.1991035-1-jakobkoschel@gmail.com/)
+
+[https://lwn.net/ml/linux-kernel/86C4CE7D-6D93-456B-AA82-F8ADEACA40B7@gmail.com/](https://lwn.net/ml/linux-kernel/86C4CE7D-6D93-456B-AA82-F8ADEACA40B7@gmail.com/)
