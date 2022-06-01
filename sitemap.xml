@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://blog.austint.in/2022/05/28/linux-5-18-whats-new.html</loc>
+<lastmod>2022-05-28</lastmod>
+</url>
+<url>
 <loc>https://blog.austint.in/2022/01/16/run-and-debug-linux-kernel-in-qemu-vm.html</loc>
 <lastmod>2022-01-16</lastmod>
 </url>
@@ -42,6 +46,6 @@
 </url>
 <url>
 <loc>https://blog.austint.in/about.html</loc>
-<lastmod>2022-01-16</lastmod>
+<lastmod>2022-06-02</lastmod>
 </url>
 </urlset>
