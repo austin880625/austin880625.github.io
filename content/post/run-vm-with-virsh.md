@@ -1,5 +1,5 @@
 title: 文字介面的 VM 工具 virsh 使用筆記
-path: 2020/04/11
+category: os/vm
 date: 2020/04/11
 ---
 

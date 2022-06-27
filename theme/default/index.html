@@ -4,7 +4,10 @@
 <div class="post-list">
     {% for post in content.post %}
     <div class="post-list-item">
-        <h3><a href="{{post.permalink}}">{{post.title}}</a></h3>
+        <div class="post-thumbnail-container"></div>
+        <h2><a href="{{post.permalink}}">{{post.title}}</a></h2>
+        <div><span>{{post.date}}</span></div>
+        <div class="post-excerpt"></div>
     </div>
     {% endfor %}
 </div>

@@ -1,6 +1,6 @@
 title: 用 gdb debug 在 QEMU 上跑的 Linux Kernel
 date: 2022/01/16
-path: 2022/01/16
+category: os/linux
 ---
 
 ## 安裝環境

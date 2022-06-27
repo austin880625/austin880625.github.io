@@ -1,0 +1,26 @@
+single_path: "/{{content.datetime.strftime(\"%Y/%m/%d\")}}"
+taxonomy:
+  category:
+    - name: 作業系統
+      slug: os
+      desc: "All about operating system"
+      children:
+        - name: Linux
+          slug: linux
+        - name: VM
+          slug: vm
+    - name: 嵌入式開發
+      slug: embedded
+    - name: 小玩具
+      slug: toy
+    - name: 電腦小知識
+      slug: computer-tips
+    - name: 程式語言
+      slug: programming-language
+      children:
+        - name: C++
+        - slug: cxx
+
+  series:
+    - name: "XX教學系列"
+      slug: "xx-tutorial"

@@ -19,8 +19,14 @@
     </head>
     <body>
         <header>
-            <h1 class="header-title"><a href="/">{{config.title}}</a></h1>
-            <h2 class="header-subtitle">{{config.subtitle}}</h2>
+            <div class="header-banner">
+                <div class="logo">
+                    <a href="/"><img class="logo-img" src="{{config.logo_url}}"></a>
+                </div>
+                <div class="header-subtitle-container">
+                    <h2 class="header-subtitle">{{config.subtitle}}</h2>
+                </div>
+            </div>
             <nav>
                 <!--
                 <ul>
@@ -32,6 +38,7 @@
                 <div class="nav-links">
                     <ul>
                         <li><a href="/">首頁</a></li>
+                        <li><a href="/post/category">文章分類</a></li>
                         {% for page in content.page %}
                         <li><a href="{{page.permalink}}">{{page.title}}</a></li>
                         {% endfor %}
@@ -43,7 +50,7 @@
             {% block site_content %}{% endblock %}
         </div>
         <footer>
-            <p>Copyright © 2021 by Austin Chang</p>
+            <p>Copyright © 2022 by Austin Chang</p>
         </footer>
     </body>
 </html>

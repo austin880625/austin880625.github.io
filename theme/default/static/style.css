@@ -1,6 +1,7 @@
 body {
     font-family: 'Noto Sans TC', sans-serif;
     color: #444;
+    background-color: #F0F0F0;
 }
 p {
     text-indent: 2rem;
@@ -14,18 +15,31 @@ p a, p a:visited {
     color: #2892d8
 }
 
+.nav-links {
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
+	margin-top: 1rem;
+	margin-bottom: 2.4rem;
+	border-top: #444 1px solid;
+	border-bottom: #444 1px solid;
+}
+
 .nav-links li>a, .nav-links li>a:visited {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     text-decoration: none;
-    color: #444;
-    background-color: #FFF;
+    color: #666;
+    letter-spacing: .2rem;
     transition: 0.2s;
-    display: block;
     height: 100%;
     width: 100%;
 }
 .nav-links li:hover>a {
-    color: #FFF;
-    background-color: #444;
+    color: #000;
     transition: 0.2s;
 }
 .nav-links ul {
@@ -35,6 +49,26 @@ ul {
     padding-left: 1rem;
     color: #666;
 }
+
+header nav {
+    text-align: center;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+}
+
+header ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+}
+header ul>li {
+    flex: 0 1 auto;
+    border-right: 1px solid #444;
+}
+header ul>li:last-child {
+    border-right: none;
+}
+
 code {
     font-size: 16px;
     color: #444;
@@ -47,43 +81,59 @@ pre {
     background-color: #DDD;
     padding: 0.5em;
 }
+pre code {
+    padding: 0em;
+}
 
 header {
-    max-width: 965px;
+    max-width: 1280px;
     padding-left: 10%;
     padding-right: 10%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 1rem;
 }
-header h1 {
-    font-size: 48px;
-    font-weight: lighter;
-    margin: 0px;
-}
-header h1 a {
-    text-decoration: none;
-}
-
-header h2 {
-    font-size: 16px;
-    margin: 0px;
-}
-
-header nav {
-    text-align: center;
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
-}
-
-header ul {
+.header-banner {
     display: flex;
-    padding: 0px;
+    font-size: 18px;
 }
-header ul>li {
+.header-banner .logo {
+    flex: 0 1 8rem;
+}
+.header-banner .logo>a {
+    width: 100%;
+    height: 100%;
+}
+.header-banner .logo img {
+    max-height: 100%;
+    max-width: 100%;
+}
+.header-banner .header-subtitle-container {
     flex: 1 1 auto;
-    border: 1px solid #000;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-subtitle-container>h2 {
+    text-align: center;
+    margin: 0;
+    font-family: monospace;
+}
+
+@media screen and (max-width: 1024px) {
+    .header-banner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .header-banner .logo {
+        flex: 0 1 8rem;
+        height: 8rem;
+    }
 }
 
 .container {
@@ -97,24 +147,28 @@ header ul>li {
 .post-list-item {
     width: calc(100% - 15px);
     font-size: 18px;
-    background-color: #FFF;
-    padding-left: 5px;
-    border-left: 10px solid #444;
-    margin-bottom: 10px;
+    margin-bottom: 0.2rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    padding-bottom: 4rem;
+    padding-top: 0.8rem;
+    border-bottom: #444 1px solid;
     transition: 0.2s;
 }
-.post-list-item:hover {
-    background-color: #444;
-    transition: 0.2s;
+.post-list-item:hover a {
+    color: #000;
 }
-.post-list-item h3 {
-    margin: 0px;
+.post-list-item h2 {
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
 }
 .post-list-item a {
     color: #444;
 }
 .post-list-item:hover a {
-    color: #FFF;
+    color: #000;
+    transition: 0.2s;
 }
 .post-list-item a,.post-list-item:hover a {
     display: block;
@@ -129,4 +183,7 @@ footer {
     text-align: center;
     font-size: 14px;
     color: #666;
+}
+footer p {
+    text-indent: 0em;
 }

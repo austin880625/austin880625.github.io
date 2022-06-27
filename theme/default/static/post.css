@@ -1,8 +1,11 @@
 .post-title {
     margin-bottom: 0.2em;
 }
+.post-heading {
+    margin-bottom: 2rem;
+}
 .post-date {
     margin-left: 0.2em;
     font-size: 0.8rem;
-    color: #AAA;
+    color: #989898;
 }

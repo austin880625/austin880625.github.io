@@ -1,5 +1,5 @@
 title: Linux 上查詢網卡 Promiscuous Mode 狀態的方法和問題
-path: 2021/05/08
+category: os/linux
 date: 2021/05/08
 ---
 ## 起點： VM 網路的黑魔法

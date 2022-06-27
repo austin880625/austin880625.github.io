@@ -1,0 +1,11 @@
+items:
+  - type: link
+    title: 首頁
+    path: /
+  - type: link
+    title: 文章分類
+    path: /post/category
+  - type: list
+    content: page
+    title: "{{page.title}}"
+    path: "{{page.permalink}}"

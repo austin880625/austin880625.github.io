@@ -1,5 +1,5 @@
 title: Cache Prefetching 及在 Linux Kernel 中的使用
-path: 2020/03/14
+category: os/linux
 date: 2020/03/14
 ---
 因為在研究某個 cache 使用情境時自己想到一種可能的最佳化策略，查查資料和翻書發現原來已經（一部分）被提到過了，以前上課果然不夠認真...

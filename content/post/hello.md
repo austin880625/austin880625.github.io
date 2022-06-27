@@ -1,6 +1,5 @@
 title: Hello World
-path: 2020/02/09
-date: 2020/02/07
+date: 2020/02/09
 ---
 # Hello World!
 

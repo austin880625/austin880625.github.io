@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block page_head %}
+<link rel="stylesheet" href="{{config.staticurl}}/post.css">
+{% endblock %}
+{% block page_title %}
+{% if is_root %}
+    分類
+{% else %}
+    {{ term.name }}
+{% endif %}
+{% endblock %}
+
+{% block site_content %}
+<div class="post-heading">
+    {% if is_root %}
+        <h1 class="post-title">分類: 全部</h1>
+    {% else %}
+        <h1 class="post-title">分類: {{ term.name }}</h1>
+    {% endif %}
+</div>
+<div class="post-content">
+    <section class="category-list">
+        {% for child in term.children %}
+            <h2><a href="/{{path}}/{{child.slug}}">{{child.name}}</a></h2>
+        {% endfor %}
+    </section>
+    <section class="post-list">
+        {% for post in content_list %}
+        <div class="post-list-item">
+            <div class="post-thumbnail-container"></div>
+            <h2><a href="{{post.permalink}}">{{post.title}}</a></h2>
+            <div><span>{{post.date}}</span></div>
+            <div class="post-excerpt"></div>
+        </div>
+        {% endfor %}
+    </section>
+</div>          
+{% endblock %}
