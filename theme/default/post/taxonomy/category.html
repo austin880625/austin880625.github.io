@@ -28,10 +28,14 @@
     <section class="post-list">
         {% for post in content_list %}
         <div class="post-list-item">
-            <div class="post-thumbnail-container"></div>
             <h2><a href="{{post.permalink}}">{{post.title}}</a></h2>
             <div><span>{{post.date}}</span></div>
             <div class="post-excerpt"></div>
+            {% if post.thumbnail != "" %}
+            <div class="post-thumbnail-container">
+                <img src="{{post.thumbnail}}">
+            </div>
+            {% endif %}
         </div>
         {% endfor %}
     </section>

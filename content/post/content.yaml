@@ -1,7 +1,7 @@
 single_path: "/{{content.datetime.strftime(\"%Y/%m/%d\")}}"
 taxonomy:
   category:
-    - name: 作業系統
+    - name: Operating System
       slug: os
       desc: "All about operating system"
       children:
@@ -9,17 +9,22 @@ taxonomy:
           slug: linux
         - name: VM
           slug: vm
-    - name: 嵌入式開發
+    - name: Embedded System
       slug: embedded
-    - name: 小玩具
+    - name: Toy
       slug: toy
-    - name: 電腦小知識
+    - name: Computer Tips
       slug: computer-tips
-    - name: 程式語言
+    - name: Programming Language
       slug: programming-language
       children:
         - name: C++
         - slug: cxx
+    - name: Web Development
+      slug: web-dev
+      children:
+        - name: Wordpress
+          slug: wordpress
 
   series:
     - name: "XX教學系列"

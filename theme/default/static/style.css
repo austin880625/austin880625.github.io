@@ -1,17 +1,28 @@
 body {
     font-family: 'Noto Sans TC', sans-serif;
-    color: #444;
+    color: #222;
     background-color: #F0F0F0;
+    font-size: 18px;
 }
 p {
+    font-family: 'Noto Serif TC', serif;
     text-indent: 2rem;
-    color: #666;
+    color: #444;
+    font-size: 20px;
+    line-height: 1.618;
+    letter-spacing: 1.2px;
+}
+p img {
+    max-width: 100%;
+    margin-left: -2rem;
+    max-height: 30rem;
 }
 a,a:visited {
     text-decoration: underline;
     color: inherit;
 }
 p a, p a:visited {
+    word-wrap: break-word;
     color: #2892d8
 }
 
@@ -20,8 +31,8 @@ p a, p a:visited {
 	padding-bottom: 0.3rem;
 	margin-top: 1rem;
 	margin-bottom: 2.4rem;
-	border-top: #444 1px solid;
-	border-bottom: #444 1px solid;
+	border-top: #222 1px solid;
+	border-bottom: #222 1px solid;
 }
 
 .nav-links li>a, .nav-links li>a:visited {
@@ -32,7 +43,7 @@ p a, p a:visited {
     margin-left: 1rem;
     margin-right: 1rem;
     text-decoration: none;
-    color: #666;
+    color: #444;
     letter-spacing: .2rem;
     transition: 0.2s;
     height: 100%;
@@ -47,7 +58,7 @@ p a, p a:visited {
 }
 ul {
     padding-left: 1rem;
-    color: #666;
+    color: #444;
 }
 
 header nav {
@@ -63,7 +74,7 @@ header ul {
 }
 header ul>li {
     flex: 0 1 auto;
-    border-right: 1px solid #444;
+    border-right: 1px solid #222;
 }
 header ul>li:last-child {
     border-right: none;
@@ -92,6 +103,7 @@ header {
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
+    font-size: 16px;
 }
 .header-banner {
     display: flex;
@@ -123,6 +135,9 @@ header {
 }
 
 @media screen and (max-width: 1024px) {
+    body {
+        font-size: 16px;
+    }
     .header-banner {
         display: flex;
         flex-direction: column;
@@ -133,6 +148,24 @@ header {
     .header-banner .logo {
         flex: 0 1 8rem;
         height: 8rem;
+    }
+    p {
+        letter-spacing: 0.1px;
+        font-size: 16px;
+    }
+    header ul {
+        flex-direction: column;
+    }
+    header ul>li {
+        flex: 0 1 auto;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        width: 100%;
+        border-bottom: 1px #222 solid;
+        border-right: none;
+    }
+    header ul>li:last-child {
+        border-bottom: none;
     }
 }
 
@@ -176,6 +209,18 @@ header {
     height: 100%;
     text-decoration: none;
 }
+.post-thumbnail-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.post-thumbnail-container a {
+    text-align: center;
+}
+.post-thumbnail-container img {
+    max-width: 80%;
+    max-height: 35rem;
+}
 
 footer {
     padding-top: 3em;
@@ -186,4 +231,7 @@ footer {
 }
 footer p {
     text-indent: 0em;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #666;
+    font-size: 18px;
 }

@@ -1,5 +1,6 @@
 title: 友站連結
 path:
+date: 2022/06/28
 ---
 
 ## [YK's](https://kaiiiz.github.io/)
