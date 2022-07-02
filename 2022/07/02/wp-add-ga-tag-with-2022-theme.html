@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
+        <link rel="stylesheet" href="/static/theme/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap" rel="stylesheet"> 
+        <title>
+在 Wordpress 2022 佈景主題加入 Google Analytics 標籤的方法 - 
+AusTinTin</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-43N3L3LDL9"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-43N3L3LDL9');
+        </script>
+        
+<link rel="stylesheet" href="/static/theme/post.css">
+
+    </head>
+    <body>
+        <header>
+            <div class="header-banner">
+                <div class="logo">
+                    <a href="/"><img class="logo-img" src="/static/content/austintin_logo.png"></a>
+                </div>
+                <div class="header-subtitle-container">
+                    <h2 class="header-subtitle">1048576 Hows, 2097152 Wheres, And 8388608 Whys</h2>
+                </div>
+            </div>
+            <nav>
+                <!--
+                <ul>
+                    
+                </ul>
+                -->
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="/">首頁</a></li>
+                        <li><a href="/post/category">文章分類</a></li>
+                        
+                        <li><a href="/links.html">友站連結</a></li>
+                        
+                        <li><a href="/about.html">關於</a></li>
+                        
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            
+<div class="post-heading">
+    <h1 class="post-title">在 Wordpress 2022 佈景主題加入 Google Analytics 標籤的方法</h1>
+    <div class="post-date">2022-07-02</div>
+</div>
+<div class="post-content">
+    <p>在一兩年前 Wordpress 預設使用的佈景主題是 Twenty Twenty-One ，這之前的佈景主題檔案都還能看到 <code>&lt;head&gt;</code> 標籤在 <code>header.php</code> 裡面，所以如果有像是 Google Analytics 的線上服務需要內嵌腳本，可以直接在更改佈景主題檔案的功能中把 <code>&lt;script&gt;</code> 標籤加到 <code>&lt;head&gt;</code> 標籤內。</p>
+<h2>為什麼 head 標籤不能直接用了？</h2>
+<p>在 2018 年起， Wordpress 發布了新版的 Gutenberg 編輯器，相較於舊版編輯器開發了區塊編輯器的概念用來取代 shortcode，將區塊作為以 ReactJS 爲基礎的統一界面，讓 plugin 的開發者能夠在文章編輯器中建立所見即所得的自訂內容區塊。而在這個編輯器發布後不久， Wordpress 開發社群就開始把目標設定為把這個編輯器從單純的文章編輯延伸到整個網站的佈景都可以透過區塊編輯。</p>
+<p>幾天前裝了一個 Wordpress 網站起來，用最新的 Twenty Twenty-Two 佈景主題發現整個佈景主題設定已經變成所見即所得的界面，佈景主題檔案內也沒有原本所見的 <code>header.php</code> 檔案，而是大部分都變成了帶有 Wordpress block 註解的 HTML 檔案，也不包含 HTML 檔案最開始的 <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code> 等標籤，從 <code>index.php</code> 的說明看起來，佈景主題也不會再有包含這些標籤的檔案，都會由 Wordpress 自動生成。</p>
+<p><img alt="Wordpress 的 Twenty Twenty-Two 佈景找不到 head 標籤" src="/static/content/wp-add-ga-tag-with-2022-theme/theme-edit.png" /></p>
+<h2>新的 GA 標籤要放哪裡？</h2>
+<p>以佈景主題的設計來說，更換佈景主題的時候是希望能夠不用影響到網站功能的，而網站的額外功能應該要由 plugin 來提供，所以原本就使用 plugin 的人應該不會被這個版本的佈景主題更新影響。但我自己不太想要只是因為一段複製貼上的 code 就裝一個 plugin ，就把插入 <code>&lt;script&gt;</code> 標籤在新版 Wordpress(5.7+) 的寫法寫到 Wordpress 預設安裝的範例 Hello Dolly plugin 裡面。做法如下：</p>
+<p>假設在 Google Analytics 管理介面拿到的 GA 標籤程式碼是這樣， <code>G-XXXXXXXXXX</code> 是 GA 的 ID</p>
+<pre><code>&lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;
+&lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XXXXXXXXXX');
+&lt;/script&gt;
+</code></pre>
+<p>先在 Plugin 頁面把 Hello Dolly 關閉，接著要找到 Hello Dolly plugin 的程式碼，開啟 Tools -&gt; Plugin File Editor 後，在右上角可以看到選擇 plugin 的選取框，選擇 Hello Dolly 後按 Select </p>
+<p><img alt="編輯 Plugin 程式碼的步驟" src="/static/content/wp-add-ga-tag-with-2022-theme/plugin-edit.png" /></p>
+<p>在編輯區塊上面的其他程式碼可以自己決定要不要刪掉，最開始的註解不要刪就可以了，那是 Wordpress 的 Plugin 宣告。然後在最底下加入</p>
+<pre><code>function dolly_enqueue_google_analytics() {
+    wp_print_script_tag(
+        array(
+            'src' =&gt; esc_url('https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX'),
+            'async' =&gt; true,
+        )
+    );
+    wp_print_inline_script_tag(&quot;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XXXXXXXXXX');
+    &quot;);
+}
+
+add_action('wp_head', dolly_enqueue_google_analytics);
+</code></pre>
+<p>接著按 Update File 後再到 Plugin 的頁面啟用 Dolly ，接著就可以到網站首頁用開發者工具檢查標籤是不是載入成功了。</p>
+<h2>References</h2>
+<p><a href="https://core.trac.wordpress.org/ticket/54272">https://core.trac.wordpress.org/ticket/54272</a></p>
+<p><a href="https://make.wordpress.org/core/2021/02/23/introducing-script-attributes-related-functions-in-wordpress-5-7/">https://make.wordpress.org/core/2021/02/23/introducing-script-attributes-related-functions-in-wordpress-5-7/</a></p>
+<p><a href="https://developer.wordpress.org/reference/functions/wp_head/">https://developer.wordpress.org/reference/functions/wp_head/</a></p>
+</div>
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'https://blog.austint.in/2022/07/02/wp-add-ga-tag-with-2022-theme.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2022/07/02/wp-add-ga-tag-with-2022-theme.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://austinchang-me.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+        </div>
+        <footer>
+            <p>Copyright © 2022 by Austin Chang</p>
+        </footer>
+    </body>
+</html>
