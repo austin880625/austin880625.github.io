@@ -1,6 +1,11 @@
 single_path: "/{{content.datetime.strftime(\"%Y/%m/%d\")}}"
 taxonomy:
   category:
+    - name: Life
+      slug: life
+      children:
+        - name: Singapore
+          slug: sg
     - name: Operating System
       slug: os
       desc: "All about operating system"
