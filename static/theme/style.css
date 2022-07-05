@@ -4,19 +4,6 @@ body {
     background-color: #F0F0F0;
     font-size: 18px;
 }
-p {
-    font-family: 'Noto Serif TC', serif;
-    text-indent: 2rem;
-    color: #444;
-    font-size: 20px;
-    line-height: 1.618;
-    letter-spacing: 1.2px;
-}
-p img {
-    max-width: 100%;
-    margin-left: -2rem;
-    max-height: 30rem;
-}
 a,a:visited {
     text-decoration: underline;
     color: inherit;

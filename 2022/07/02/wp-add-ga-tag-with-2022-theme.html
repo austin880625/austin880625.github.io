@@ -4,22 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" >
         <link rel="stylesheet" href="/static/theme/style.css">
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap" rel="stylesheet"> 
         <title>
 在 Wordpress 2022 佈景主題加入 Google Analytics 標籤的方法 - 
 AusTinTin</title>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-43N3L3LDL9"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-43N3L3LDL9');
-        </script>
+        
         
 <link rel="stylesheet" href="/static/theme/post.css">
 
@@ -64,7 +56,7 @@ AusTinTin</title>
 <h2>為什麼 head 標籤不能直接用了？</h2>
 <p>在 2018 年起， Wordpress 發布了新版的 Gutenberg 編輯器，相較於舊版編輯器開發了區塊編輯器的概念用來取代 shortcode，將區塊作為以 ReactJS 爲基礎的統一界面，讓 plugin 的開發者能夠在文章編輯器中建立所見即所得的自訂內容區塊。而在這個編輯器發布後不久， Wordpress 開發社群就開始把目標設定為把這個編輯器從單純的文章編輯延伸到整個網站的佈景都可以透過區塊編輯。</p>
 <p>幾天前裝了一個 Wordpress 網站起來，用最新的 Twenty Twenty-Two 佈景主題發現整個佈景主題設定已經變成所見即所得的界面，佈景主題檔案內也沒有原本所見的 <code>header.php</code> 檔案，而是大部分都變成了帶有 Wordpress block 註解的 HTML 檔案，也不包含 HTML 檔案最開始的 <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code> 等標籤，從 <code>index.php</code> 的說明看起來，佈景主題也不會再有包含這些標籤的檔案，都會由 Wordpress 自動生成。</p>
-<p><img alt="Wordpress 的 Twenty Twenty-Two 佈景找不到 head 標籤" src="/static/content/wp-add-ga-tag-with-2022-theme/theme-edit.png" /></p>
+<p><img alt="Wordpress 的 Twenty Twenty-Two 佈景找不到 head 標籤" src="https://img.austint.in/dqxWTvt2S6N4aKsg4c_9FVkA9VU=/960x0/wp-add-ga-tag-with-2022-theme/theme-edit.png" /></p>
 <h2>新的 GA 標籤要放哪裡？</h2>
 <p>以佈景主題的設計來說，更換佈景主題的時候是希望能夠不用影響到網站功能的，而網站的額外功能應該要由 plugin 來提供，所以原本就使用 plugin 的人應該不會被這個版本的佈景主題更新影響。但我自己不太想要只是因為一段複製貼上的 code 就裝一個 plugin ，就把插入 <code>&lt;script&gt;</code> 標籤在新版 Wordpress(5.7+) 的寫法寫到 Wordpress 預設安裝的範例 Hello Dolly plugin 裡面。做法如下：</p>
 <p>假設在 Google Analytics 管理介面拿到的 GA 標籤程式碼是這樣， <code>G-XXXXXXXXXX</code> 是 GA 的 ID</p>
@@ -79,7 +71,7 @@ AusTinTin</title>
 &lt;/script&gt;
 </code></pre>
 <p>先在 Plugin 頁面把 Hello Dolly 關閉，接著要找到 Hello Dolly plugin 的程式碼，開啟 Tools -&gt; Plugin File Editor 後，在右上角可以看到選擇 plugin 的選取框，選擇 Hello Dolly 後按 Select </p>
-<p><img alt="編輯 Plugin 程式碼的步驟" src="/static/content/wp-add-ga-tag-with-2022-theme/plugin-edit.png" /></p>
+<p><img alt="編輯 Plugin 程式碼的步驟" src="https://img.austint.in/Uoj5IMhW4iIuk5eF0EDpjVbufAo=/960x0/wp-add-ga-tag-with-2022-theme/plugin-edit.png" /></p>
 <p>在編輯區塊上面的其他程式碼可以自己決定要不要刪掉，最開始的註解不要刪就可以了，那是 Wordpress 的 Plugin 宣告。然後在最底下加入</p>
 <pre><code>function dolly_enqueue_google_analytics() {
     wp_print_script_tag(
