@@ -16,15 +16,17 @@ taxonomy:
           slug: vm
     - name: Embedded System
       slug: embedded
-    - name: Toy
-      slug: toy
     - name: Computer Tips
       slug: computer-tips
-    - name: Programming Language
-      slug: programming-language
+    - name: Programming
+      slug: programming
       children:
         - name: C++
-        - slug: cxx
+          slug: cxx
+        - name: Python
+          slug: python
+    - name: Server
+      slug: server
     - name: Web Development
       slug: web-dev
       children:
