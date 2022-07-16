@@ -1,15 +1,15 @@
-# 使用 Thumbor + NextCloud 架設自己的網頁圖床 (2): NextCloud 安裝與自己開發 Plugin
+# 使用 Thumbor + Nextcloud 架設自己的網頁圖床 (2): Nextcloud 安裝與自己開發 Plugin
 date: 2022/07/16
 category: server
 thumbnail: https://img.austint.in/YjnRls77eA_l7IgeZMum1B0eSpg=/thumbor-sample/thumbor-nextcloud.png
 ---
-架設完 Thumbor 伺服器之後，把網站圖片放在伺服器的固定位置就能使用 file loader 滿足圖片伺服器需求。但在第一篇文章也提到，傳輸圖片到 server 需要使用 scp 類型的工具，如果是在手機上拍照，把圖片上傳的流程會是把手機照片傳輸到電腦 -> 用電腦 scp 檔案到伺服器 -> 手動用 script 產生 Thumbor 圖片 url ，其實不是很方便。其實會希望有手機或電腦有客戶端可以直接上傳檔案的雲端硬碟，然後直接在界面上拿到圖片的 url 。因為本來有在用 NextCloud ，所以來試著在 NextCloud 上實作產生 url 的機制。
+架設完 Thumbor 伺服器之後，把網站圖片放在伺服器的固定位置就能使用 file loader 滿足圖片伺服器需求。但在第一篇文章也提到，傳輸圖片到 server 需要使用 scp 類型的工具，如果是在手機上拍照，把圖片上傳的流程會是把手機照片傳輸到電腦 -> 用電腦 scp 檔案到伺服器 -> 手動用 script 產生 Thumbor 圖片 url ，其實不是很方便。其實會希望有手機或電腦有客戶端可以直接上傳檔案的雲端硬碟，然後直接在界面上拿到圖片的 url 。因為本來有在用 Nextcloud ，所以來試著在 Nextcloud 上實作產生 url 的機制。
 
-## NextCloud 安裝
+## Nextcloud 安裝
 
-雖然本來就有裝好的 NextCloud ，但為了文章完整度還是重新架一個，順便拿來當 Plugin 開發的測試環境。
+雖然本來就有裝好的 Nextcloud ，但為了文章完整度還是重新架一個，順便拿來當 Plugin 開發的測試環境。
 
-安裝 NextCloud 預設環境需要一個能夠執行 PHP 的網頁伺服器和資料庫，官方文件有不同網頁伺服器和資料庫的設定方法，我自己習慣的是 Nginx+MariaDB+phpFPM 的組合，目前使用的 Linux 發行版是 Alpine Linux 。安裝過程如下：
+安裝 Nextcloud 預設環境需要一個能夠執行 PHP 的網頁伺服器和資料庫，官方文件有不同網頁伺服器和資料庫的設定方法，我自己習慣的是 Nginx+MariaDB+phpFPM 的組合，目前使用的 Linux 發行版是 Alpine Linux 。安裝過程如下：
 
 ### 套件
 
@@ -65,7 +65,7 @@ group = www-data
 listen = 127.0.0.1:9000
 ```
 
-nginx 放一個 virtual host ，這段設定是修改自[官網](https://docs.nextcloud.com/server/stable/admin_manual/installation/nginx.html)的，我們主要先設定成 80 port 就可以連線，底下有很多跟 NextCloud 實作有關的 rewrite ，自己寫實在不太好寫。
+nginx 放一個 virtual host ，這段設定是修改自[官網](https://docs.nextcloud.com/server/stable/admin_manual/installation/nginx.html)的，我們主要先設定成 80 port 就可以連線，底下有很多跟 Nextcloud 實作有關的 rewrite ，自己寫實在不太好寫。
 
 `/etc/nginx/http.d/nextcloud.conf`
 
@@ -247,7 +247,7 @@ rc-service php-fpm8 reload
 rc-service nginx reload
 ```
 
-### NextCloud 主程式
+### Nextcloud 主程式
 
 ```
 wget https://download.nextcloud.com/server/releases/latest.zip
@@ -257,7 +257,7 @@ chown -R php:www-data /var/www/nextcloud
 
 接著打開瀏覽器輸入 [http://主機名稱](http://localhost) 應該就能看到安裝畫面，填入需要的資訊後按安裝。
 
-![NextCloud 主程式安裝畫面](https://img.austint.in/hRyg-u_FlvBqb9ACli1mfY4bnvQ=/1000x0/thumbor-sample/nc-install.png)
+![Nextcloud 主程式安裝畫面](https://img.austint.in/hRyg-u_FlvBqb9ACli1mfY4bnvQ=/1000x0/thumbor-sample/nc-install.png)
 
 如果是在 http server 上安裝的話，安裝完成的重新導向會導向 https 的網址，可以在 `/var/www/nextcloud/config/config.php` 修改增加這些設定：
 
@@ -267,44 +267,44 @@ chown -R php:www-data /var/www/nextcloud
   'overwriteprotocol' => 'http',
 ```
 
-接著就能回到瀏覽器用 http 的網址重新連線。安裝精靈會提示是否要安裝一些 NextCloud App ，看喜好決定後安裝完成就能進到主畫面了。
+接著就能回到瀏覽器用 http 的網址重新連線。安裝精靈會提示是否要安裝一些 Nextcloud App ，看喜好決定後安裝完成就能進到主畫面了。
 
-![NextCloud 24.0.2.1 主畫面](https://img.austint.in/P6XEqfswA-MHWoghDvD035FzK34=/1000x0/thumbor-sample/nc-dashboard.png)
+![Nextcloud 24.0.2.1 主畫面](https://img.austint.in/P6XEqfswA-MHWoghDvD035FzK34=/1000x0/thumbor-sample/nc-dashboard.png)
 
 ## Thumbor 設定
 
-接著要設定 Thumbor 可以存取 NextCloud 中的檔案，其實很簡單，只要用 file loader 並把 `thumbor.conf` 中的 `FILE_LOADER_ROOT_PATH` 改成 NextCloud 的使用者資料目錄，接著就能用相對位置當作 url 存取上傳到 NextCloud 的圖片了。
+接著要設定 Thumbor 可以存取 Nextcloud 中的檔案，其實很簡單，只要用 file loader 並把 `thumbor.conf` 中的 `FILE_LOADER_ROOT_PATH` 改成 Nextcloud 的使用者資料目錄，接著就能用相對位置當作 url 存取上傳到 Nextcloud 的圖片了。
 
 ```
 # 只有一個使用者的話也可以指定成使用者目錄底下的特定位置
 FILE_LOADER_ROOT_PATH = '/var/www/nextcloud/data/austin/files/
 ```
 
-如果 Thumbor 和 NextCloud 架在不同機器的話，我想到的做法是用 WebDAV 的 url 搭配 NextCloud 的 app password 存取，不過需要在 http request 中加入驗證 header ，可能需要改 http loader 的實作。
+如果 Thumbor 和 Nextcloud 架在不同機器的話，我想到的做法是用 WebDAV 的 url 搭配 Nextcloud 的 app password 存取，不過需要在 http request 中加入驗證 header ，可能需要改 http loader 的實作。
 
-## NextCloud App 開發
+## Nextcloud App 開發
 
-這段應該才是寫這篇文章真正的動機，希望在 NextCloud 上傳圖片的當下就能在頁面上得到 Thumbor 附帶 HMAC 的網址，我的想像是在檔案的下拉選單有一個 Get thumbor url 的選項，按下去之後出現圖片的 unsafe url 以及 HMAC url ，修改 unsafe url 上的濾鏡參數之後 HMAC url 跟著改變並且可以一鍵複製。
+這段應該才是寫這篇文章真正的動機，希望在 Nextcloud 上傳圖片的當下就能在頁面上得到 Thumbor 附帶 HMAC 的網址，我的想像是在檔案的下拉選單有一個 Get thumbor url 的選項，按下去之後出現圖片的 unsafe url 以及 HMAC url ，修改 unsafe url 上的濾鏡參數之後 HMAC url 跟著改變並且可以一鍵複製。
 
-NextCloud 提供了自訂 App 的開發 API ，所以想達成的效果應該是可行的，只是說明文件有點過時（加上不太有用和錯亂）。過去 NextCloud 的 javascript API 是在全域變數裡的，似乎是從 OwnCloud 帶進來的，較新版的 NextCloud 則開始使用 webpack 打包 javascript 套件，官方文件上也推薦使用新版套件管理的開發流程。但也只有推薦，幾乎沒有文件、沒有範例、沒有 code 。 ㄛ對，有些 API 看起來就是舊版的文件被刪了，新版的 code 還沒用到新的 API 。
+Nextcloud 提供了自訂 App 的開發 API ，所以想達成的效果應該是可行的，只是說明文件有點過時（加上不太有用和錯亂）。過去 Nextcloud 的 javascript API 是在全域變數裡的，似乎是從 OwnCloud 帶進來的，較新版的 Nextcloud 則開始使用 webpack 打包 javascript 套件，官方文件上也推薦使用新版套件管理的開發流程。但也只有推薦，幾乎沒有文件、沒有範例、沒有 code 。 ㄛ對，有些 API 看起來就是舊版的文件被刪了，新版的 code 還沒用到新的 API 。
 
-於是整個開發過程就是看一些原始碼、從瀏覽器 console 倒一些變數猜函式怎麼用、從 NextCloud 原始碼塞 `echo` 看哪裡新舊版載入行為不一樣（裝 XDebug 對我還是有點麻煩），看說明文件花的時間反而最少 orz。整個開發體驗和 Wordpress plugin 差有點多。
+於是整個開發過程就是看一些原始碼、從瀏覽器 console 倒一些變數猜函式怎麼用、從 Nextcloud 原始碼塞 `echo` 看哪裡新舊版載入行為不一樣（裝 XDebug 對我還是有點麻煩），看說明文件花的時間反而最少 orz。整個開發體驗和 Wordpress plugin 差有點多。
 
-總之花了一個禮拜先做出了一個能用的版本，打包好的 zip 檔案在解壓縮之後就能放在 NextCloud 的 `apps` 目錄（通常在 `/var/www/nextcloud/apps` 下），在 app 管理頁面就能看到 Thumbor Url 的啟用選項。
+總之花了一個禮拜先做出了一個能用的版本，打包好的 zip 檔案在解壓縮之後就能放在 Nextcloud 的 `apps` 目錄（通常在 `/var/www/nextcloud/apps` 下），在 app 管理頁面就能看到 Thumbor Url 的啟用選項。
 
-![NextCloud 安裝完 Thumbor Url apps 後的啟用選項](https://img.austint.in/fXSHaDgF5jZkKRU_I7PTabN1x_E=/800x0/thumbor-sample/thumborurl-enable.png)
+![Nextcloud 安裝完 Thumbor Url apps 後的啟用選項](https://img.austint.in/fXSHaDgF5jZkKRU_I7PTabN1x_E=/800x0/thumbor-sample/thumborurl-enable.png)
 
 啟用後就能在個人設定的分享頁面中看到 Thumbor Url 需要的設定。
 
-![NextCloud 中 Thumbor Url 設定畫面](https://img.austint.in/eQwKjUFKgKyKyQltplyKd5zvCXU=/800x0/thumbor-sample/thumborurl-settings.png)
+![Nextcloud 中 Thumbor Url 設定畫面](https://img.austint.in/eQwKjUFKgKyKyQltplyKd5zvCXU=/800x0/thumbor-sample/thumborurl-settings.png)
 
 三個設定的意義如下：
 
 - Thumbor server base url ： Thumbor 伺服器位置
-- Thumbor server base dir ： Thumbor 的 **file loader 圖片根目錄**相對 NextCloud 中**使用者根目錄**的位置。例如使用者名稱是 `austin` ，在 NextCloud 把要分享的圖片放在 `img/for-thumbor` 目錄下，這個時候 base dir 就會設定為 `/img/for-thumbor` 而 Thumbor 的 `FILE_LOADER_ROOT_PATH` 設定就會像 `/var/www/nextcloud/data/austin/files/img/for-thumbor`
+- Thumbor server base dir ： Thumbor 的 **file loader 圖片根目錄**相對 Nextcloud 中**使用者根目錄**的位置。例如使用者名稱是 `austin` ，在 Nextcloud 把要分享的圖片放在 `img/for-thumbor` 目錄下，這個時候 base dir 就會設定為 `/img/for-thumbor` 而 Thumbor 的 `FILE_LOADER_ROOT_PATH` 設定就會像 `/var/www/nextcloud/data/austin/files/img/for-thumbor`
 - Thumbor server security key ： Thumbor 用來對 url 做 HMAC 簽章的 security key
 
-設定完成後在 NextCloud 檔案瀏覽畫面中圖片的檔案下拉選單就會出現 Get Thumbor Url 的選項。其實只有在 base dir 底下的圖片這個選項才是有作用的，只是我的 app 沒有特別過濾所以到處都會出現。
+設定完成後在 Nextcloud 檔案瀏覽畫面中圖片的檔案下拉選單就會出現 Get Thumbor Url 的選項。其實只有在 base dir 底下的圖片這個選項才是有作用的，只是我的 app 沒有特別過濾所以到處都會出現。
 
 ![檔案下拉選單新增的 Get Thumbor Url 選項](https://img.austint.in/DpSLIfYdhSCull-Cpv0AXOKhzXw=/800x0/thumbor-sample/thumborurl-menu.png)
 
@@ -312,13 +312,13 @@ NextCloud 提供了自訂 App 的開發 API ，所以想達成的效果應該是
 
 ![輸入 Thumbor 圖片處理選項](https://img.austint.in/1Uaq5CDZmVm7KB1gpQaGjPMLJZo=/800x0/thumbor-sample/thumborurl-enter-filter.png)
 
-最後就會獲得有 HMAC hash 的圖片 url ，NextCloud 有 https 的話也會直接複製進剪貼簿，不需要有本地 script 才能得到 url hash 了。
+最後就會獲得有 HMAC hash 的圖片 url ，Nextcloud 有 https 的話也會直接複製進剪貼簿，不需要有本地 script 才能得到 url hash 了。
 
 ![帶有 HMAC hash 的圖片 url](https://img.austint.in/p7WrYlm_FmH2MKJHJWw2LIbjZQs=/800x0/thumbor-sample/thumborurl-signed-url.png)
 
 ## Downloads
 
-最後這是寫出來的 NextCloud App 的 repository ，應該是沒有要把他推上 NextCloud AppStore 的計劃，因為文件實在太難讀，日後維護感覺會很痛苦。不過有什麼簡單的建議應該也是可以再討論。
+最後這是寫出來的 Nextcloud App 的 repository ，應該是沒有要把他推上 Nextcloud AppStore 的計劃，因為文件實在太難讀，日後維護感覺會很痛苦。不過有什麼簡單的建議應該也是可以再討論。
 
 [https://github.com/austin880625/nextcloud-thumbor-url](https://github.com/austin880625/nextcloud-thumbor-url)
 

@@ -1,4 +1,4 @@
-# 使用 Thumbor + NextCloud 架設自己的網頁圖床 (1): Thumbor 伺服器安裝
+# 使用 Thumbor + Nextcloud 架設自己的網頁圖床 (1): Thumbor 伺服器安裝
 date: 2022/07/11
 category: server
 thumbnail: https://img.austint.in/YjnRls77eA_l7IgeZMum1B0eSpg=/thumbor-sample/thumbor-nextcloud.png
