@@ -75,7 +75,9 @@ code {
     padding-right: 0.5em;
 }
 pre {
-    overflow-x: auto;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    max-height: 30rem;
     background-color: #DDD;
     padding: 0.5em;
 }
