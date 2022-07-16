@@ -2,6 +2,9 @@
 date: 2022/07/16
 category: server
 thumbnail: https://img.austint.in/YjnRls77eA_l7IgeZMum1B0eSpg=/thumbor-sample/thumbor-nextcloud.png
+
+excerpt: Thumbor 可以透過 file loader 存取 Nextcloud 的檔案。本文介紹 Nextcloud 的安裝並整合 Thumbor 使其可以快速取得 Thumbor url 的過程
+
 ---
 架設完 Thumbor 伺服器之後，把網站圖片放在伺服器的固定位置就能使用 file loader 滿足圖片伺服器需求。但在第一篇文章也提到，傳輸圖片到 server 需要使用 scp 類型的工具，如果是在手機上拍照，把圖片上傳的流程會是把手機照片傳輸到電腦 -> 用電腦 scp 檔案到伺服器 -> 手動用 script 產生 Thumbor 圖片 url ，其實不是很方便。其實會希望有手機或電腦有客戶端可以直接上傳檔案的雲端硬碟，然後直接在界面上拿到圖片的 url 。因為本來有在用 Nextcloud ，所以來試著在 Nextcloud 上實作產生 url 的機制。
 

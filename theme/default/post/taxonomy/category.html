@@ -3,13 +3,13 @@
 {% block page_head %}
 <link rel="stylesheet" href="{{config.staticurl}}/post.css">
 {% endblock %}
-{% block page_title %}
-{% if is_root %}
+{% block page_title -%}
+{% if is_root -%}
     分類
-{% else %}
+{%- else -%}
     {{ term.name }}
-{% endif %}
-{% endblock %}
+{%- endif %}{{" - "}}
+{%- endblock %}
 
 {% block site_content %}
 <div class="post-heading">

@@ -2,6 +2,9 @@
 date: 2022/07/11
 category: server
 thumbnail: https://img.austint.in/YjnRls77eA_l7IgeZMum1B0eSpg=/thumbor-sample/thumbor-nextcloud.png
+
+excerpt: 使用 GitHub Page 寫部落格開始有加圖片的需求，可以架設 Thumbor 作為自動裁切縮放以及快取圖片的服務。本文介紹 Thumbor 服務的安裝以及基本的安全性設定
+
 ---
 原本部落格的文章只有文章和 code ，所以東西全部放在 GitHub Page 上輕鬆自在，最近想寫生活廢文開始有加圖片的需求，感覺到圖片和相片直接放 GitHub Page 很快就會讓 repository 接近 1GB 的容量上限，而且也會拖慢 git 操作的速度。
 

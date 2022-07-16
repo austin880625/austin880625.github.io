@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 
-{% block page_title %}
-{{post.title + " - "}}
-{% endblock %}
+{% block page_title %}{{post.title + " - "}}{% endblock %}
 
 {% block page_head %}
 <link rel="stylesheet" href="{{config.staticurl}}/post.css">
+{% if post.excerpt != "" -%}
+<meta name="description" content="{{post.excerpt}}">
+{%- endif %}
+{% if post.thumbnail != "" -%}
+<meta property="og:image" content="{{post.thumbnail}}">
+{%- endif %}
 {% endblock %}
 
 {% block site_content %}

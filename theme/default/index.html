@@ -6,7 +6,7 @@
     <div class="post-list-item">
         <h2><a href="{{post.permalink}}">{{post.title}}</a></h2>
         <div><span>{{post.date}}</span></div>
-        <div class="post-excerpt"></div>
+        <div class="post-excerpt">{% if post.excerpt != "" %}<p>{{post.excerpt}}...{% endif %}</p></div>
         {% if post.thumbnail != "" %}
         <div class="post-thumbnail-container">
             <a href="{{post.permalink}}">

@@ -210,6 +210,14 @@ header {
     max-width: 80%;
     max-height: 35rem;
 }
+.post-excerpt {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #444;
+    font-size: 20px;
+    line-height: 1.618;
+    letter-spacing: 1.2px;
+    word-wrap: break-word;
+}
 
 footer {
     padding-top: 3em;
