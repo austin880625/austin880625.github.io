@@ -16,6 +16,8 @@ date: 2022/06/28
 
 AusTinTin 是我的個人網站，在這上面放了我學習的一些文章，還有生活觀察到一些事物的時候記錄下來的來龍去脈。
 
+網站的副標題改寫自 Rudyard Kipling 關於好奇的詩 _I Keep Six Honest Serving Men_ ，最後一句的 seven million Whys 在不同語言被翻譯成不同數量，在華語則是「十萬個為什麼」，而我相信在程式中常用到的 2 的次方數應該適合用來代表對資訊科技的好奇，也是建立這個網站的技術基礎所在。
+
 [自己嘗試寫了一個 static site generator](/2020/02/09/ssg-in-200-lines.html) ，因為覺得自己文章量不多且未來頂多把文章的 markdown 檔案搬去別的 SSG 就好，就把這個網站直接上線看看，缺的功能就慢慢一邊寫文章一邊補上。
 
 *To be continued...*
