@@ -3,7 +3,7 @@ category: os/linux
 date: 2021/05/08
 thumbnail: https://img.austint.in/OGpkWWxY_nymusI_bgGagSkckuU=/fit-in/760x560/promisc.png
 
-excerpt: 可以用 ip 和 ifconfig 獲得網卡的 promisc 模式狀態，但顯示的狀態似乎和應用時的預期有差距，探索 Linux kernel 的原始碼找出真正原因
+excerpt: 我們可以用 ip 和 ifconfig 獲得網卡的 promisc 模式狀態，但顯示的狀態似乎和應用時的預期有差距，探索 Linux kernel 的原始碼找出真正原因
 
 ---
 ## 起點： VM 網路的黑魔法

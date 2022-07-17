@@ -53,3 +53,10 @@
 .post-content p {
     text-indent: 2rem;
 }
+
+
+@media screen and (max-width: 1024px) {
+    .post-content {
+        font-size: 16px;
+    }
+}
