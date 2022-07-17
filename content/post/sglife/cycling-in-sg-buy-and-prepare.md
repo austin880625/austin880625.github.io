@@ -1,7 +1,7 @@
 # 我要在新加坡騎腳踏車上班！(1): 腳踏車購買與配件
 date: 2022/07/18
 category: life/sg
-thumbnail: https://img.austint.in/_l_C6irQlxHJaqYu0ZgPLq4TUI4=/fit-in/760x560/cycling-in-sg-intro/head1.jpg
+thumbnail: https://img.austint.in/Cjlfjl8KFGtXT3FD59ui9vHQp4M=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/head1.jpg
 
 excerpt: 在新加坡騎腳踏車上班容易嗎？到哪裡找腳踏車來騎？除了車子還要買什麼？這篇文章是我在新加坡買腳踏車的經驗和觀察。
 
@@ -38,7 +38,7 @@ excerpt: 在新加坡騎腳踏車上班容易嗎？到哪裡找腳踏車來騎�
 
 最後我選擇的是在網購買二手車，主要考量是還沒有決定要長久住在新加坡，沒有打算買太好的，加上也不介意自己做一點簡單的維修調整。最後買了一台 130 新幣的二手車，外觀上只有手把是公路車彎把，實際上零件都是比較便宜的登山車零件。
 
-![最後在 Carousell 撿到的一台腳踏車，據說是一個阿公幫小孩換車後小孩再也不騎這台的故事](https://img.austint.in/b0EOrjoBLspIJnqn6-7ufosYfC4=/fit-in/560x760/filters:rotate(-90)/cycling-in-sg-intro/sg-first-bike.jpg)
+![最後在 Carousell 撿到的一台腳踏車，據說是一個有錢阿公幫孫子換車後孫子再也不騎這台的故事](https://img.austint.in/b0EOrjoBLspIJnqn6-7ufosYfC4=/fit-in/560x760/filters:rotate(-90)/cycling-in-sg-intro/sg-first-bike.jpg)
 
 如果是像我從台灣來的話，最便宜的做法其實是在台灣買車再用車袋打包帶過來新加坡，不知道是不是主觀感受，同樣的價格台灣的腳踏車感覺設計都比較精緻，規格也稍微好一點。只是出國時要帶的東西很多的話有點麻煩而已。需要額外注意的是，如果是電動滑板車或電動腳踏車的話，都還需要額外經過新加坡的[交通工具進口程序](https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matters/regulations_licensing/active_mobility/import_control_regime_for_pabs_and_motorised_pmds.html)。
 

@@ -1,7 +1,7 @@
 # 在 Wordpress 2022 佈景主題加入 Google Analytics 標籤的方法
 date: 2022/07/02
 category: web-dev/wordpress
-thumbnail: https://img.austint.in/dqxWTvt2S6N4aKsg4c_9FVkA9VU=/960x0/wp-add-ga-tag-with-2022-theme/theme-edit.png
+thumbnail: https://img.austint.in/yy_O-vL9tKSknaOhdIecPZck3D8=/fit-in/760x560/filters:format(webp)/wp-add-ga-tag-with-2022-theme/theme-edit.png
 ---
 
 在一兩年前 Wordpress 預設使用的佈景主題是 Twenty Twenty-One ，這之前的佈景主題檔案都還能看到 `<head>` 標籤在 `header.php` 裡面，所以如果有像是 Google Analytics 的線上服務需要內嵌腳本，可以直接在更改佈景主題檔案的功能中把 `<script>` 標籤加到 `<head>` 標籤內。

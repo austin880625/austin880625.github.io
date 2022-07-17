@@ -1,7 +1,7 @@
 # 在新加坡最讓人抓狂的電話（們
 date: 2022/07/03
 category: life/sg
-thumbnail: https://img.austint.in/H9bAKB-z9RHgW2dDmsy7rqtOVdk=/fit-in/960x600/sg-scam-call/head.jpg
+thumbnail: https://img.austint.in/3Yqor5sDk6RGsKKUFJVxkiWNHYc=/fit-in/760x560/filters:format(webp)/sg-scam-call/head.jpg
 ---
 
 到新加坡也剛滿四個月，工作雖然也會累但都還在能力範圍內，生活好像也因為工作佔據了時間變比較簡（ㄉㄢ）單（ㄉㄧㄠˋ）。即使如此在新加坡還是有一種人會三不五時送上讓人抓狂的關心，這種人就是詐騙集團。

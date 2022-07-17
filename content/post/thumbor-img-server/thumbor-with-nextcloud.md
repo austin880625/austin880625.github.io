@@ -1,7 +1,7 @@
 # 使用 Thumbor + Nextcloud 架設自己的網頁圖床 (2): Nextcloud 安裝與自己開發 Plugin
 date: 2022/07/16
 category: server
-thumbnail: https://img.austint.in/YjnRls77eA_l7IgeZMum1B0eSpg=/thumbor-sample/thumbor-nextcloud.png
+thumbnail: https://img.austint.in/-TfQgliVsEl09tzAu7mbg18K-eo=/fit-in/760x560/filters:format(webp)/thumbor-sample/thumbor-nextcloud.png
 
 excerpt: Thumbor 可以透過 file loader 存取 Nextcloud 的檔案。本文介紹 Nextcloud 的安裝並整合 Thumbor 使其可以快速取得 Thumbor url 的過程
 

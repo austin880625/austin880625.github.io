@@ -4,8 +4,11 @@
 
 {% block page_head %}
 <link rel="stylesheet" href="{{config.staticurl}}/post.css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{post.title}}">
 {% if post.excerpt != "" -%}
 <meta name="description" content="{{post.excerpt}}">
+<meta property="og:description" content="{{post.excerpt}}">
 {%- endif %}
 {% if post.thumbnail != "" -%}
 <meta property="og:image" content="{{post.thumbnail}}">

@@ -1,7 +1,7 @@
 # 使用 Thumbor + Nextcloud 架設自己的網頁圖床 (1): Thumbor 伺服器安裝
 date: 2022/07/11
 category: server
-thumbnail: https://img.austint.in/YjnRls77eA_l7IgeZMum1B0eSpg=/thumbor-sample/thumbor-nextcloud.png
+thumbnail: https://img.austint.in/-TfQgliVsEl09tzAu7mbg18K-eo=/fit-in/760x560/filters:format(webp)/thumbor-sample/thumbor-nextcloud.png
 
 excerpt: 使用 GitHub Page 寫部落格開始有加圖片的需求，可以架設 Thumbor 作為自動裁切縮放以及快取圖片的服務。本文介紹 Thumbor 服務的安裝以及基本的安全性設定
 
@@ -30,7 +30,7 @@ sudo aptitude install thumbor
 # Pillow 編譯的 dependency ，只有安裝時會用到
 apk add --virtual  build-deps gcc python3-dev musl-dev
 apk add gcc python3-dev jpeg-dev zlib-dev
-apk add curl-dev
+apk add curl-dev libwebp-dev
 pip3 install pycurl
 wget https://github.com/thumbor/thumbor/archive/refs/tags/7.0.10.zip
 unzip 7.0.10.zip
