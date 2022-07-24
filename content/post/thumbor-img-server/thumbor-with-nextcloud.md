@@ -258,7 +258,7 @@ unzip -d /var/www/ latest.zip
 chown -R php:www-data /var/www/nextcloud
 ```
 
-接著打開瀏覽器輸入 [http://主機名稱](http://localhost) 應該就能看到安裝畫面，填入需要的資訊後按安裝。
+接著打開瀏覽器輸入 http://主機名稱 (如 http://localhost) 應該就能看到安裝畫面，填入需要的資訊後按安裝。
 
 ![Nextcloud 主程式安裝畫面](https://img.austint.in/hRyg-u_FlvBqb9ACli1mfY4bnvQ=/1000x0/thumbor-sample/nc-install.png)
 
