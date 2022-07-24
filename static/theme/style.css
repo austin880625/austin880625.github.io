@@ -14,10 +14,6 @@ p a, p a:visited {
 }
 
 .nav-links {
-	padding-top: 0.3rem;
-	padding-bottom: 0.3rem;
-	margin-top: 1rem;
-	margin-bottom: 2.4rem;
 	border-top: #222 1px solid;
 	border-bottom: #222 1px solid;
 }
@@ -49,6 +45,10 @@ ul {
 }
 
 header nav {
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
+	margin-top: 1rem;
+	margin-bottom: 2.4rem;
     text-align: center;
     margin-left: -0.5rem;
     margin-right: -0.5rem;
@@ -123,6 +123,15 @@ header {
     font-family: monospace;
 }
 
+.nav-links input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.nav-links label {
+    display: none;
+}
+
 @media screen and (max-width: 1024px) {
     body {
         font-size: 16px;
@@ -138,10 +147,6 @@ header {
         flex: 0 1 8rem;
         height: 8rem;
     }
-    p {
-        letter-spacing: 0.1px;
-        font-size: 16px;
-    }
     header ul {
         flex-direction: column;
     }
@@ -155,6 +160,28 @@ header {
     }
     header ul>li:last-child {
         border-bottom: none;
+    }
+    .nav-links label {
+        display: inline-block;
+        height: 2.4rem;
+        line-height: 2.4rem;
+        font-size: 20px;
+        width: 100%;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        color: #444;
+        cursor: pointer;
+    }
+    .nav-links > ul{
+        display: none;
+    }
+    #nav-toggle:checked + ul {
+        display: block;
+        margin-bottom: 0rem;
+    }
+    p {
+        letter-spacing: 0.1px;
+        font-size: 16px;
     }
 }
 
