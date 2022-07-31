@@ -73,6 +73,8 @@ code {
     background-color: #DDD;
     padding-left: 0.5em;
     padding-right: 0.5em;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
 }
 pre {
     overflow-x: scroll;
