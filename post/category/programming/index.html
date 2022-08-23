@@ -59,6 +59,13 @@
     <section class="post-list">
         
         <div class="post-list-item">
+            <h2><a href="/2022/08/24/linux-aio-basic-usage.html">Linux 中普通檔案的 async IO API：Linux AIO 基本使用</a></h2>
+            <div><span>2022-08-24</span></div>
+            <div class="post-excerpt"><p>先前介紹的 POSIX AIO 只有做到執行讀寫操作的 process 不會在讀寫時阻塞，如果要讓 kernel 在完成後通知 process 的話，還是需要核心的協助。本文介紹 Linux 提供的 AIO 界面來達成這項任務</p></div>
+            
+        </div>
+        
+        <div class="post-list-item">
             <h2><a href="/2022/08/01/posix-aio-basic-usage.html">能對普通檔案做 async IO 嗎？跨平台 POSIX AIO 介紹與基本使用</a></h2>
             <div><span>2022-08-01</span></div>
             <div class="post-excerpt"><p>在普通檔案的讀寫中，一般在網路程式裡會使用到的非同步 IO 通常都是沒辦法直接使用的， POSIX AIO 提供基本的非同步 API 讓一個 process 可以一次發出多個檔案讀寫請求</p></div>
