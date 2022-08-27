@@ -206,8 +206,8 @@ header {
     border-bottom: #444 1px solid;
     transition: 0.2s;
 }
-.post-list-item:hover a {
-    color: #000;
+.post-list-cat {
+    margin-left: 0.8rem;
 }
 .post-list-item h2 {
     font-size: 2rem;
@@ -216,12 +216,13 @@ header {
 }
 .post-list-item a {
     color: #444;
+    transition: 0.2s;
 }
-.post-list-item:hover a {
+.post-list-item:hover .post-list-item-title>a {
     color: #000;
     transition: 0.2s;
 }
-.post-list-item a,.post-list-item:hover a {
+.post-list-item-title a {
     display: block;
     width: 100%;
     height: 100%;

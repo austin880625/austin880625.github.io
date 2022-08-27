@@ -50,7 +50,10 @@
             
 <div class="post-heading">
     <h1 class="post-title">Linux 中普通檔案的 async IO API：Linux AIO 基本使用</h1>
-    <div class="post-date">2022-08-24</div>
+    <div class="post-meta">
+        <span>2022-08-24</span>
+        <span class="post-cat">Category: <a href="post/category/programming">Programming</a></span>
+    </div>
 </div>
 <div class="post-content">
     <p><a href="/post/2022/08/01/posix-aio-basic-usage.html">之前的文章</a>提到 POSIX 版的 async IO 界面其實只是啟動新的 thread 進行普通的 blocking IO ，如果程式本身已經是在多個 thread 中進行平行的 IO 操作，那麼使用這個 API 其實不會獲得任何效能上的好處。</p>

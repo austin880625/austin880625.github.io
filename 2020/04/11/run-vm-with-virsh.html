@@ -49,7 +49,10 @@
             
 <div class="post-heading">
     <h1 class="post-title">文字介面的 VM 工具 virsh 使用筆記</h1>
-    <div class="post-date">2020-04-11</div>
+    <div class="post-meta">
+        <span>2020-04-11</span>
+        <span class="post-cat">Category: <a href="post/category/os/vm">VM</a></span>
+    </div>
 </div>
 <div class="post-content">
     <p>對於個人使用的 VM 環境來說，除了圖形化介面的 VirtualBox 或 VMWare 之外，在 Linux 上可以使用的虛擬化技術還有 KVM, QEMU, Xen 等，他們各自可以擁有很多不同的操作介面，可能是文字、圖形或網頁。對這些虛擬化技術如果能有統一的 API ，不同類型的操作介面就可以只用這套 API 控制不同虛擬化技術的 VM ， libvirt 就是提供這種 API 的一套函式庫，而 virsh 則是使用這個函式庫的一種文字介面管理程式。</p>
