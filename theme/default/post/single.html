@@ -18,7 +18,10 @@
 {% block site_content %}
 <div class="post-heading">
     <h1 class="post-title">{{ post.title }}</h1>
-    <div class="post-date">{{ post.date }}</div>
+    <div class="post-meta">
+        <span>{{ post.date }}</span>
+        <span class="post-cat">Category: <a href="{{post.category.permalink}}">{{post.category.name}}</a></span>
+    </div>
 </div>
 <div class="post-content">
     {{ post.content }}

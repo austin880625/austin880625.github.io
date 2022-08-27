@@ -4,8 +4,11 @@
 <div class="post-list">
     {% for post in content.post %}
     <div class="post-list-item">
-        <h2><a href="{{post.permalink}}">{{post.title}}</a></h2>
-        <div><span>{{post.date}}</span></div>
+        <h2 class="post-list-item-title"><a href="{{post.permalink}}">{{post.title}}</a></h2>
+        <div>
+            <span>{{post.date}}</span>
+            <span class="post-list-cat">Category: <a href="{{post.category.permalink}}">{{post.category.name}}</a></span>
+        </div>
         <div class="post-excerpt">{% if post.excerpt != "" %}<p>{{post.excerpt}}...{% endif %}</p></div>
         {% if post.thumbnail != "" %}
         <div class="post-thumbnail-container">

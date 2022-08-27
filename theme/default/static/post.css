@@ -4,10 +4,14 @@
 .post-heading {
     margin-bottom: 2rem;
 }
-.post-date {
+.post-meta {
     margin-left: 0.2em;
+    margin-top: 0.8rem;
     font-size: 1rem;
-    color: #888;
+    color: #666;
+}
+.post-cat {
+    margin-left: 0.8rem;
 }
 .post-content {
     font-family: Georgia, 'Times New Roman', Times, serif;

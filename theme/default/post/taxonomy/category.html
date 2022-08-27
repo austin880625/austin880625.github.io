@@ -28,7 +28,7 @@
     <section class="post-list">
         {% for post in content_list %}
         <div class="post-list-item">
-            <h2><a href="{{post.permalink}}">{{post.title}}</a></h2>
+            <h2 class="post-list-item-title"><a href="{{post.permalink}}">{{post.title}}</a></h2>
             <div><span>{{post.date}}</span></div>
             <div class="post-excerpt"><p>{{post.excerpt}}</p></div>
             {% if post.thumbnail != "" %}
