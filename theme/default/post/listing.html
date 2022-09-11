@@ -1,20 +1,21 @@
 {% extends "base.html" %}
+{% block page_title -%}
+Posts
+{%- endblock %}
 
 {% block site_content %}
 <section class="post-list">
-    {% for post in content.post[0] %}
+    {% for post in content_list %}
     <div class="post-list-item">
         <h2 class="post-list-item-title"><a href="{{post.permalink}}">{{post.title}}</a></h2>
         <div class="post-meta">
             <span class="post-list-date">{{post.date}}</span>
             <span class="post-list-cat">Category: <a href="{{post.category.permalink}}">{{post.category.name}}</a></span>
         </div>
-        <div class="post-excerpt">{% if post.excerpt != "" %}<p>{{post.excerpt}}...{% endif %}</p></div>
+        <div class="post-excerpt"><p>{{post.excerpt}}</p></div>
         {% if post.thumbnail != "" %}
         <div class="post-thumbnail-container">
-            <a href="{{post.permalink}}">
-                <img src="{{post.thumbnail}}">
-            </a>
+            <img src="{{post.thumbnail}}">
         </div>
         {% endif %}
     </div>
@@ -22,12 +23,16 @@
 </section>
 <div class="pagination-bar">
     <div class="pagination-left">
-
+        <div class="pagination-prev">
+            {% if page_current > 0 %}
+            <span><a href="{{'/post/p' + (page_current-1)|string + '.html'}}">Newer</a></span>
+            {% endif %}
+        </div>
     </div>
     <div class="pagination-right">
         <div class="pagination-next">
-            {% if content.post|length > 1 %}
-            <span><a href="/post/p1.html">More Posts...</a></span>
+            {% if page_current < page_num - 1 %}
+            <span><a href="{{'/post/p' + (page_current+1)|string + '.html'}}">Older</a></span>
             {% endif %}
         </div>
     </div>

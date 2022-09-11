@@ -42,7 +42,7 @@
                     <ul>
                         <li><a href="/">首頁</a></li>
                         <li><a href="/post/category">文章分類</a></li>
-                        {% for page in content.page %}
+                        {% for page in content.page[0] %}
                         <li><a href="{{page.permalink}}">{{page.title}}</a></li>
                         {% endfor %}
                     </ul>
