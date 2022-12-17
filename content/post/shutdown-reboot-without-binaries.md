@@ -36,4 +36,5 @@ echo o > /proc/sysrq-trigger
 ## References
 
 [Input/Output Error  How to Reboot or shutdown the Linux server?](https://www.linuxforfreshers.com/2020/10/inputoutput-error-how-to-reboot-or.html)
+
 [Linux Magic System Request Key Hacks](https://www.kernel.org/doc/html/v5.16/admin-guide/sysrq.html)
