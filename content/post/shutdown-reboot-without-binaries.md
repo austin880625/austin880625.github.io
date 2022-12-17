@@ -1,0 +1,39 @@
+# 在 Linux 上不使用 poweroff, reboot 指令關機以及重新開機的方法
+
+category: os/linux
+date: 2022/12/18
+excerpt: 最近遇到看似磁碟損壞造成大部分指令回傳 Input/output error 無法使用的情況，包含想要嘗試重新開機的指令，這時可以利用 Linux 內建的 SysRq 機制來完成。
+
+---
+
+好久沒更新文章，工作堆起來實在會讓人休假只想躺在床上，不過這次遇到了一開始看到就會覺得要馬上處理的問題。自己架的 VM 裡其中一個網站掛了，原本想從 ProxmoxVE 直接看終端，發現只能登入 ssh 但不能連上 web 介面，用一些指令檢查發現有很多指令都直接回傳 Input/output Error 。發現很可能是 storage 的問題就整個人毛起來覺得應該趕快修。
+
+檢查一下發現 RAID 陣列內容應該正常，而在 `/dev` 下發現 SSD 不見了，而 SSD 一塊磁區是作為 RAID 陣列的 bcache cache device ，另一塊磁區是 PVE 的系統磁區，所以變成原本裝在上面跑的 VM 還可以正常運作，但 PVE 本身只剩下還在記憶體上的內容（kernel, process, filesystem page cache）還在運作的詭異情況，只剩下少數指令還能執行。
+
+人在國外不能去開機殼，原本想到了一些比較 hack 的方法，但幾乎要能保證一次成功，而且想了一下發現買到 SSD 距離現在還不滿兩年應該沒那麼快壞，所以就決定先複製出 VM 裡一些最近比較可能用到的內容（還好 VM 還活著）就直接嘗試重新開機。好了問題來了，`poweroff`, `systemctl`, `reboot` 和各種想得到有關機功能的執行檔都沒辦法使用，從別的機器嘗試 `scp` 一些 busybox 類的東西也複製不上來（兩端機器似乎都要有），怎麼關？
+
+於是發現還真的有其他人有過這種情況，這時候就可以使用 Linux 提供的 SysRq 機制。 SysRq 被稱為 Linux Magic System Request ，就是有幾種對系統的操作不需要透過 user space 做 system call 達成，而是由 kernel 直接捕捉特定按鍵組合或是在 proc filesystem 裡的一個檔案來觸發。
+
+SysRq 在 `/proc` 檔案系統內有兩個介面可以操作，第一個是 `/proc/sys/kernel/sysrq` 控制有什麼操作能用鍵盤按鍵觸發，第二個是 `/proc/sysrq-trigger` 是用來觸發操作的檔案，操作的方式就是寫入特定的字元。
+
+以 shell 還在的狀況來說，直接操作 proc filesystem 裡的檔案就好了，也就是使用下面的指令：
+
+```
+# 第一步啟用所有操作都可以用鍵盤觸發，不一定需要
+echo 1 > /proc/sys/kernel/sysrq
+# 重新開機
+echo b > /proc/sysrq-trigger
+# 關機
+echo o > /proc/sysrq-trigger
+```
+
+我重新開機完就發現 SSD 回來了，又後來登入主機連接的 switch 發現斷電後用 backup image 重啟的訊息，應該可以確定是電源不穩導致的，下次回國應該準備買 UPS 了。
+
+要注意這裡的重新開機和關機不會做任何磁碟 unmount 或 sync ，所以完成重新開機後最好還是進行一下 fsck 類的整理動作。
+
+看了一下 kernel docs ，支援的操作還滿多的，像是把檔案系統凍結、 kill 掉 init 以外所有 process 等，全部都是適合在 VM 裡測試的東西。
+
+## References
+
+https://www.linuxforfreshers.com/2020/10/inputoutput-error-how-to-reboot-or.html
+https://www.kernel.org/doc/html/v5.16/admin-guide/sysrq.html

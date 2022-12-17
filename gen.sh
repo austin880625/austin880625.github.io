@@ -1,8 +1,10 @@
 #!/bin/bash
 DATE=$(date)
-feasium
 cd public
 git checkout master
+cd ..
+feasium
+cd public
 git add .
 git commit -m "update site $DATE"
 git push origin HEAD
