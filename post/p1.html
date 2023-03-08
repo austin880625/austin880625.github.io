@@ -4,6 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" >
         <link rel="stylesheet" href="/static/theme/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+
+        <!-- The loading of KaTeX is deferred to speed up page rendering -->
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    
+        <!-- To automatically render math in text elements, include the auto-render extension: -->
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+        
         <title>PostsAusTinTin</title>
         
         
@@ -44,10 +53,24 @@
 <section class="post-list">
     
     <div class="post-list-item">
+        <h2 class="post-list-item-title"><a href="/2022/07/02/wp-add-ga-tag-with-2022-theme.html">在 Wordpress 2022 佈景主題加入 Google Analytics 標籤的方法</a></h2>
+        <div class="post-meta">
+            <span class="post-list-date">2022-07-02</span>
+            <span class="post-list-cat">Category: <a href="/post/category/web-dev/wordpress">Wordpress</a></span>
+        </div>
+        <div class="post-excerpt"><p></p></div>
+        
+        <div class="post-thumbnail-container">
+            <img src="https://img.austint.in/yy_O-vL9tKSknaOhdIecPZck3D8=/fit-in/760x560/filters:format(webp)/wp-add-ga-tag-with-2022-theme/theme-edit.png">
+        </div>
+        
+    </div>
+    
+    <div class="post-list-item">
         <h2 class="post-list-item-title"><a href="/2022/05/28/linux-5-18-whats-new.html">Linux 5.18 核心正式版發布，有哪些重要更新</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2022-05-28</span>
-            <span class="post-list-cat">Category: <a href="post/category/uncategorized">Uncategorized</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/uncategorized">Uncategorized</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
         
@@ -57,7 +80,7 @@
         <h2 class="post-list-item-title"><a href="/2022/01/16/run-and-debug-linux-kernel-in-qemu-vm.html">用 gdb debug 在 QEMU 上跑的 Linux Kernel</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2022-01-16</span>
-            <span class="post-list-cat">Category: <a href="post/category/os/linux">Linux</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/os/linux">Linux</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
         
@@ -67,7 +90,7 @@
         <h2 class="post-list-item-title"><a href="/2021/05/08/nic-show-promisc-and-caveat.html">Linux 上查詢網卡 Promiscuous Mode 狀態的方法和問題</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2021-05-08</span>
-            <span class="post-list-cat">Category: <a href="post/category/os/linux">Linux</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/os/linux">Linux</a></span>
         </div>
         <div class="post-excerpt"><p>我們可以用 ip 和 ifconfig 獲得網卡的 promisc 模式狀態，但顯示的狀態似乎和應用時的預期有差距，探索 Linux kernel 的原始碼找出真正原因</p></div>
         
@@ -81,7 +104,7 @@
         <h2 class="post-list-item-title"><a href="/2021/01/11/sql-beginner-admin-commands.html">一些用一次忘一次的 SQL 管理指令</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2021-01-11</span>
-            <span class="post-list-cat">Category: <a href="post/category/uncategorized">Uncategorized</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/uncategorized">Uncategorized</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
         
@@ -91,7 +114,7 @@
         <h2 class="post-list-item-title"><a href="/2020/10/16/hw-cxx-tricks-1.html">寫作業用到的一些好玩的 C++ 語法 (1)</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2020-10-16</span>
-            <span class="post-list-cat">Category: <a href="post/category/programming/cxx">C++</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/programming/cxx">C++</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
         
@@ -101,7 +124,7 @@
         <h2 class="post-list-item-title"><a href="/2020/10/01/wol-os-and-power.html">Wake on LAN 需要的設定選項與代表的意義</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2020-10-01</span>
-            <span class="post-list-cat">Category: <a href="post/category/computer-tips">Computer Tips</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/computer-tips">Computer Tips</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
         
@@ -111,7 +134,7 @@
         <h2 class="post-list-item-title"><a href="/2020/07/19/icd-ice-programmer-difference.html">開發板下載器翻譯的歷史問題</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2020-07-19</span>
-            <span class="post-list-cat">Category: <a href="post/category/embedded">Embedded System</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/embedded">Embedded System</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
         
@@ -121,7 +144,7 @@
         <h2 class="post-list-item-title"><a href="/2020/04/11/run-vm-with-virsh.html">文字介面的 VM 工具 virsh 使用筆記</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2020-04-11</span>
-            <span class="post-list-cat">Category: <a href="post/category/os/vm">VM</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/os/vm">VM</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
         
@@ -131,17 +154,7 @@
         <h2 class="post-list-item-title"><a href="/2020/03/14/linux-prefetch.html">Cache Prefetching 及在 Linux Kernel 中的使用</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2020-03-14</span>
-            <span class="post-list-cat">Category: <a href="post/category/os/linux">Linux</a></span>
-        </div>
-        <div class="post-excerpt"><p></p></div>
-        
-    </div>
-    
-    <div class="post-list-item">
-        <h2 class="post-list-item-title"><a href="/2020/02/09/ssg-in-200-lines.html">用 Python 實作一個 200 行內的 Static Site Generator</a></h2>
-        <div class="post-meta">
-            <span class="post-list-date">2020-02-09</span>
-            <span class="post-list-cat">Category: <a href="post/category/programming/python">Python</a></span>
+            <span class="post-list-cat">Category: <a href="/post/category/os/linux">Linux</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
         
@@ -158,6 +171,8 @@
     </div>
     <div class="pagination-right">
         <div class="pagination-next">
+            
+            <span><a href="/post/p2.html">Older</a></span>
             
         </div>
     </div>
