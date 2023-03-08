@@ -6,6 +6,8 @@ taxonomy:
       children:
         - name: Singapore
           slug: sg
+    - name: Mathematics
+      slug: math
     - name: Operating System
       slug: os
       desc: "All about operating system"

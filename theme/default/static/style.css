@@ -6,6 +6,16 @@ body {
     background-color: #efe2d5;
     font-size: 18px;
 }
+blockquote,.katex-display {
+    background-color: #e3ceb9;
+    font-style: italic;
+    padding: 4px;
+    padding-top: 8px;
+}
+table,th,td {
+    border: 2px solid #d5b392;
+    border-collapse: collapse;
+}
 a,a:visited {
     text-decoration: underline;
     color: inherit;
@@ -13,6 +23,9 @@ a,a:visited {
 p a, p a:visited {
     word-wrap: break-word;
     color: #623916
+}
+.katex {
+    letter-spacing: normal;
 }
 
 .nav-links {
