@@ -6,7 +6,7 @@ category: os/linux
 ## 安裝環境
 
 ```
-apt-get install qemu-system build-essential flex bison libelf-dev libssl-dev
+apt-get install qemu-system build-essential flex bison libelf-dev libssl-dev pahole libncurses-dev
 wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.12.tar.xz
 tar -xvf linux-5.15.12.tar.xz
 cd linux-5.15.12
