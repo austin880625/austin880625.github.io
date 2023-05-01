@@ -89,7 +89,7 @@ sudo ln -s /busybox mnt/sbin/init
 <pre><code>umount mnt
 qemu-system-x86_64 -kernel arch/x86/boot/bzImage -nographic -append &quot;console=ttyS0 nokaslr root=/dev/sda rw&quot; -drive format=raw,file=../rootfs/a.img
 </code></pre>
-<p>這裡可能出現的小疑惑是 root 還沒掛載前 kernel 怎麼知道 /dev/sda 在哪裡？這個猜測沒錯，所以 Linux kernel 中實際上會把 <code>/dev/XXYN</code> 這樣格式的路徑轉換為不同介面的磁碟對應的 major number 和 minor number。</p>
+<p>這裡可能出現的小疑惑是 root 還沒掛載前 kernel 怎麼知道 /dev/sda 在哪裡？這個猜測沒錯，所以 Linux kernel 中實際上會把 <code>/dev/XXYN</code> 這樣格式的路徑直接轉換為不同介面的磁碟對應的 major number 和 minor number ，不會再從 VFS 嘗試尋找路徑。</p>
 <p>這次執行的 QEMU 應該能看到 <code>Please press Enter to activate this console.</code> 的提示，再按一次 enter 就可以看到 shell 了，可以用 <code>/busybox XX</code> 的方式執行 busybox 支援的指令了。</p>
 <pre><code>/ # /busybox ls /
 bin         busybox     dev         lost+found  sbin
@@ -113,7 +113,7 @@ bin         busybox     dev         lost+found  sbin
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
 
 var disqus_config = function () {
-this.page.url = 'https://blog.austint.in/2023/03/11/build-minimal-rootfs-for-kernel.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.url = 'http://127.0.0.1:8000/2023/03/11/build-minimal-rootfs-for-kernel.html';  // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = '/2023/03/11/build-minimal-rootfs-for-kernel.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 
@@ -129,7 +129,7 @@ s.setAttribute('data-timestamp', +new Date());
 
         </div>
         <footer>
-            <p>Copyright © 2022 by Austin Chang</p>
+            <p>Copyright © 2023 by Austin Chang</p>
         </footer>
     </body>
 </html>
