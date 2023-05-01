@@ -43,7 +43,7 @@ umount mnt
 qemu-system-x86_64 -kernel arch/x86/boot/bzImage -nographic -append "console=ttyS0 nokaslr root=/dev/sda rw" -drive format=raw,file=../rootfs/a.img
 ```
 
-這裡可能出現的小疑惑是 root 還沒掛載前 kernel 怎麼知道 /dev/sda 在哪裡？這個猜測沒錯，所以 Linux kernel 中實際上會把 `/dev/XXYN` 這樣格式的路徑轉換為不同介面的磁碟對應的 major number 和 minor number。
+這裡可能出現的小疑惑是 root 還沒掛載前 kernel 怎麼知道 /dev/sda 在哪裡？這個猜測沒錯，所以 Linux kernel 中實際上會把 `/dev/XXYN` 這樣格式的路徑直接轉換為不同介面的磁碟對應的 major number 和 minor number ，不會再從 VFS 嘗試尋找路徑。
 
 這次執行的 QEMU 應該能看到 `Please press Enter to activate this console.` 的提示，再按一次 enter 就可以看到 shell 了，可以用 `/busybox XX` 的方式執行 busybox 支援的指令了。
 
