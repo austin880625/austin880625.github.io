@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
+        <link rel="stylesheet" href="/static/theme/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+
+        <!-- The loading of KaTeX is deferred to speed up page rendering -->
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    
+        <!-- To automatically render math in text elements, include the auto-render extension: -->
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+        
+        <title>在 shell 上快速架設 HTTP server 的方法：Python, nc, socat - AusTinTin</title>
+        
+        
+<link rel="stylesheet" href="/static/theme/post.css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 shell 上快速架設 HTTP server 的方法：Python, nc, socat">
+<meta name="description" content="架設測試用的 HTTP server 有幾種方法，直接裝標準的 HTTP server 軟體需要寫設定檔，用 Python 或 Golang 直接套框架寫對一些簡單的需求也太慢了。 HTTP 也是標準的網路協定，因此一些設計來在 shell 上使用的網路測試工具就剛好可以用來架簡單的 HTTP server 。這篇文章整理了幾種我自己會使用的方法和情境。">
+<meta property="og:description" content="架設測試用的 HTTP server 有幾種方法，直接裝標準的 HTTP server 軟體需要寫設定檔，用 Python 或 Golang 直接套框架寫對一些簡單的需求也太慢了。 HTTP 也是標準的網路協定，因此一些設計來在 shell 上使用的網路測試工具就剛好可以用來架簡單的 HTTP server 。這篇文章整理了幾種我自己會使用的方法和情境。">
+
+
+    </head>
+    <body>
+        <header>
+            <div class="header-banner">
+                <div class="logo">
+                    <a href="/"><img class="logo-img" width="128" height="128" src="/static/content/austintin_logo.png"></a>
+                </div>
+                <div class="header-subtitle-container">
+                    <h2 class="header-subtitle">1048576 Hows, 2097152 Wheres, And 8388608 Whys</h2>
+                </div>
+            </div>
+            <nav>
+                <!--
+                <ul>
+                    
+                </ul>
+                -->
+                <div class="nav-links">
+                    <label for="nav-toggle">☰</label>
+                    <input id="nav-toggle" type="checkbox">
+                    <ul>
+                        <li><a href="/">首頁</a></li>
+                        <li><a href="/post/category">文章分類</a></li>
+                        
+                        <li><a href="/links.html">友站連結</a></li>
+                        
+                        <li><a href="/about.html">關於</a></li>
+                        
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            
+<div class="post-heading">
+    <h1 class="post-title">在 shell 上快速架設 HTTP server 的方法：Python, nc, socat</h1>
+    <div class="post-meta">
+        <span>2024-01-21</span>
+        <span class="post-cat">Category: <a href="/post/category/server">Server</a></span>
+    </div>
+</div>
+<div class="post-content">
+    <p>在寫網頁應用程式的時候，除了取得網頁本身的 HTTP request 之外，也常有其他會發送 HTTP request 的元件或流程。例如網頁前端會有 javascript 另外發送的 API request ，也有來自其他服務的 webhook 。有時候想快速測試一下這類型的 request 內容就需要事先架好一個 HTTP server ，也要能回傳簡單的回應。</p>
+<p>以前架這種 HTTP server 都是用 Python 的 <code>SimpleHttpServer</code> 來寫，但這種方法主要是用來顯示目錄下的檔案，如果有要測試 header 或依照 request 回傳不同內容的時候還是要寫一個實際的 server 。寫久了就覺得 unix 上常用的網路工具應該還是有機會達到手寫自訂 response 的目標。但到最近才開始真的自己實驗。總結過後快速架設 HTTP server 主要有下面幾種方法。</p>
+<h2>Python 的 <code>http.server</code></h2>
+<p>就是上面說的要快速展示當下目錄的 HTML 或圖片的時候用的。</p>
+<pre><code>python3 -m http.server &lt;port&gt;
+</code></pre>
+<h2>netcat</h2>
+<p>一開始說的發送 API request 的情境在 python 的 <code>http.server</code> 上不是請求檔案內容，想要回傳 json 內容的話使用沒有那麼方便。假如熟悉 HTTP 協定的回應結構的話，能夠直接打出純文字在 socket 上傳送資料應該和寫 code 的工作量差不多，因為在 json 回覆裡該設定的 header 和欄位都一樣需要設定。如果是 client 端通常是用 telnet 來達成， server 端的話則是可以用 netcat ，安裝好之後是叫做 <code>nc</code> 指令。使用 <code>nc -l &lt;port&gt;</code> 就可以開始 listen 在指定的 port 上。</p>
+<pre><code>nc -l 8000
+</code></pre>
+<p>這時候用瀏覽器或 curl 訪問 http://127.0.0.1:8000 就可以在終端機上看到 request 被印出來：</p>
+<pre><code>austin@fedora:~/Documents/labs$ nc -l 8000
+GET / HTTP/1.1
+Host: 127.0.0.1:8000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+
+</code></pre>
+<p>可以直接按照 HTTP response 的格式打上回傳內容：</p>
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 21
+
+{&quot;status&quot;: &quot;success&quot;}
+
+</code></pre>
+<p>接著就可以看到瀏覽器順利認定連線已經結束（接收的內容長度和 Content-Length 相符）並且顯示我們的回傳內容。</p>
+<h2>socat</h2>
+<p>socat 被視為功能進階的 netcat ，當然 netcat 已經有很多我還沒完全活用的功能了，不過 socat 對我的感覺是操作上比較 high level 一些。使用以下指令就可以開始聽指定的 port ，然後就可以跟上面 netcat 的操作方式一樣直接在 stdin 打上回傳內容。</p>
+<pre><code>socat TCP-LISTEN:8000,crlf,fork -
+</code></pre>
+<p>需要的時候甚至也可以讓 socat 處理 HTTPS 連線，可以看<a href="https://fabianlee.org/2022/10/26/linux-socat-used-as-secure-https-web-server/">這篇教學</a>。</p>
+<h2>結論</h2>
+<p>nc 和 socat 都是功能滿多的工具，nc 的主要用途就是用來掃 port 和發送自訂封包， socat 的主要用途是把不同 socket 和 IO 的資料接起來。因為 HTTP 是純文字的協定，所以在 HTTP 伺服器需要回傳 HTML 或多媒體檔案以外的內容就會比較方便，在需要的回傳內容足夠簡單的情況下也不會比直接套框架寫 API 慢太多。</p>
+<h2>References</h2>
+<p><a href="https://chwang12341.medium.com/coding%E8%B5%B7%E4%BE%86-python-%E4%B8%80%E8%A1%8C%E6%8C%87%E4%BB%A4%E5%B0%B1%E8%83%BD%E8%BC%95%E9%AC%86%E5%BB%BA%E7%AB%8B%E7%B6%B2%E9%A0%81%E4%BC%BA%E6%9C%8D%E5%99%A8-simplehttpserver%E5%A5%97%E4%BB%B6-http-server%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8-34c30b81c26">Coding起來 — Python — 一行指令就能輕鬆建立網頁伺服器 — SimpleHTTPServer套件 — http.server使用教學</a></p>
+<p><a href="https://www.varonis.com/blog/netcat-commands">How to Use Netcat Commands: Examples and Cheat Sheets</a></p>
+<p><a href="https://fabianlee.org/2022/10/26/linux-socat-used-as-secure-https-web-server/">Linux: socat used as secure HTTPS web server</a></p>
+</div>
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'https://blog.austint.in/2024/01/21/socat-http-fake-server.html';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = '/2024/01/21/socat-http-fake-server.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://austinchang-me.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+        </div>
+        <footer>
+            <p>Copyright © 2023 by Austin Chang</p>
+        </footer>
+    </body>
+</html>
