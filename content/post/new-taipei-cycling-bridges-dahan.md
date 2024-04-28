@@ -92,7 +92,7 @@ thumbnail: https://img.austint.in/ru9DEdQIi4XRwrCwhnqjwhx7dzc=/fit-in/760x560/fi
 
 有點複雜附上相關位置的圖
 
-![](https://img.austint.in/76uKDwGwoJ_0sCRtUncgaxllV8I=/fit-in/760x560/filters:format(webp)/new-taipei-cycling-bridges-1/googlemap-newtaipei-bridge.png)
+![新北大橋上橋點位置圖](https://img.austint.in/76uKDwGwoJ_0sCRtUncgaxllV8I=/fit-in/760x560/filters:format(webp)/new-taipei-cycling-bridges-1/googlemap-newtaipei-bridge.png)
 
 ## 華江橋
 
