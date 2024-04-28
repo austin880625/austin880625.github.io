@@ -139,6 +139,13 @@ default-authentication-plugin=mysql_native_password
 ALTER USER 'user'@'localhost' IDENTIFIED BY 'mysql_native_password' WITH '密碼';
 ```
 
+新增使用者、更改使用者密碼：
+
+```
+CREATE USER 'user' IDENTIFIED BY '密碼';
+ALTER USER 'user' IDENTIFIED BY '密碼';
+```
+
 ### PostgreSQL
 
 新增使用者、更改使用者密碼：

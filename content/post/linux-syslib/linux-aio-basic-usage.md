@@ -55,7 +55,7 @@ Linux AIO 就對這種類型的 IO 提供部分的支援，主要透過 `io_setu
 - `IOCB_CMD_PREADV`
 - `IOCB_CMD_PWRITEV`
 
-`aio_flags` 指定了 IO request 的一些屬性，這裡我只會 `IOCB_FLAG_IOPRIO` ，表示
+`aio_flags` 指定了 IO request 的一些屬性，這裡我只會 `IOCB_FLAG_IOPRIO` ，表示這個 aio request 會使用到 `aio_reqprio` 欄位來指定優先級
 
 `aio_reqprio` 表示這個 IO request 的優先級，數字越大表示優先級越低。在 `aio_flags` 的值是 `IOCB_FLAG_IOPRIO` 的時候使用 `IOPRIO_PRIO_VALUE` 這個 macro 來定義。這個 macro 接收兩個參數 `class` 和 `data` ，分別表示 IO 排程器的種類和優先級， `data` 可以是 0-7 的值，有一個中間值常數 `IOPRIO_NORM=4`， `class` 可以使用的值則有以下三種：
 

@@ -6,6 +6,8 @@ taxonomy:
       children:
         - name: Singapore
           slug: sg
+        - name: Taipei
+          slug: tpe
     - name: Mathematics
       slug: math
     - name: Operating System
