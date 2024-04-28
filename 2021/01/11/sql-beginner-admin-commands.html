@@ -153,6 +153,10 @@ WHERE table_name='tablename';
 <p>對於使用者則需要確認是使用對應的驗證方式：</p>
 <pre><code>ALTER USER 'user'@'localhost' IDENTIFIED BY 'mysql_native_password' WITH '密碼';
 </code></pre>
+<p>新增使用者、更改使用者密碼：</p>
+<pre><code>CREATE USER 'user' IDENTIFIED BY '密碼';
+ALTER USER 'user' IDENTIFIED BY '密碼';
+</code></pre>
 <h3>PostgreSQL</h3>
 <p>新增使用者、更改使用者密碼：</p>
 <pre><code>CREATE USER 'user' WITH PASSWORD '密碼';

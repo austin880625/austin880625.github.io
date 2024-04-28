@@ -118,7 +118,7 @@
 <li><code>IOCB_CMD_PREADV</code></li>
 <li><code>IOCB_CMD_PWRITEV</code></li>
 </ul>
-<p><code>aio_flags</code> 指定了 IO request 的一些屬性，這裡我只會 <code>IOCB_FLAG_IOPRIO</code> ，表示</p>
+<p><code>aio_flags</code> 指定了 IO request 的一些屬性，這裡我只會 <code>IOCB_FLAG_IOPRIO</code> ，表示這個 aio request 會使用到 <code>aio_reqprio</code> 欄位來指定優先級</p>
 <p><code>aio_reqprio</code> 表示這個 IO request 的優先級，數字越大表示優先級越低。在 <code>aio_flags</code> 的值是 <code>IOCB_FLAG_IOPRIO</code> 的時候使用 <code>IOPRIO_PRIO_VALUE</code> 這個 macro 來定義。這個 macro 接收兩個參數 <code>class</code> 和 <code>data</code> ，分別表示 IO 排程器的種類和優先級， <code>data</code> 可以是 0-7 的值，有一個中間值常數 <code>IOPRIO_NORM=4</code>， <code>class</code> 可以使用的值則有以下三種：</p>
 <ul>
 <li><code>IOPRIO_CLASS_RT</code>: Realtime 的排程，會排在最高優先級，此時 <code>data</code> 表示的是 IO request 應該完成的時間區間，但其實在系統中沒有辦法自己指定具體的 deadline。</li>
