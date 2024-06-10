@@ -67,6 +67,16 @@
 <section class="post-list">
     
     <div class="post-list-item">
+        <h2 class="post-list-item-title"><a href="/2022/08/24/linux-aio-basic-usage.html">Linux 中普通檔案的 async IO API：Linux AIO 基本使用</a></h2>
+        <div class="post-meta">
+            <span class="post-list-date">2022-08-24</span>
+            <span class="post-list-cat">Category: <a href="/post/category/programming">Programming</a></span>
+        </div>
+        <div class="post-excerpt"><p>先前介紹的 POSIX AIO 只有做到執行讀寫操作的 process 不會在讀寫時阻塞，如果要讓 kernel 在完成後通知 process 的話，還是需要核心的協助。本文介紹 Linux 提供的 AIO 界面來達成這項任務</p></div>
+        
+    </div>
+    
+    <div class="post-list-item">
         <h2 class="post-list-item-title"><a href="/2022/08/01/posix-aio-basic-usage.html">能對普通檔案做 async IO 嗎？跨平台 POSIX AIO 介紹與基本使用</a></h2>
         <div class="post-meta">
             <span class="post-list-date">2022-08-01</span>
@@ -177,20 +187,6 @@
             <span class="post-list-cat">Category: <a href="/post/category/os/linux">Linux</a></span>
         </div>
         <div class="post-excerpt"><p></p></div>
-        
-    </div>
-    
-    <div class="post-list-item">
-        <h2 class="post-list-item-title"><a href="/2021/05/08/nic-show-promisc-and-caveat.html">Linux 上查詢網卡 Promiscuous Mode 狀態的方法和問題</a></h2>
-        <div class="post-meta">
-            <span class="post-list-date">2021-05-08</span>
-            <span class="post-list-cat">Category: <a href="/post/category/os/linux">Linux</a></span>
-        </div>
-        <div class="post-excerpt"><p>我們可以用 ip 和 ifconfig 獲得網卡的 promisc 模式狀態，但顯示的狀態似乎和應用時的預期有差距，探索 Linux kernel 的原始碼找出真正原因</p></div>
-        
-        <div class="post-thumbnail-container">
-            <img src="https://img.austint.in/pZYK25bR5gQkdyEkZ-LcCby2gTU=/fit-in/760x560/filters:format(webp)/promisc.png">
-        </div>
         
     </div>
     
