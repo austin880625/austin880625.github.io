@@ -7,7 +7,35 @@ thumbnail: https://img.austint.in/ru9DEdQIi4XRwrCwhnqjwhx7dzc=/fit-in/760x560/fi
 
 ---
 
+2024/10/10 更新浮洲橋資訊。新月橋至今尚未開放通行，工程主要分從橋下設立支撐和更換鋼索兩階段，因為橋的跨度大且遇到颱風等災害，設立支撐的進度不如預期，原訂九月底有條件通車的目標似乎延到了十一月。
+
 居住在板橋，要騎腳踏車在周邊區域到處跑或通勤或~~騎腳踏車外送~~的話就會常常需要過橋，有時候雖然地圖指示會有腳踏車可以上橋的路線，但每座橋對腳踏車實際上友善程度不一樣，和河濱自行車道或市區道路銜接的位置有時候也和汽機車不同。所以找了一個假日把板橋周邊常看到的橋用腳踏車騎過一遍，整理了一些橋的上橋點和附近方便的一些橫移門。這次假日體驗的橋主要在板橋靠大漢溪這一側，也就是和新莊、三重來往的地方，以後有機會再繼續整理往其他區域的橋樑。
+
+## 浮洲橋
+
+浮洲橋因為台 65 貼在旁邊，從市區（四川路一帶）看起來很像快速道路的橋，會以為腳踏車不能進去。但其實從四川路的機慢車道、環河路和大觀路 265 巷都可以先到達橋邊。
+
+![環河路和四川路在橋前匯合處，靠右走往自行車牽引道](https://img.austint.in/CAIUdUQpv8hhSmx5kBHTZTSFTdc=/fit-in/760x560/filters:format(webp)/new-taipei-cycling-bridges-1/20241005_140538.jpg)
+
+到橋邊就可以看到腳踏車不能直接上橋，要走旁邊（環河路）的牽引道。
+
+![浮洲橋機慢車道禁行自行車標示，和新海橋狀況類似](https://img.austint.in/lEJhjCF7epHqLl7ltXaR6sf_cxo=/fit-in/760x560/filters:format(webp)/new-taipei-cycling-bridges-1/20241005_140734.jpg)
+
+浮洲端市區的牽引道是樓梯加斜坡，上去之後其實就是浮洲橋本來的人行道，只有單側所以對向腳踏車也會上來，會車的時候要多注意。
+
+![浮洲橋板橋端市區上橋點](https://img.austint.in/BOP1iDqctmjbrWrD7Q1N_oLMWKQ=/fit-in/760x560/filters:format(webp)/new-taipei-cycling-bridges-1/20241005_140835.jpg)
+
+在河堤外自行車道也有牽引道，如果從大觀路走的話到河邊就會看到浮洲橫移門，進去自行車道之後左轉就會到橋下。
+
+![浮洲橫移門](https://img.austint.in/kY6Dc3wizdUUGGSEbNWA44fD7dk=/fit-in/760x560/filters:format(webp)/new-taipei-cycling-bridges-1/20241005_143529.jpg)
+
+牽引道在橋下的自行車租借站旁邊。
+
+![浮洲橋板橋端河堤外上橋點](https://img.austint.in/r9D_hYy7N41z8ojfsvOWIplzQA8=/fit-in/760x560/filters:format(webp)/new-taipei-cycling-bridges-1/20241005_141148.jpg)
+
+在樹林側下橋會在河堤自行車道上，有一個帶斜坡的樓梯可以往下到市區的大觀路三段，對面有舊的人行樓梯，浮洲橋只有這一側，所以從樹林回到浮洲也是走同樣的路回去。
+
+![浮洲橋樹林端](https://img.austint.in/h-50_j3wUdWj2h_G_6ZUEH23UFc=/fit-in/760x560/filters:format(webp)/new-taipei-cycling-bridges-1/20241005_141729.jpg)
 
 ## 新月橋
 
@@ -115,6 +143,8 @@ thumbnail: https://img.austint.in/ru9DEdQIi4XRwrCwhnqjwhx7dzc=/fit-in/760x560/fi
 ## 不能用的橋
 
 這裡列幾個腳踏車確定不能上的橋，避免白跑一趟多繞路。
+
+浮洲鐵路橋：在大觀路一段 38 巷有個天橋，其實只能到河堤外的自行車道，還是只能一路往南到浮洲橋，不如走橫移門少爬一段樓梯。
 
 台 65 機慢車道： Google 地圖標示機慢車道但車道旁實際上標示禁止腳踏車上橋，而且從新莊 -> 板橋的方向有時候還是會出現在腳踏車的路線規劃裡。新月橋以南只能一路繞到浮洲橋去了。
 
