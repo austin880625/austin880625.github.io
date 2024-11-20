@@ -1,12 +1,12 @@
 # 在新加坡最讓人抓狂的電話（們
 date: 2022/07/03
 category: life/sg
-thumbnail: https://img.austint.in/3Yqor5sDk6RGsKKUFJVxkiWNHYc=/fit-in/760x560/filters:format(webp)/sg-scam-call/head.jpg
+thumbnail: https://imgcdn.austint.in/3Yqor5sDk6RGsKKUFJVxkiWNHYc=/fit-in/760x560/filters:format(webp)/sg-scam-call/head.jpg
 ---
 
 到新加坡也剛滿四個月，工作雖然也會累但都還在能力範圍內，生活好像也因為工作佔據了時間變比較簡（ㄉㄢ）單（ㄉㄧㄠˋ）。即使如此在新加坡還是有一種人會三不五時送上讓人抓狂的關心，這種人就是詐騙集團。
 
-![申辦新加坡手機門號以來一直收到的詐騙電話](https://img.austint.in/H9bAKB-z9RHgW2dDmsy7rqtOVdk=/fit-in/960x600/sg-scam-call/head.jpg)
+![申辦新加坡手機門號以來一直收到的詐騙電話](https://imgcdn.austint.in/H9bAKB-z9RHgW2dDmsy7rqtOVdk=/fit-in/960x600/sg-scam-call/head.jpg)
 
 雖然知道詐騙電話的來源可能是世界各地。但在台灣生活的時候，記得上次接到詐騙電話已經是五六年前了，到了新加坡每一兩個禮拜就會接到一次，實在是很久沒有體驗到這麼頻繁接傳統電話的感覺（？）。第一次接到的時候在這裡人生地不熟，所以相信了對方跟著走了一段劇本，不過我在中途就感覺不對勁結束通話了，所以沒有被騙到錢。
 
@@ -54,6 +54,6 @@ thumbnail: https://img.austint.in/3Yqor5sDk6RGsKKUFJVxkiWNHYc=/fit-in/760x560/fi
 
 ## 政府的防詐騙宣導
 
-![到處可見的防詐騙宣導](https://img.austint.in/PrFIRtN30Dp6IhOd4VewCwvk0AQ=/fit-in/600x960/filters:rotate(-90)/sg-scam-call/2.jpg)
+![到處可見的防詐騙宣導](https://imgcdn.austint.in/PrFIRtN30Dp6IhOd4VewCwvk0AQ=/fit-in/600x960/filters:rotate(-90)/sg-scam-call/2.jpg)
 
 平常出門的時候其實也能感覺到一些廣告欄位會出現政府的政令宣導，其中反詐騙的宣導版面也多到真的很有感，從社區看板、公車站牌到捷運站都有看過。應該有很多像我這樣剛到新加坡沒多久，還沒有開始習慣閱讀本地傳媒的外國人會接到類似的電話，這些宣導廣告只要會出門就能看見，對於移民的族群應該是有相當效果的。但不管怎麼樣，沒被騙還沒有什麼危害，打電話的時間卻總是在我還在睡的時間，奪走一夜好眠的美好週末才是新加坡詐騙集團最大的危害（？

@@ -2,7 +2,7 @@
 category: embedded
 date: 2024/10/15
 excerpt: 在開發嵌入式系統的程式時，通常使用的處理器都和桌機/筆電的 x86 不同，因此會注意到有不同的 register ，其中會用 link register 來記錄函式返回的位置。因為功能看起來和 call stack 重複，因此去尋找了 call stack 的一點歷史紀錄。
-thumbnail: https://img.austint.in/dvoTM-C7Srgh6ZmuONraJPHoMpw=/fit-in/760x560/filters:format(webp)/from-link-register-to-function-call/title-2.png
+thumbnail: https://imgcdn.austint.in/dvoTM-C7Srgh6ZmuONraJPHoMpw=/fit-in/760x560/filters:format(webp)/from-link-register-to-function-call/title-2.png
 ---
 
 大學的時候修計算機組織的時候主要介紹的是 MIPS 處理器，後來偶爾玩一些 ARM 開發板也會看到一些組語，在這兩種處理器上都會看到在一些函式呼叫的流程會用到幾種指令和暫存器：

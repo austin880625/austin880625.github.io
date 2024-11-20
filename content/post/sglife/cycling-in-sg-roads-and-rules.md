@@ -2,14 +2,14 @@
 date: 2022/07/25
 category: life/sg
 excerpt: 買好腳踏車和裝備之後就能準備騎腳踏車上路了，但在新加坡腳踏車有什麼規定要遵守呢
-thumbnail: https://img.austint.in/jBK5Hv9vyoK9aBnOp4vKXKNl6Cc=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_185158.jpg
+thumbnail: https://imgcdn.austint.in/jBK5Hv9vyoK9aBnOp4vKXKNl6Cc=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_185158.jpg
 
 ---
 買好腳踏車和裝備之後就能準備騎腳踏車上路了，但和大部分國家一樣，腳踏車在新加坡一樣受交通規則管理。我剛買到車子要騎回家的時候只敢在人行道上騎，騎得很慢也一直怕哪個路段忘記下來牽車就被開罰單，一段時間熟悉上班路線的路況也比較熟悉路上駕駛人間的默契過後，騎單車才變得比較沒那麼緊張。這篇文章就來分享一下在新加坡騎腳踏車比較需要注意的交通規則和一些我覺得有點用處的用路方式。
 
 ## 交通工具分類
 
-![交通工具出現在錯的路上不管是人或錢包都會很危險 圖片來源：LTA Rules & Code of Conduct](https://img.austint.in/wzyM8FHdVok_g7-k4dHbb_QD6EA=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/where-can-ride.jpg)
+![交通工具出現在錯的路上不管是人或錢包都會很危險 圖片來源：LTA Rules & Code of Conduct](https://imgcdn.austint.in/wzyM8FHdVok_g7-k4dHbb_QD6EA=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/where-can-ride.jpg)
 
 這篇文章主要介紹的是「人力腳踏車」，除此之外新加坡還有將其它小型的交通工具分類為 PMD(Personal Mobility Device) 、 PAB(Power Assisted Bicycles) 和 PMA(Personal Mobility Aids) 。 PMD 是指電動滑板車、滑板車、滑板和獨輪車類名字通常沒有腳踏車的各種小型交通工具， PAB 就是單獨指電動腳踏車， PMA 則是輪椅等輔具。這些交通工具的移動範圍、速限等規定和腳踏車有一點不一樣，也不一定和每個人的直覺相符。所以如果要使用這些交通工具，可能也要再讀完官方公告對其他交通工具的規範。
 
@@ -19,29 +19,29 @@ thumbnail: https://img.austint.in/jBK5Hv9vyoK9aBnOp4vKXKNl6Cc=/fit-in/760x560/fi
 
 ### 人行道
 
-![人行道不會遇到車流交會，而且大部分路段都有遮雨棚或樹蔭](https://img.austint.in/pNtwIAWmmpRS5ioDlIWutqYChVI=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_183200.jpg)
+![人行道不會遇到車流交會，而且大部分路段都有遮雨棚或樹蔭](https://imgcdn.austint.in/pNtwIAWmmpRS5ioDlIWutqYChVI=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_183200.jpg)
 
 人行道是可以騎腳踏車的，但速限非常低，只有**每小時 10 公里**。這幾乎是踏板用力踩半圈就會超過的速度。看了一些相關的新聞，制定這種速限的理由是有很多腳踏車撞到行人的事件，發生時腳踏車騎士都以為自己車速沒有很快，實際上花同樣的力氣腳踏車通常比走路快，又人和腳踏車加起來的重量容易有更大的撞擊力道，行人也沒有額外的保護裝備。所以這個規定幾乎不是為了讓腳踏車方便設計的。另一個規定是在人行道上要禮讓行人，要超越其他行人或腳踏車的時候要響鈴。
 
-![有些人行道比較窄，騎車遇到有人會有點歹勢](https://img.austint.in/SCUahamMkpIhmSTZ1Soudfx2xxM=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_184152.jpg)
+![有些人行道比較窄，騎車遇到有人會有點歹勢](https://imgcdn.austint.in/SCUahamMkpIhmSTZ1Soudfx2xxM=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_184152.jpg)
 
 除此之外，新加坡的人行道雖然幾乎到處都有，但不是每一段都適合騎腳踏車，人行道很寬敞的時候也不能騎快，也有不少地區的人行道都有點窄，配上 10 公里的速限會有一種在玩電流急急棒的感覺。
 
 ### 鐵路步道（Rail Corridor）
 
-![Rail corridor 在假日常看到有人出來運動，不過速限和周遭設備是比較適合感受自然氛圍的地方](https://img.austint.in/qMrowDbCOXPSXc_lnKnOM4yTsEs=/fit-in/560x760/filters:format(webp):rotate(-90)/cycling-in-sg-intro/20220522_152239.jpg)
+![Rail corridor 在假日常看到有人出來運動，不過速限和周遭設備是比較適合感受自然氛圍的地方](https://imgcdn.austint.in/qMrowDbCOXPSXc_lnKnOM4yTsEs=/fit-in/560x760/filters:format(webp):rotate(-90)/cycling-in-sg-intro/20220522_152239.jpg)
 
 鐵路步道是新加坡政府規劃的一段南北向的森林鐵路步道，有點像觀光步道，也不會有動力交通工具出現。只不過不是全部路段都適合騎腳踏車，晚上也幾乎沒有燈光，速限也是**每小時 10 公里**。所以我覺得這種步道比較適合休閒看風景用。
 
 ### 自行車道（PCN）
 
-![雖然這不是 PCN 而是和腳踏車分道的人行道，但 PCN 差不多就長這樣子，腳踏車圖樣會多出 PCN 字樣](https://img.austint.in/xKwLcJQOT_KFfm2hTazNhwaSr3I=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_185242.jpg)
+![雖然這不是 PCN 而是和腳踏車分道的人行道，但 PCN 差不多就長這樣子，腳踏車圖樣會多出 PCN 字樣](https://imgcdn.austint.in/xKwLcJQOT_KFfm2hTazNhwaSr3I=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_185242.jpg)
 
 PCN 全名是 Park Connector Network ，實際上的意思就是連接新加坡各個自然公園的休閒車道，大部份路段都有鋪設柏油，騎乘的感覺比人行道好很多，車道和人行步道通常會有分隔線或是其中一邊塗成紅色，但實際上不論走哪邊都會有人試圖提醒你應該走另一邊，會這樣應該是因為有人以為是分雙向車道有人以為是人車分道，所以記得以禮讓行人為原則就好XD 。 PCN 的速限是**每小時 25 公里**，比較不容易超速了，但用力騎快或遇到大下坡的情況還是要小心。
 
 ### 馬路
 
-![馬路是最不用擔心會超速或撞到人的地方，也是最需要擔心別人超速或被撞到的地方](https://img.austint.in/aMvdX-D2XJ3JaSyEaJ-kzhP4S2I=/fit-in/560x760/filters:format(webp):rotate(-90)/cycling-in-sg-intro/20220703_183552.jpg)
+![馬路是最不用擔心會超速或撞到人的地方，也是最需要擔心別人超速或被撞到的地方](https://imgcdn.austint.in/aMvdX-D2XJ3JaSyEaJ-kzhP4S2I=/fit-in/560x760/filters:format(webp):rotate(-90)/cycling-in-sg-intro/20220703_183552.jpg)
 
 腳踏車可以在一般的馬路上和汽機車一起行駛，主要的規定有前一篇提到的車燈和安全帽必須戴、還有禁止騎上高速公路和要盡量靠左側，其他的規則主要比照汽機車，包括不能逆向闖紅燈之類的。速限則是跟隨該路段的標準，通常是**時速 50 公里**，這個速度就不是普通人能容易超過的了。但也很需要時時注意路況和其他車，也還有其他規則還有一些和其他車輛互動的方式會在下面說明。
 
@@ -63,7 +63,7 @@ PCN 全名是 Park Connector Network ，實際上的意思就是連接新加坡�
 
 ### 車道切換、紅綠燈轉彎
 
-![直行時有後方車要左轉時把自己視為在切換車道，後方駕駛比較容易反應](https://img.austint.in/zijTArQaJqDOSy4oOTPn5wUpbuo=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_185235.jpg)
+![直行時有後方車要左轉時把自己視為在切換車道，後方駕駛比較容易反應](https://imgcdn.austint.in/zijTArQaJqDOSy4oOTPn5wUpbuo=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220717_185235.jpg)
 
 交通規則中，腳踏車應該盡可能靠左，但有幾種情況可以往中間車道移動。第一種是直行時要從左轉道切換到直行道。第二種是超車，通常發生在有公車或汽車要停靠路邊的時候。第三種是準備右轉要切入到中間的右轉道。這些狀況都要記得比手勢過後再切換車道。
 
@@ -71,13 +71,13 @@ PCN 全名是 Park Connector Network ，實際上的意思就是連接新加坡�
 
 ### Dismount And Push!
 
-![人行道上很容易見到的下車牽行標誌](https://img.austint.in/K27tlrpmOSg0Y-0UZZPxyAgi7ak=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220723_125430.jpg)
+![人行道上很容易見到的下車牽行標誌](https://imgcdn.austint.in/K27tlrpmOSg0Y-0UZZPxyAgi7ak=/fit-in/760x560/filters:format(webp)/cycling-in-sg-intro/20220723_125430.jpg)
 
 在人行道或穿越馬路的時候也滿常看到這個標誌，通常是經過有車流交會的地方（如工地、加油站）或是有明顯的上下坡度（天橋、地下道），這個時候就要記得下腳踏車牽行通過。
 
 ### 停車
 
-![百貨公司和一些捷運站會看到的雙層停車架，上層的車架可以向外拉之後向下拉成可以把車放上去的斜坡](https://img.austint.in/IY-nj2i1hATVMj41WhSUGhV8G1I=/fit-in/560x760/filters:format(webp):rotate(-90)/cycling-in-sg-intro/20220602_084609.jpg)
+![百貨公司和一些捷運站會看到的雙層停車架，上層的車架可以向外拉之後向下拉成可以把車放上去的斜坡](https://imgcdn.austint.in/IY-nj2i1hATVMj41WhSUGhV8G1I=/fit-in/560x760/filters:format(webp):rotate(-90)/cycling-in-sg-intro/20220602_084609.jpg)
 
 到達目的地後，會發現能停車的區域也不是隨便就找得到，只有地上有黃色格子（一些公車站旁邊）或有停車架（比如捷運站旁）的地方才能停。如果是私人土地或是租屋區域的話，就需要和所有人確認是否可以停車（通常是不行），否則所有人是有權把車鎖剪斷的。
 

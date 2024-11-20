@@ -1,7 +1,7 @@
 # 怎麼認識 tensor （一）
 date: 2023/03/08
 category: math
-thumbnail: https://img.austint.in/f7CxY-ikjHKrdIDe_RYwtAFDK1c=/fit-in/760x560/filters:format(webp)/understanding-tensor/spider-man-1.jpeg
+thumbnail: https://imgcdn.austint.in/f7CxY-ikjHKrdIDe_RYwtAFDK1c=/fit-in/760x560/filters:format(webp)/understanding-tensor/spider-man-1.jpeg
 excerpt: 以前覺得張量這個名字很酷，但各種介紹文章在一開始都看不懂，希望可以寫一系列的文章給跟當時的我一樣的人。
 ---
 

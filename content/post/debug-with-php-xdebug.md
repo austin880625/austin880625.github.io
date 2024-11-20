@@ -40,7 +40,7 @@ xdebug_info();
 
 瀏覽伺服器上這個網頁應該就會看到 Xdebug 的版本和設定資訊。
 
-![Xdebug 版本資訊頁面](https://img.austint.in/XFUnurUccg7ZdtAF-0tYu3CNSBE=/fit-in/760x560/filters:format(webp)/debug-with-php-xdebug/xdebug-info.png)
+![Xdebug 版本資訊頁面](https://imgcdn.austint.in/XFUnurUccg7ZdtAF-0tYu3CNSBE=/fit-in/760x560/filters:format(webp)/debug-with-php-xdebug/xdebug-info.png)
 
 ## 設定除錯模式和觸發條件
 
@@ -84,7 +84,7 @@ xdebug.client_port=9003
 
 到要進行除錯的開發機。在 VSCode 上使用 Xdebug 需要安裝 `PHP Debug` 這個 extension ，接著需要打開要進行 debug 的程式碼目錄（和遠端主機執行的要一樣，不一樣的話也是可以執行，只是斷點上的 code 不是實際在執行的 code 而已）。
 
-![VSCode 上的 PHP Debug extension ，認明藍勾勾標章](https://img.austint.in/lQbB5NgHx-AtkgGja9yCB4WEDgE=/fit-in/760x560/filters:format(webp)/debug-with-php-xdebug/vscode-php-debug.png)
+![VSCode 上的 PHP Debug extension ，認明藍勾勾標章](https://imgcdn.austint.in/lQbB5NgHx-AtkgGja9yCB4WEDgE=/fit-in/760x560/filters:format(webp)/debug-with-php-xdebug/vscode-php-debug.png)
 
 然後可以在左側 `Run and Debug` 的分頁底下按 `create a launch.json file` 建立 VSCode 的 debug 選項設定檔， `Listen for Xdebug` 的選項就是用來接收遠端 Xdebug 連線的，可以改成下面的樣子：
 
@@ -109,7 +109,7 @@ xdebug.client_port=9003
 
 都設定完成之後就可以開始除錯了，在 VSCode 上的 `Run and Debug` 分頁啟動 `Listen for Xdebug` 選項，接著用瀏覽器或 Postman 類的工具對遠端主機發出 HTTP request ，沒有發生意外的話，就會看到程式被停在最開始執行的位置上，這時候就可以開始加其他想要的斷點或開始單步執行和查看相關的變數。
 
-![開始 debug 的畫面](https://img.austint.in/_OFXvyDwc5RmEfc2m8_jN-rYxUo=/fit-in/760x560/filters:format(webp)/debug-with-php-xdebug/vscode-xdebug-running.png)
+![開始 debug 的畫面](https://imgcdn.austint.in/_OFXvyDwc5RmEfc2m8_jN-rYxUo=/fit-in/760x560/filters:format(webp)/debug-with-php-xdebug/vscode-xdebug-running.png)
 
 最後有找到實際發生錯誤的原因了，是因為 PHP 的 `session_save_path` 目錄沒有建立好，沒辦法建立 session 導致 CSRF 怎麼驗證都會失敗，應該是某個我不記得的日子動到 PHP config 造成的。
 

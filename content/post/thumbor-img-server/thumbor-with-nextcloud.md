@@ -1,7 +1,7 @@
 # 使用 Thumbor + Nextcloud 架設自己的網頁圖床 (2): Nextcloud 安裝與自己開發 Plugin
 date: 2022/07/16
 category: server
-thumbnail: https://img.austint.in/-TfQgliVsEl09tzAu7mbg18K-eo=/fit-in/760x560/filters:format(webp)/thumbor-sample/thumbor-nextcloud.png
+thumbnail: https://imgcdn.austint.in/-TfQgliVsEl09tzAu7mbg18K-eo=/fit-in/760x560/filters:format(webp)/thumbor-sample/thumbor-nextcloud.png
 
 excerpt: Thumbor 可以透過 file loader 存取 Nextcloud 的檔案。本文介紹 Nextcloud 的安裝並整合 Thumbor 使其可以快速取得 Thumbor url 的過程
 
@@ -260,7 +260,7 @@ chown -R php:www-data /var/www/nextcloud
 
 接著打開瀏覽器輸入 http://主機名稱 (如 http://localhost) 應該就能看到安裝畫面，填入需要的資訊後按安裝。
 
-![Nextcloud 主程式安裝畫面](https://img.austint.in/hRyg-u_FlvBqb9ACli1mfY4bnvQ=/1000x0/thumbor-sample/nc-install.png)
+![Nextcloud 主程式安裝畫面](https://imgcdn.austint.in/hRyg-u_FlvBqb9ACli1mfY4bnvQ=/1000x0/thumbor-sample/nc-install.png)
 
 如果是在 http server 上安裝的話，安裝完成的重新導向會導向 https 的網址，可以在 `/var/www/nextcloud/config/config.php` 修改增加這些設定：
 
@@ -272,7 +272,7 @@ chown -R php:www-data /var/www/nextcloud
 
 接著就能回到瀏覽器用 http 的網址重新連線。安裝精靈會提示是否要安裝一些 Nextcloud App ，看喜好決定後安裝完成就能進到主畫面了。
 
-![Nextcloud 24.0.2.1 主畫面](https://img.austint.in/P6XEqfswA-MHWoghDvD035FzK34=/1000x0/thumbor-sample/nc-dashboard.png)
+![Nextcloud 24.0.2.1 主畫面](https://imgcdn.austint.in/P6XEqfswA-MHWoghDvD035FzK34=/1000x0/thumbor-sample/nc-dashboard.png)
 
 ## Thumbor 設定
 
@@ -295,11 +295,11 @@ Nextcloud 提供了自訂 App 的開發 API ，所以想達成的效果應該是
 
 總之花了一個禮拜先做出了一個能用的版本，打包好的 zip 檔案在解壓縮之後就能放在 Nextcloud 的 `apps` 目錄（通常在 `/var/www/nextcloud/apps` 下），在 app 管理頁面就能看到 Thumbor Url 的啟用選項。
 
-![Nextcloud 安裝完 Thumbor Url apps 後的啟用選項](https://img.austint.in/fXSHaDgF5jZkKRU_I7PTabN1x_E=/800x0/thumbor-sample/thumborurl-enable.png)
+![Nextcloud 安裝完 Thumbor Url apps 後的啟用選項](https://imgcdn.austint.in/fXSHaDgF5jZkKRU_I7PTabN1x_E=/800x0/thumbor-sample/thumborurl-enable.png)
 
 啟用後就能在個人設定的分享頁面中看到 Thumbor Url 需要的設定。
 
-![Nextcloud 中 Thumbor Url 設定畫面](https://img.austint.in/eQwKjUFKgKyKyQltplyKd5zvCXU=/800x0/thumbor-sample/thumborurl-settings.png)
+![Nextcloud 中 Thumbor Url 設定畫面](https://imgcdn.austint.in/eQwKjUFKgKyKyQltplyKd5zvCXU=/800x0/thumbor-sample/thumborurl-settings.png)
 
 三個設定的意義如下：
 
@@ -309,15 +309,15 @@ Nextcloud 提供了自訂 App 的開發 API ，所以想達成的效果應該是
 
 設定完成後在 Nextcloud 檔案瀏覽畫面中圖片的檔案下拉選單就會出現 Get Thumbor Url 的選項。其實只有在 base dir 底下的圖片這個選項才是有作用的，只是我的 app 沒有特別過濾所以到處都會出現。
 
-![檔案下拉選單新增的 Get Thumbor Url 選項](https://img.austint.in/DpSLIfYdhSCull-Cpv0AXOKhzXw=/800x0/thumbor-sample/thumborurl-menu.png)
+![檔案下拉選單新增的 Get Thumbor Url 選項](https://imgcdn.austint.in/DpSLIfYdhSCull-Cpv0AXOKhzXw=/800x0/thumbor-sample/thumborurl-menu.png)
 
 點下去之後會出現輸入圖片處理選項的彈出視窗，可以在這一步輸入 Thumbor url 格式的縮放、濾鏡、裁切選項。
 
-![輸入 Thumbor 圖片處理選項](https://img.austint.in/1Uaq5CDZmVm7KB1gpQaGjPMLJZo=/800x0/thumbor-sample/thumborurl-enter-filter.png)
+![輸入 Thumbor 圖片處理選項](https://imgcdn.austint.in/1Uaq5CDZmVm7KB1gpQaGjPMLJZo=/800x0/thumbor-sample/thumborurl-enter-filter.png)
 
 最後就會獲得有 HMAC hash 的圖片 url ，Nextcloud 有 https 的話也會直接複製進剪貼簿，不需要有本地 script 才能得到 url hash 了。
 
-![帶有 HMAC hash 的圖片 url](https://img.austint.in/p7WrYlm_FmH2MKJHJWw2LIbjZQs=/800x0/thumbor-sample/thumborurl-signed-url.png)
+![帶有 HMAC hash 的圖片 url](https://imgcdn.austint.in/p7WrYlm_FmH2MKJHJWw2LIbjZQs=/800x0/thumbor-sample/thumborurl-signed-url.png)
 
 ## Downloads
 

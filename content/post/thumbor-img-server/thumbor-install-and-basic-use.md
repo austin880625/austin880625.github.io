@@ -1,7 +1,7 @@
 # 使用 Thumbor + Nextcloud 架設自己的網頁圖床 (1): Thumbor 伺服器安裝
 date: 2022/07/11
 category: server
-thumbnail: https://img.austint.in/-TfQgliVsEl09tzAu7mbg18K-eo=/fit-in/760x560/filters:format(webp)/thumbor-sample/thumbor-nextcloud.png
+thumbnail: https://imgcdn.austint.in/-TfQgliVsEl09tzAu7mbg18K-eo=/fit-in/760x560/filters:format(webp)/thumbor-sample/thumbor-nextcloud.png
 
 excerpt: 使用 GitHub Page 寫部落格開始有加圖片的需求，可以架設 Thumbor 作為自動裁切縮放以及快取圖片的服務。本文介紹 Thumbor 服務的安裝以及基本的安全性設定
 
@@ -82,7 +82,7 @@ http://localhost:8888/unsafe/400x300/thumbor-sample/usb.jpg
 
 得到的圖片：
 
-![基本 Thumbor url 回傳的圖片](https://img.austint.in/KSlIxb9kb8HvQFj1DGSL9zT8BhY=/400x300/thumbor-sample/usb.jpg)
+![基本 Thumbor url 回傳的圖片](https://imgcdn.austint.in/KSlIxb9kb8HvQFj1DGSL9zT8BhY=/400x300/thumbor-sample/usb.jpg)
 
 url 中的 `400x300` 就是寬x高的裁切大小， Thumbor 會自己取圖片的中間區域，如果，如果在之前加上 `fit-in` 就變成縮放到指定大小，最後的 `thumbor-sample/usb.jpg` 則是圖片的路徑，我是使用 file loader 所以是相對於設定檔中圖片根目錄的圖片位置，假如是 http loader 的話就是 url encoded 過的圖片網址，像是 `https%3A%2F%2Fgithub.com%2Fthumbor%2Fthumbor%2Fraw%2Fmaster%2Fexample.jpg`。也可以加上手動指定的裁切範圍和加上一些其他濾鏡：
 
@@ -90,7 +90,7 @@ url 中的 `400x300` 就是寬x高的裁切大小， Thumbor 會自己取圖片�
 http://localhost:8888/unsafe/50x10:2000x3000/fit-in/800x600/filters:rotate(-90):grayscale()/thumbor-sample/usb.jpg
 ```
 
-![加上濾鏡](https://img.austint.in/riTn97y4CGGky5KqMm_1RDMByFQ=/50x10:2000x3000/fit-in/800x600/filters:rotate(-90):grayscale()/thumbor-sample/usb.jpg)
+![加上濾鏡](https://imgcdn.austint.in/riTn97y4CGGky5KqMm_1RDMByFQ=/50x10:2000x3000/fit-in/800x600/filters:rotate(-90):grayscale()/thumbor-sample/usb.jpg)
 
 還可以加上很多如翻轉、背景填色等參數，更詳細的 url 格式可以參考[官方文件說明](https://thumbor.readthedocs.io/en/latest/usage.html)。
 
@@ -103,7 +103,7 @@ http://localhost:8888/unsafe/50x10:2000x3000/fit-in/800x600/filters:rotate(-90):
 Secret key 的設定在 thumbor config 的 `SECURITY_KEY` 中，可以是任意的隨機字串。要強制使用 security url 的話就把 `ALLOW_UNSAFE_URL` 改成 `False` ，從此要存取圖片就要將 url 中的 unsafe 換成那個 url 使用 secret key 的 hash ，如下面 url 中的 `KSlIxb9kb8HvQFj1DGSL9zT8BhY=`：
 
 ```
-https://img.austint.in/KSlIxb9kb8HvQFj1DGSL9zT8BhY=/400x300/thumbor-sample/usb.jpg
+https://imgcdn.austint.in/KSlIxb9kb8HvQFj1DGSL9zT8BhY=/400x300/thumbor-sample/usb.jpg
 ```
 
 那要用什麼方式獲得 url 的 hash 呢？ Thumbor 安裝的時候有內建 `thumbor-url` 指令，把 secret key 存在文字檔內就可以用來產生 url

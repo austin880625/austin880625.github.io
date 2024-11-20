@@ -1,7 +1,7 @@
 # 在 Wordpress 2022 佈景主題加入 Google Analytics 標籤的方法
 date: 2022/07/02
 category: web-dev/wordpress
-thumbnail: https://img.austint.in/yy_O-vL9tKSknaOhdIecPZck3D8=/fit-in/760x560/filters:format(webp)/wp-add-ga-tag-with-2022-theme/theme-edit.png
+thumbnail: https://imgcdn.austint.in/yy_O-vL9tKSknaOhdIecPZck3D8=/fit-in/760x560/filters:format(webp)/wp-add-ga-tag-with-2022-theme/theme-edit.png
 ---
 
 在一兩年前 Wordpress 預設使用的佈景主題是 Twenty Twenty-One ，這之前的佈景主題檔案都還能看到 `<head>` 標籤在 `header.php` 裡面，所以如果有像是 Google Analytics 的線上服務需要內嵌腳本，可以直接在更改佈景主題檔案的功能中把 `<script>` 標籤加到 `<head>` 標籤內。
@@ -12,7 +12,7 @@ thumbnail: https://img.austint.in/yy_O-vL9tKSknaOhdIecPZck3D8=/fit-in/760x560/fi
 
 幾天前裝了一個 Wordpress 網站起來，用最新的 Twenty Twenty-Two 佈景主題發現整個佈景主題設定已經變成所見即所得的界面，佈景主題檔案內也沒有原本所見的 `header.php` 檔案，而是大部分都變成了帶有 Wordpress block 註解的 HTML 檔案，也不包含 HTML 檔案最開始的 `<head>`, `<body>` 等標籤，從 `index.php` 的說明看起來，佈景主題也不會再有包含這些標籤的檔案，都會由 Wordpress 自動生成。
 
-![Wordpress 的 Twenty Twenty-Two 佈景找不到 head 標籤](https://img.austint.in/dqxWTvt2S6N4aKsg4c_9FVkA9VU=/960x0/wp-add-ga-tag-with-2022-theme/theme-edit.png)
+![Wordpress 的 Twenty Twenty-Two 佈景找不到 head 標籤](https://imgcdn.austint.in/dqxWTvt2S6N4aKsg4c_9FVkA9VU=/960x0/wp-add-ga-tag-with-2022-theme/theme-edit.png)
 
 ## 新的 GA 標籤要放哪裡？
 
@@ -34,7 +34,7 @@ thumbnail: https://img.austint.in/yy_O-vL9tKSknaOhdIecPZck3D8=/fit-in/760x560/fi
 
 先在 Plugin 頁面把 Hello Dolly 關閉，接著要找到 Hello Dolly plugin 的程式碼，開啟 Tools -> Plugin File Editor 後，在右上角可以看到選擇 plugin 的選取框，選擇 Hello Dolly 後按 Select 
 
-![編輯 Plugin 程式碼的步驟](https://img.austint.in/Uoj5IMhW4iIuk5eF0EDpjVbufAo=/960x0/wp-add-ga-tag-with-2022-theme/plugin-edit.png)
+![編輯 Plugin 程式碼的步驟](https://imgcdn.austint.in/Uoj5IMhW4iIuk5eF0EDpjVbufAo=/960x0/wp-add-ga-tag-with-2022-theme/plugin-edit.png)
 
 在編輯區塊上面的其他程式碼可以自己決定要不要刪掉，最開始的註解不要刪就可以了，那是 Wordpress 的 Plugin 宣告。然後在最底下加入
 
