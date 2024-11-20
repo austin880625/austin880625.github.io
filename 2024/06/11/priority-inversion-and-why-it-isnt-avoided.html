@@ -21,7 +21,7 @@
 <meta property="og:title" content="Priority Inversion 是什麼？作業系統應該避免嗎？">
 <meta name="description" content="在作業系統課程中，會提到一種叫做 priority inversion 的現象，這個現象通常是不希望發生的，通常也會順帶介紹幾種解決方式。但有些作業系統沒有把這些 protocol 通常沒有包含在預設的 scheduling policy 中。本文從一些文件和歷史 mailing list 來推測可能的原因。">
 <meta property="og:description" content="在作業系統課程中，會提到一種叫做 priority inversion 的現象，這個現象通常是不希望發生的，通常也會順帶介紹幾種解決方式。但有些作業系統沒有把這些 protocol 通常沒有包含在預設的 scheduling policy 中。本文從一些文件和歷史 mailing list 來推測可能的原因。">
-<meta property="og:image" content="https://img.austint.in/UN0o2vP91OI_YMCDkQ2BdAxwxQo=/fit-in/760x560/filters:format(webp)/priority-inversion-and-why-it-isnt-avoided/unbounded_priority_inversion.drawio.png">
+<meta property="og:image" content="https://imgcdn.austint.in/UN0o2vP91OI_YMCDkQ2BdAxwxQo=/fit-in/760x560/filters:format(webp)/priority-inversion-and-why-it-isnt-avoided/unbounded_priority_inversion.drawio.png">
 
     </head>
     <body>
@@ -89,12 +89,12 @@
 </ol>
 <p>接著就能介紹主角，就如名字所表示的， priority inversion 讓優先級低的任務比優先級高的任務先分配到 CPU 時間。 Priority inversion 分為兩種，一種是 bounded 一種是 unbounded 。 Bounded priority inversion 發生在有一個高優先級的 task （稱為 A）和一個低優先級的 task （稱為 B）利用 mutex 共享資源的時候。當 task B 先取得 mutex ，在持有鎖的期間被 preempt 輪到高優先級的 A 執行，在 A 嘗試獲得 mutex 的時候就會被 block 住，造成優先級高的 A 需要等待優先級低的 B 釋放 mutex 才能繼續執行，也就是優先級低的 task 反而能先獲得 CPU 資源，因此稱作 priority inversion 。而稱作 bounded 的原因主要是共享資源的兩個 task 是程式設計者事先已知的，所以這段影響的時間是可以被開發者控制和預測的，所以 bounded priority inversion 通常不被視為一個問題。</p>
 <p>
-<figure><img alt="Bounded priority inversion" src="https://img.austint.in/D7zRSwNbFGdeQr7cHMA4l9bar90=/fit-in/760x560/filters:format(webp)/priority-inversion-and-why-it-isnt-avoided/bounded_priority_inversion.drawio.png" /><figcaption>Bounded priority inversion</figcaption>
+<figure><img alt="Bounded priority inversion" src="https://imgcdn.austint.in/D7zRSwNbFGdeQr7cHMA4l9bar90=/fit-in/760x560/filters:format(webp)/priority-inversion-and-why-it-isnt-avoided/bounded_priority_inversion.drawio.png" /><figcaption>Bounded priority inversion</figcaption>
 </figure>
 </p>
 <p>Unbounded priority 就有點不一樣，它的情境是有三個高、中、低優先級的 task （我們分別稱作 A, B, C）， A 和 C 用一個 mutex 共享資源。一開始 C 先拿到 mutex ，在持有期間 A 嘗試獲得 mutex 就會被 block 。這個時候 B 開始執行，不出意外的話就要出意外了， B 因為優先級在 A, C 之間會 preempt C ，接下來 C 就只能等到 B 釋放 CPU 時間才有機會執行到，假如除了 B 還有其他 D, E, F... task 的優先級都在 A, C 之間，接下來的時間 scheduler 都不會選擇 C ，最後就會導致 task A 被無止境的卡住。</p>
 <p>
-<figure><img alt="Unbounded priority inversion" src="https://img.austint.in/UN0o2vP91OI_YMCDkQ2BdAxwxQo=/fit-in/760x560/filters:format(webp)/priority-inversion-and-why-it-isnt-avoided/unbounded_priority_inversion.drawio.png" /><figcaption>Unbounded priority inversion</figcaption>
+<figure><img alt="Unbounded priority inversion" src="https://imgcdn.austint.in/UN0o2vP91OI_YMCDkQ2BdAxwxQo=/fit-in/760x560/filters:format(webp)/priority-inversion-and-why-it-isnt-avoided/unbounded_priority_inversion.drawio.png" /><figcaption>Unbounded priority inversion</figcaption>
 </figure>
 </p>
 <h2>作業系統避免 Unbounded Priority Inversion 的方法</h2>

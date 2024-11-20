@@ -21,7 +21,7 @@
 <meta property="og:title" content="使用 Thumbor + Nextcloud 架設自己的網頁圖床 (1): Thumbor 伺服器安裝">
 <meta name="description" content="使用 GitHub Page 寫部落格開始有加圖片的需求，可以架設 Thumbor 作為自動裁切縮放以及快取圖片的服務。本文介紹 Thumbor 服務的安裝以及基本的安全性設定">
 <meta property="og:description" content="使用 GitHub Page 寫部落格開始有加圖片的需求，可以架設 Thumbor 作為自動裁切縮放以及快取圖片的服務。本文介紹 Thumbor 服務的安裝以及基本的安全性設定">
-<meta property="og:image" content="https://img.austint.in/-TfQgliVsEl09tzAu7mbg18K-eo=/fit-in/760x560/filters:format(webp)/thumbor-sample/thumbor-nextcloud.png">
+<meta property="og:image" content="https://imgcdn.austint.in/-TfQgliVsEl09tzAu7mbg18K-eo=/fit-in/760x560/filters:format(webp)/thumbor-sample/thumbor-nextcloud.png">
 
     </head>
     <body>
@@ -126,14 +126,14 @@ FILE_LOADER_ROOT_PATH = '/path/to/圖片根目錄'
 </code></pre>
 <p>得到的圖片：</p>
 <p>
-<figure><img alt="基本 Thumbor url 回傳的圖片" src="https://img.austint.in/KSlIxb9kb8HvQFj1DGSL9zT8BhY=/400x300/thumbor-sample/usb.jpg" /><figcaption>基本 Thumbor url 回傳的圖片</figcaption>
+<figure><img alt="基本 Thumbor url 回傳的圖片" src="https://imgcdn.austint.in/KSlIxb9kb8HvQFj1DGSL9zT8BhY=/400x300/thumbor-sample/usb.jpg" /><figcaption>基本 Thumbor url 回傳的圖片</figcaption>
 </figure>
 </p>
 <p>url 中的 <code>400x300</code> 就是寬x高的裁切大小， Thumbor 會自己取圖片的中間區域，如果，如果在之前加上 <code>fit-in</code> 就變成縮放到指定大小，最後的 <code>thumbor-sample/usb.jpg</code> 則是圖片的路徑，我是使用 file loader 所以是相對於設定檔中圖片根目錄的圖片位置，假如是 http loader 的話就是 url encoded 過的圖片網址，像是 <code>https%3A%2F%2Fgithub.com%2Fthumbor%2Fthumbor%2Fraw%2Fmaster%2Fexample.jpg</code>。也可以加上手動指定的裁切範圍和加上一些其他濾鏡：</p>
 <pre><code>http://localhost:8888/unsafe/50x10:2000x3000/fit-in/800x600/filters:rotate(-90):grayscale()/thumbor-sample/usb.jpg
 </code></pre>
 <p>
-<figure><img alt="加上濾鏡" src="https://img.austint.in/riTn97y4CGGky5KqMm_1RDMByFQ=/50x10:2000x3000/fit-in/800x600/filters:rotate(-90):grayscale()/thumbor-sample/usb.jpg" /><figcaption>加上濾鏡</figcaption>
+<figure><img alt="加上濾鏡" src="https://imgcdn.austint.in/riTn97y4CGGky5KqMm_1RDMByFQ=/50x10:2000x3000/fit-in/800x600/filters:rotate(-90):grayscale()/thumbor-sample/usb.jpg" /><figcaption>加上濾鏡</figcaption>
 </figure>
 </p>
 <p>還可以加上很多如翻轉、背景填色等參數，更詳細的 url 格式可以參考<a href="https://thumbor.readthedocs.io/en/latest/usage.html">官方文件說明</a>。</p>
@@ -141,7 +141,7 @@ FILE_LOADER_ROOT_PATH = '/path/to/圖片根目錄'
 <p>用 url 指定輸出格式的方式很方便，但因為 url 所有人都能存取，顯然會有安全性問題，攻擊者只要指定大量不同的圖片尺寸就能夠消耗伺服器的計算資源。</p>
 <p>對於這點目前 Thumbor 使用 HMAC 來驗證圖片的存取，將需求的 url 以設定中的 secret key 做 HMAC 的 hash ，使用者發出 request 時要在 url 的第一段加上這段 hash Thumbor 才會做處理。也就是只有擁有 secret key 的人才能產生可供所有人存取的 Thumbor url 。</p>
 <p>Secret key 的設定在 thumbor config 的 <code>SECURITY_KEY</code> 中，可以是任意的隨機字串。要強制使用 security url 的話就把 <code>ALLOW_UNSAFE_URL</code> 改成 <code>False</code> ，從此要存取圖片就要將 url 中的 unsafe 換成那個 url 使用 secret key 的 hash ，如下面 url 中的 <code>KSlIxb9kb8HvQFj1DGSL9zT8BhY=</code>：</p>
-<pre><code>https://img.austint.in/KSlIxb9kb8HvQFj1DGSL9zT8BhY=/400x300/thumbor-sample/usb.jpg
+<pre><code>https://imgcdn.austint.in/KSlIxb9kb8HvQFj1DGSL9zT8BhY=/400x300/thumbor-sample/usb.jpg
 </code></pre>
 <p>那要用什麼方式獲得 url 的 hash 呢？ Thumbor 安裝的時候有內建 <code>thumbor-url</code> 指令，把 secret key 存在文字檔內就可以用來產生 url</p>
 <pre><code># 注意相對路徑的開頭不包含斜線！
