@@ -81,7 +81,7 @@ excerpt: 因緣際會下看到一些馬達控制和馬達設計的文章，決�
 
 ![手繪版馬達驅動電路](https://img.austint.in/FIRPKzjEpfe4V5Q1KgnE6Emf9pk=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/driving-circuit-drawing-1.png)
 
-除了右邊的馬達本體和左邊的直流電源之外，電路的主要部分大致是六個 MOSFET 。在上面的繞線方式中有提到三根線要組合出一個相是 N 極另外兩個相是 S 極的電流，並且要不斷的換相，也就是讓三條線輪流擔任正極和負極。這個電路中我們可以把 $Q_1 \sim Q_6$ 這六顆 MOSFET 當作開關， $Q_1$ 閉合（導通）$Q_2$ 斷開的時候就可以把導線 A 視為和正極導通，相對的 $Q_1$ 斷開 $Q_2$ 閉合時就等同於 A 和負極導通。以此類推 $Q_3, Q_4$ 一組、$Q_5, Q_6$ 一組就分別能夠控制 B, C 要當正極還是負極。輪流控制 $Q_1 \sim Q_6$ 就可以做到不斷換相進而使馬達旋轉。
+除了右邊的馬達本體和左邊的直流電源之外，電路的主要部分大致是六個 MOSFET 。在上面的繞線方式中有提到三根線要組合出一個相是 N 極另外兩個相是 S 極的電流，並且要不斷的換相，也就是讓三條線輪流擔任正極和負極。這個電路中我們可以把 $`Q_1 \sim Q_6`$ 這六顆 MOSFET 當作開關， $`Q_1`$ 閉合（導通）$Q_2`$ 斷開的時候就可以把導線 A 視為和正極導通，相對的 $`Q_1`$ 斷開 $`Q_2`$ 閉合時就等同於 A 和負極導通。以此類推 $`Q_3, Q_4`$ 一組、$Q_5, Q_6`$ 一組就分別能夠控制 B, C 要當正極還是負極。輪流控制 $`Q_1 \sim Q_6`$ 就可以做到不斷換相進而使馬達旋轉。
 
 這張圖大致表示了原理，但距離實際可用的馬達驅動電路還是少了一些細節，在接下來的段落介紹一些這些電路的各個部分需要的其他東西。
 
@@ -91,9 +91,9 @@ excerpt: 因緣際會下看到一些馬達控制和馬達設計的文章，決�
 
 ### Gate driver 和自舉電路 (Bootstrap circuit)
 
-在一些圖上控制 $Q_1 \sim Q_6$ 的 gate 可能是直接畫到 MCU 的輸出上，這個畫法的第一個問題是雖然 MOSFET 的 gate 只看電位沒有實際電流通過，但可能 MCU 針腳的高電位就沒有達到 MOSFET 導通的 threshold （$V_{th}$），不足以驅動 MOSFET ，而第二個問題會出在 high side 和 low side 不同的導通條件上。
+在一些圖上控制 $`Q_1 \sim Q_6`$ 的 gate 可能是直接畫到 MCU 的輸出上，這個畫法的第一個問題是雖然 MOSFET 的 gate 只看電位沒有實際電流通過，但可能 MCU 針腳的高電位就沒有達到 MOSFET 導通的 threshold （$V_{th}$），不足以驅動 MOSFET ，而第二個問題會出在 high side 和 low side 不同的導通條件上。
 
-NMOS 導通需要 gate 和 source 的電壓差大於 threshold ($V_{th}$)，在 low side 上就和以前偷懶學的「gate 高電位導通低電位斷開」一樣。但到了 high side 上世界就不一樣了，在導通前 source 是低電位，所以表面上只要 gate 的電壓達到 $V_{th}$ 就能導通，但 source 和 drain 導通後， source 的電壓會變得和正極 +V 相同（高電壓），所以這時候 gate 的電壓需要比 +V 再多出 $V_{th}$ 才能繼續維持導通，否則整個開關就會處於不斷開關的狀態。
+NMOS 導通需要 gate 和 source 的電壓差大於 threshold ($V_{th}$)，在 low side 上就和以前偷懶學的「gate 高電位導通低電位斷開」一樣。但到了 high side 上世界就不一樣了，在導通前 source 是低電位，所以表面上只要 gate 的電壓達到 $`V_{th}`$ 就能導通，但 source 和 drain 導通後， source 的電壓會變得和正極 +V 相同（高電壓），所以這時候 gate 的電壓需要比 +V 再多出 $`V_{th}`$ 才能繼續維持導通，否則整個開關就會處於不斷開關的狀態。
 
 基於以上兩種原因，在 MCU 輸出和 MOSFET 的 gate 之間通常還會有叫做閘極驅動器（gate driver）的電路或 IC ，用來確保在 MCU 給出訊號的時候，驅動器能用足夠快的速度和足夠的電壓讓對應的 MOSFET 導通/斷開。
 
@@ -107,13 +107,13 @@ Gate driver 大多有現成的 IC 可以用，在一般馬達控制的情境其�
 
 ![High side 開關電路，包含 bootstrap circuit](https://img.austint.in/xoeoOc54WCFTgy4wSECotsDfY7I=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/driving-circuit-high.png)
 
-Bootstrap circuit 除了保護用的電阻和二極體之外，達到升壓作用的就是 $C_1$ 電容，在 low side 導通的時候 $Q_1$ 的 source 端電壓是 $V_{Gnd}$ ，電容會被充電，在輪到 low side 斷開、 high side 導通的瞬間，電容兩端變得沒有電位差（都是 12V）使電容放電維持電位差，這時 $C_1 - R_2$ 所在接點的電壓會被維持在 (12V + 電容電壓)， $Q_1$ 的 source 端電壓則會是 12V。所以 $V_{gs}$ 會是電容的電壓，直到電容放電電壓低到讓 $Q_1$ 斷開為止。
+Bootstrap circuit 除了保護用的電阻和二極體之外，達到升壓作用的就是 $`C_1`$ 電容，在 low side 導通的時候 $`Q_1`$ 的 source 端電壓是 $`V_{Gnd}`$ ，電容會被充電，在輪到 low side 斷開、 high side 導通的瞬間，電容兩端變得沒有電位差（都是 12V）使電容放電維持電位差，這時 $`C_1 - R_2`$ 所在接點的電壓會被維持在 (12V + 電容電壓)， $`Q_1`$ 的 source 端電壓則會是 12V。所以 $`V_{gs}`$ 會是電容的電壓，直到電容放電電壓低到讓 $`Q_1`$ 斷開為止。
 
 所以 bootstrap circuit 的特性就是沒辦法讓 high side 保持長期導通。需要和 low side 輪流開關讓電容充電，開關允許的速度也會因此和電容充電的速度有關。但以這次的實驗來說是足夠讓馬達轉起來的。
 
 ### 為什麼不用 PMOS 就好？
 
-MOSFET 的導通是取決於 gate 和 source 的電壓差， NMOS 是在 gate 比 source 電壓高出 $V_{th}$ 的時候導通，所以在 high side 有上面提到的導通後電壓不夠的問題，而 PMOS 是 gate 和 source 電壓差低於 $V_{th}$ （通常是負的）的時候導通，也就是導通後 gate 和 source 電壓差變得更低所以能維持導通，那是不是把 high side 的 MOSFET 都換成 PMOS 就好呢？
+MOSFET 的導通是取決於 gate 和 source 的電壓差， NMOS 是在 gate 比 source 電壓高出 $`V_{th}`$ 的時候導通，所以在 high side 有上面提到的導通後電壓不夠的問題，而 PMOS 是 gate 和 source 電壓差低於 $`V_{th}`$ （通常是負的）的時候導通，也就是導通後 gate 和 source 電壓差變得更低所以能維持導通，那是不是把 high side 的 MOSFET 都換成 PMOS 就好呢？
 
 原理來說是可以的，其實在許多介紹 PMOS 的文章也是說 PMOS 適合的用途就是在 high side switch 。但實際上在馬達驅動沒有這樣做的原因有幾個：
 
