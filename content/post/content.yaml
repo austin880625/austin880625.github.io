@@ -18,6 +18,8 @@ taxonomy:
           slug: linux
         - name: VM
           slug: vm
+    - name: Maker
+      slug: maker
     - name: Embedded System
       slug: embedded
     - name: Computer Tips

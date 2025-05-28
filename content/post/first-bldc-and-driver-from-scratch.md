@@ -1,0 +1,198 @@
+# 從零自製無刷馬達筆記
+category: maker
+date: 2025/05/29
+thumbnail: https://img.austint.in/J1mNHuYK65mh165pHlNz2cC_vKU=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/20250214_023739.jpg
+excerpt: 因緣際會下看到一些馬達控制和馬達設計的文章，決定試著自己製作一顆馬達，從馬達本體和控制板都自己畫圖、組裝、繞線，紀錄中間找到的各種零碎原理和知識點。
+---
+
+忘記多久以前在查自己畫 MCU 開發板的資料，接著短時間內分別被 Youtube 推了自己畫 FPGA+STM32 的 SoC 開發板的影片，又在 FB 上被演算法推到一個社團出現一些很漂亮的 PCB 的圖就按了加入，加入社團後才發現是馬達控制的社團。裡面的人不只會寫 code 也很會設計 PCB ，是以前只會寫 code （甚至不敢說自己很會寫）的我沒有想過的。
+
+以前看過馬達驅動板的 module ，但原本對馬達的認知停留在文具店買來的教具裡正負極接上去就會動的小馬達，其他種類的伺服馬達和無刷馬達+電子變速器(ESC)也只要多接一條訊號線就可以動，所以一直不知道驅動板在「驅動」的是什麼。
+
+在社團文章的耳濡目染下，大概知道電子變速器是在遙控模型比較常用的名稱，算是驅動板的其中一類，控制的都是叫做直流無刷(BLDC)的馬達。但其他的名詞有點多，不只不知道是什麼，也不知道為什麼需要這些東西。所以後面就轉向自己慢慢找資料，釐清各個名詞。也陸續看到更多 BLDC 驅動的介紹文章影片，發現從驅動板到馬達本體都是有可能在家自己做的。當時也剛好看到便宜的 3D 列印機，買來剛好可以印馬達相關的機構來測試。於是就開始以從頭製作馬達和馬達驅動板為目標，作為馬達控制的第一個初學 project 。
+
+## 馬達製作
+
+### 有刷/無刷馬達的原理差異和名詞
+
+國高中課本或一些科普書都會提到馬達的結構分為定子(stator)和轉子(rotor)，運作原理都是把電能在線圈轉換成磁場推動/吸引轉子。固定的線圈會需要變換磁場的方向讓轉子能持續旋轉，這個變換磁場的過程稱作「換相」(phase commutation)，而在馬達中能夠「產生獨立磁場方向」的一組線圈稱作一個「相」(phase)。文具店的教具小馬達是用碳刷達成換相，稱作有刷馬達。而一般家用電扇透過輸入本身是交流電，或是上面提到的 BLDC用電子電路輪流開關線圈的電路來變換磁場方向（驅動板最重要的工作！），這些馬達沒有碳刷就稱作無刷馬達。
+
+一些像是感應馬達的轉子是沒有磁鐵的，磁場方向的變化和轉子不會是相同的轉速，稱作非同步(Asynchronous)馬達。但我想做的馬達先用選擇有磁鐵的比較直覺（材料也比較簡單），磁場在哪裡，磁鐵就被吸到哪個方向，就屬於一種同步(Synchronous)馬達，轉子內有永久磁鐵的同步馬達就會被稱作永磁同步馬達(Permanent magnet synchronous motor, PMSM)。
+
+名詞上說是這樣說，輸入是直流電透過 0/1 開關出方波電流變換磁場、且旋轉產生的感應電動勢是梯形波的會被叫做 BLDC ，輸入和感應電動勢是正弦波(或是等效正弦波)的才會叫 PMSM 。。兩者依照原理做出來的結構是一樣的，控制方式也可以互通（就是拿 BLDC 的方波輸入 PMSM 一樣會轉），但會因為輸入電流波形的不同讓轉子定子的形狀和繞線設計變得不一樣。這兩者的差異又有許多文章專門解釋就先跳過。下面提到無刷馬達指的就當作是這一段提到的 BLDC 。
+
+### 無刷馬達的結構
+
+無刷馬達最常見的設計是 3 個相輪流產生磁場。磁鐵和這 3 個相在定子裡的排列和數量在馬達設計中稱為「極數」和「槽數」(pole/slot) ， 極數(pole)是轉子上的 NS 交替的磁極數量，通常是 2 的倍數，兩個又會稱作一對， 槽數(slot)是定子上繞一圈經過的線圈數量，通常是 3 的倍數，。在介紹原理時畫出來的通常是最簡單的 3 個槽 2 極。極和槽的數量決定了馬達在換相時的磁場變化，相對應的決定了馬達的轉速和扭力等參數。
+
+這個小動畫大致展示了一顆無刷馬達在換相過程中電流變換和旋轉的方式：
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BfGoqYF1IHk?si=vhUevhERH3giSPeP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### 繞線方式
+
+直覺上看來一顆無刷馬達有三組線圈，一組線圈要接兩個接點，總共就需要六個接點，但馬達在運作時通常不需要每組線圈獨立決定要產生的磁極，一相產生 N 極磁場，剩下的兩個相就一定要產生 S 極磁場，所以最後大家就發現把幾個接點直接接起來，留下三個接點就能控制馬達旋轉需要的磁場，於是市面上買得到的無刷馬達電源線都是三條就是這樣來的。接點連接的方式又分為 star(或稱 WYE) 和 delta 兩種接法， star 就是三個線圈抓出一端直接接在一起，剩下沒接在一起的三個接點就是輸入線， delta 則是三個線圈接成一個三角形，每個頂點拉一條線出來當作輸入線。
+
+我自己做是看 WYE 看起來要焊接比較好焊（只要焊一個點）所以就選 WYE ，實際設計時要看馬達會通過的電流決定適合的繞線方式，沒有絕對的好壞。
+
+除了接點連接方式之外，銅線在每個槽上的繞線方式也是另一個馬達設計的考量要點，最傳統的就是隔壁槽就是下一個相，每三個相循環一次。後來有人發現了其他繞法，像是每個相中間空一個槽可以達到不同的轉速或轉矩性質，就接著發展出 LRK 、 dLRK 等繞線方法，可以參考 [bavaria-direct.co.za](https://www.bavaria-direct.co.za/scheme/common/#prettyPhoto) 的介紹，網站上還有個計算機可以用，在自己手繞的時候一邊看也比較不容易繞錯。
+
+### 旋轉機構
+
+這邊大概是要開始手作馬達的時候開始卡住的地方了，上面的原理都搞懂了，但買了漆包線之後要纏在哪裡？轉子和定子的位置怎麼固定？這些東西的「形狀」要怎麼來？
+
+工商業的考量下這些東西都是學問，不過這篇文章要做的是一個手作 project ，目標只有要做到可以轉，所以我會告訴你：「開心就好」。
+
+一些比較需要處理金屬和比較精密運作的零件就是網拍找到尺寸合的就可以買了，像是光軸、軸承、限位器等。當然如果你家剛好有開工廠有辦法做這些東西，全部自己做也會是一種花式炫富的趣味。
+
+對我來說，能夠放在家裡最大的「機具」大概只有文章一開始提到的 3D 列印機，可以用來印出自己畫的轉子和定子。畫圖軟體我是用 FreeCAD ，但不知道什麼時候會受不了開始用有免費版的 Fusion360 。這些機構的設計原則就是先畫出可以繞線的槽和可以裝下轉子的磁鐵，並且可以讓轉子裝上輸出的軸。這個部分網路上也有頗多自製無刷馬達的影片，從很簡易的到很精緻的都可以參考，自己拿來抄要注意的就都會是和其他買來的零件之間的尺寸配合。
+
+### 鐵芯哪裡來？
+
+剛剛提到我的定子是用 3D 列印畫的所以材料是 PLA 塑膠，但如果國小或國中做過的電磁鐵實驗裡，漆包線是繞在鐵釘上的。線圈中間的材料選擇考慮的就是導磁性和面對磁場變化時的保磁能力，在市面上的馬達最常用的材料是含矽的鐵片，稱作矽鋼片（或電工鋼、電磁鋼片）堆疊而成，矽鋼片的性質可以參考 [這篇專欄](https://vocus.cc/article/62d58778fd8978000168806e) 有很詳細的介紹。
+
+用塑膠的效果相對於鐵主要的差異就是磁力會明顯比較弱，整個馬達完成的時候可能就是會轉但稍微掐住輸出軸就停了。假如可以的話我也希望定子是矽鋼片，或至少是鐵做的。
+
+在寫這篇文章的時候，我還是沒有找到可以容易買到小量馬達用矽鋼片的零售通路，在台灣還是需要找廠商單獨詢價，製作的小量可能是為了後續量產所做的試產。我找了一些 youtube 上其他自製馬達的影片也大多是將就著用塑膠，但還是有一些可能的替代方案：
+
+1. [3D 列印模具 + 樹脂](https://www.youtube.com/watch?v=NzLnURZvKEo&t=12s)：把鐵粉加在融化的樹脂裡面，再把樹脂倒在 3D 列印的模具， 3D 列印的材料會需要承受比較高溫，我看影片裡用的是 ABS 。
+2. [用鐵片 + CNC 加工](https://www.youtube.com/watch?v=rgZQXvuWoms&t=72s)： 「CNC 加工」可以代換成放電加工或雷射切割等足夠精密的加工方式，自己提供材料的 CNC 代工應該還是有廠商願意做。不過如果要把鐵片換成矽鋼片的話，現在找到的都還是一次要一整捲鋼捲買，假如可以買到小片的矽鋼片，應該也可以嘗試用這種加工方式。
+3. [3D 列印的定子預留螺絲孔](https://www.youtube.com/watch?v=TFQrXbMy84c&t=61s)：鐵製的螺絲或釘子比較好找，在印好定子之後把螺絲鎖在每個槽裡面，影片裡的實測看起來每種螺絲導磁/保磁特性還是不太一樣，需要多嘗試幾種，而且 3D 列印的定子外殼就要多注意轉速提升溫度升高後可能融化的問題。
+
+### 我的設計
+
+組裝過程沒有拍太多照片，就分享一些 CAD 檔和有用到的零件。主要機構參考的是[這個影片](https://www.youtube.com/watch?v=OgCGVHafqgE)
+
+![轉子 CAD ，中間的洞用來讓軸穿過四個方向的長方形槽是用來放磁鐵的](https://img.austint.in/ogAOzN-BfnrEINfhbgRz0Vh4uAo=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/rotor-freecad.png)
+
+![定子 CAD ，分成三個比較好用 3D 列印出來的部分](https://img.austint.in/2K3x6H9fCOI8EbHccZwjCEfO9ns=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/stator-freecad.png)
+
+![光軸、軸承和防止轉子在定子裡面滑走的限位器](https://img.austint.in/NZE4r-4szdVrt54yPjjz3zlmNO8=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/shaft-bearings.jpg)
+
+![組裝成品](https://img.austint.in/-HyFlxp6XiNJFtpEEyiJY5OOgUM=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/assemble-1.jpg)
+
+## 驅動電路
+
+無刷馬達繞好之後對外面連接的就是上面繞線方式提到的三根線了，輸入電池或電源供應器的正負極，輸出馬達上三根線需要的電流訊號就是驅動電路的主要工作。上網直接找無刷馬達驅動電路的話應該會很常看到像是這樣的圖：
+
+![Google 搜圖找到各種長得很像的馬達驅動電路](https://imgcdn.austint.in/uJrwqr8dvnomK4wa-H59EJmGyy8=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/driving-circuit-img-search.png)
+
+放好幾張只是用來表示很多地方都在解釋同個概念，為了解說我也畫一張差不多的：
+
+![手繪版馬達驅動電路](https://img.austint.in/FIRPKzjEpfe4V5Q1KgnE6Emf9pk=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/driving-circuit-drawing-1.png)
+
+除了右邊的馬達本體和左邊的直流電源之外，電路的主要部分大致是六個 MOSFET 。在上面的繞線方式中有提到三根線要組合出一個相是 N 極另外兩個相是 S 極的電流，並且要不斷的換相，也就是讓三條線輪流擔任正極和負極。這個電路中我們可以把 $Q_1 \sim Q_6$ 這六顆 MOSFET 當作開關， $Q_1$ 閉合（導通）$Q_2$ 斷開的時候就可以把導線 A 視為和正極導通，相對的 $Q_1$ 斷開 $Q_2$ 閉合時就等同於 A 和負極導通。以此類推 $Q_3, Q_4$ 一組、$Q_5, Q_6$ 一組就分別能夠控制 B, C 要當正極還是負極。輪流控制 $Q_1 \sim Q_6$ 就可以做到不斷換相進而使馬達旋轉。
+
+這張圖大致表示了原理，但距離實際可用的馬達驅動電路還是少了一些細節，在接下來的段落介紹一些這些電路的各個部分需要的其他東西。
+
+### High/Low side
+
+上面這樣一組兩個 MOSFET 的結構稱作一個 half bridge ，接在正極(+V)的那一側（$Q_1, Q_3, Q_5$）稱作高壓側（high side），相對的接在負極(0V)那一側（$Q_2, Q_4, Q_6$）稱作低壓側（low side）。首先可以注意到一件事情是高壓測和低壓測的開關不能同時導通，否則就會短路，又因為這六個 MOSFET 的 gate 通常是由 MCU 寫 code 控制的，所以這也是一種 code 沒寫好會把電路燒掉的實例。因此這個 project 直到開始寫 code 也還是需要小心，不能用軟體先丟上去試再慢慢 debug 的思維上傳 code 。
+
+### Gate driver 和自舉電路 (Bootstrap circuit)
+
+在一些圖上控制 $Q_1 \sim Q_6$ 的 gate 可能是直接畫到 MCU 的輸出上，這個畫法的第一個問題是雖然 MOSFET 的 gate 只看電位沒有實際電流通過，但可能 MCU 針腳的高電位就沒有達到 MOSFET 導通的 threshold （$V_{th}$），不足以驅動 MOSFET ，而第二個問題會出在 high side 和 low side 不同的導通條件上。
+
+NMOS 導通需要 gate 和 source 的電壓差大於 threshold ($V_{th}$)，在 low side 上就和以前偷懶學的「gate 高電位導通低電位斷開」一樣。但到了 high side 上世界就不一樣了，在導通前 source 是低電位，所以表面上只要 gate 的電壓達到 $V_{th}$ 就能導通，但 source 和 drain 導通後， source 的電壓會變得和正極 +V 相同（高電壓），所以這時候 gate 的電壓需要比 +V 再多出 $V_{th}$ 才能繼續維持導通，否則整個開關就會處於不斷開關的狀態。
+
+基於以上兩種原因，在 MCU 輸出和 MOSFET 的 gate 之間通常還會有叫做閘極驅動器（gate driver）的電路或 IC ，用來確保在 MCU 給出訊號的時候，驅動器能用足夠快的速度和足夠的電壓讓對應的 MOSFET 導通/斷開。
+
+Gate driver 大多有現成的 IC 可以用，在一般馬達控制的情境其實也是建議直接買 IC ，在訊號的反應速度比較容易得到保證。但既然這是一個以理解原理為目的的 project ，我也自己畫了一個可以當作 gate driver 的電路。
+
+這組電路分成兩個部分，一部分是用來讓 5V 的 MCU 訊號開關 12V 的 MOSFET gate 。
+
+![Low side 開關電路](https://img.austint.in/DGFyCcrRLCFfzv2zV01UAf_Zhqg=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/driving-circuit-low.png)
+
+另一個部分是在 high side 用來升壓用的 bootstrap circuit ，可以用來保持 MOSFET 的 gate/source 電壓。
+
+![High side 開關電路，包含 bootstrap circuit](https://img.austint.in/xoeoOc54WCFTgy4wSECotsDfY7I=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/driving-circuit-high.png)
+
+Bootstrap circuit 除了保護用的電阻和二極體之外，達到升壓作用的就是 $C_1$ 電容，在 low side 導通的時候 $Q_1$ 的 source 端電壓是 $V_{Gnd}$ ，電容會被充電，在輪到 low side 斷開、 high side 導通的瞬間，電容兩端變得沒有電位差（都是 12V）使電容放電維持電位差，這時 $C_1 - R_2$ 所在接點的電壓會被維持在 (12V + 電容電壓)， $Q_1$ 的 source 端電壓則會是 12V。所以 $V_{gs}$ 會是電容的電壓，直到電容放電電壓低到讓 $Q_1$ 斷開為止。
+
+所以 bootstrap circuit 的特性就是沒辦法讓 high side 保持長期導通。需要和 low side 輪流開關讓電容充電，開關允許的速度也會因此和電容充電的速度有關。但以這次的實驗來說是足夠讓馬達轉起來的。
+
+### 為什麼不用 PMOS 就好？
+
+MOSFET 的導通是取決於 gate 和 source 的電壓差， NMOS 是在 gate 比 source 電壓高出 $V_{th}$ 的時候導通，所以在 high side 有上面提到的導通後電壓不夠的問題，而 PMOS 是 gate 和 source 電壓差低於 $V_{th}$ （通常是負的）的時候導通，也就是導通後 gate 和 source 電壓差變得更低所以能維持導通，那是不是把 high side 的 MOSFET 都換成 PMOS 就好呢？
+
+原理來說是可以的，其實在許多介紹 PMOS 的文章也是說 PMOS 適合的用途就是在 high side switch 。但實際上在馬達驅動沒有這樣做的原因有幾個：
+
+- MCU 輸出電壓仍然可能不夠斷開 PMOS ，最後可能還是要有其他電路來控制用來驅動閘極的電源。
+- PMOS 導通時電流通過的效率沒那麼好， PMOS 的 P 是 p-channel 的意思，導通的電流載體是電洞，可以想像推動電洞移動實際上是推動一群價電子，會比 N 型半導體只要推動一些自由電子困難一些。
+- 相同效能的 NMOS 比 PMOS 便宜很多。
+
+### Flyback diode
+
+馬達有線圈，是個線圈就會對磁場的變化有反應（產生電流），馬達轉動時定子的磁場就會跟著旋轉而讓線圈產生電流，也就是發電機的原理。但這種過程在馬達中產生的電稱作反電動勢。反電動勢在馬達運轉中會抵銷一部份驅動馬達的電流，但在斷電後短時間內馬達因為慣性持續旋轉時，反電動勢會跑回驅動電路，就可能沿著原本電流的反向通過 MOSFET 造成 MOSFET 壞掉。
+
+解決方式就是在 MOSFET 的 source 到 drain 接上一個二極體，馬達運轉時電流在正常方向就不會通過這個二極體，在馬達斷電後產生的反電動勢就會經過這顆二極體而不會經過 MOSFET 。這種二極體就稱作 flyback diode 。有些圖不會把這個二極體畫出來，是因為有些把多個 MOSFET 整合的 IC 如果設計的用途就是馬達驅動，就會把這顆二極體內建進去。但如果是單獨買的 MOSFET 這顆二極體就需要自己加上去。
+
+### 畫完的電路
+
+整個原理大致理解之後我就開始畫電路了，畫完一開始想用洞洞板來焊接，焊了兩個半橋就感覺太痛苦了開始用 KiCAD ，這也變成我第一次畫的 PCB ，完全是依照「會導電就好」的心態在畫，有很多 PCB 設計的常識當時都沒有考慮進去（比如連接地面都沒有），最後主要的特色應該就是可以很容易從板子對照看出原理。
+
+![驅動電路 PCB layout](https://img.austint.in/648IkzlXXNhvVqhLHlQoJRhJhpI=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/driver-circuit.png)
+
+![驅動電路 PCB 本體，代工是找 JLCPCB](https://img.austint.in/j5YPuo_dWEAQ7QnzV9T8PALgmBQ=/fit-in/760x560/filters:format(webp)/bldc-from-scratch/driver-circuit-pcb.jpg)
+
+## 其他零件選擇
+
+這裡列出一些其他用到的零件，需要一次買齊的時候方便對照
+
+- 二極體 1N4007
+- MOSFET IRFZ44N ：KiCAD 上寫 IRLZ44N 但腳位 footprint 一樣。
+- 磁鐵：尺寸 10mmx20mmx5mm ，我是在電子材料行順便買的，這個因為是現成品基本上和軸承尺寸一起決定其他零件要設計怎樣的尺寸。
+- 軸承、光軸、限位器：找蝦皮上尺寸對得起來的。
+- 電源供應器：找 12V 的工業電源再搭配帶插頭的電線，心臟夠大顆的話也可以拿電腦的電源供應器找 CPU 風扇的腳位拉出來。
+
+## 成果紀錄
+
+驅動版的輸入是六隻 IO 腳，我直接用 Arduino 依照馬達換相的順序輪流輸出 high low 電位。輸出就焊上香蕉頭接在馬達的三條線上。
+
+最後旋轉起來的影片就像下面影片。
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/44OAKSR44P8?si=5yoe9a2h2-WFcnj1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## 結語
+
+這篇文拖了有夠久，現在看這個專案的每個環節其實都是對應領域裡很基礎的知識，只是我透過這個專案從頭學起，看起來才很多內容。主要複習了很多電學，搭配了一些以前只有聽過沒有實際玩過的 maker 技能。
+
+往下鑽研的話不管是馬達控制或馬達設計製造都可以是水很深的東西，後續大概就自然發展看哪邊有趣和課金狀況允許決定要玩什麼。
+
+## References
+
+[BLDC驱动电路中的MOS管，谁还没烧过管子呢？-电子工程专辑](https://www.eet-china.com/mp/a56740.html)
+
+[隔離式閘極驅動器揭秘](https://www.compotechasia.com/uploads/technology/234/234ADI.pdf)
+
+[瞭解馬達控制的基礎知識 - 電子技術設計](https://www.edntaiwan.com/202303xxta01-learning-the-basics-of-motor-control/)
+
+[馬達材料：矽鋼片 ( I )｜方格子 vocus](https://vocus.cc/article/62d58778fd8978000168806e)
+
+Fundamentals of MOSFET and IGBT Gate Driver Circuits, Laszlo Balogh, Texas Instruments
+
+[PMOS vs NMOS: Unraveling the Differences in Transistor Technology](https://www.wevolver.com/article/nmos-vs-pmos)
+
+[Introduction To MOSFETs For Beginners: IRFZ44N & IRLZ34N](https://www.youtube.com/watch?v=7EpJ0fR5_cQ)
+
+[3 Simple MOSFET Drive Circuits](https://www.youtube.com/watch?v=wv4uAz8FV2w)
+
+[transistors - Is MOSFET gate threshold voltage a limit or minimal "Full-on" switching voltage? - Electrical Engineering Stack Exchange](https://electronics.stackexchange.com/questions/195073/is-mosfet-gate-threshold-voltage-a-limit-or-minimal-full-on-switching-voltage)
+
+[Do I need a mosfet driver? - Nano Family / Classic Nano - Arduino Forum](https://forum.arduino.cc/t/do-i-need-a-mosfet-driver/925106/18)
+
+[How To Make A Brushless Motor - YouTube](https://www.youtube.com/watch?v=OgCGVHafqgE)
+
+[MOSFET BOOTSTRAPPING TUTORIAL! - YouTube](https://www.youtube.com/watch?v=zhcChmEwZGM)
+
+[3 High Side MOSFET Drive Circuits - YouTube](https://www.youtube.com/watch?v=M5lETaqI9JM)
+
+[MOSFET Bootstrapping - YouTube](https://www.youtube.com/watch?v=zcQV_ZpK1W8)
+
+[How Does an ESC work? What does the PWM Frequency Do and should I change it? - YouTube](https://www.youtube.com/watch?v=ttyTrxB0OmA)
+
+[ESC Hardware Design - Phil's Lab #66 - YouTube](https://www.youtube.com/watch?v=dJjxcjJOlN0)
+
+[Most Basic Brushless Motor Control - YouTube](https://www.youtube.com/watch?v=urQEdGjK7Xg)
+
+[bavaria-direct.co.za](https://www.bavaria-direct.co.za/)
